@@ -17,6 +17,9 @@ The MVVM pattern ensures a clear separation of concerns:
 2. DEPENDENCY INJECTION
 To improve modularity and testability, dependencies are injected via protocols into DataSources and UseCases. Protocols are defined in separate files, but I know they could also have been created inside the files that implement each protocol, as there is only one struct for each one. 
 
+3. FRAMEWORKS
+Kingfisher to save image cache, it is a solvent third-party library that I've used in my past projects too.
+
 4. CHOICES
  -- nonisolated struct that conforms to Sendable
 Marks the structs as independent from any global actor (including the MainActor) and safe to pass between concurrency contexts.
