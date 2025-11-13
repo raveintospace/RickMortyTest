@@ -10,6 +10,6 @@ enum CharacterGender: String, Decodable {
     case female = "Female"
     case genderless = "Genderless"
     case male = "Male"
-    case unknown = "Unknown"
+    case unknown = "unknown"
 }
 

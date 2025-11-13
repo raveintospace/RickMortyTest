@@ -46,7 +46,7 @@ final class DatabaseViewModel {
             await MainActor.run {
                 self.characters.append(contentsOf: response.results)
                 
-                self.totalCharacterCount = response.info.characterCount
+                self.totalCharacterCount = response.info.objectCount
                 
                 // Update properties for the next fetch
                 self.canLoadMore = response.info.nextPage != nil

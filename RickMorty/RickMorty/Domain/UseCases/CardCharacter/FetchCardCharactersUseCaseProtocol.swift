@@ -9,5 +9,5 @@
 protocol FetchCardCharactersUseCaseProtocol {
     
     /// Retrieves a single page of character data from the API
-    func execute(page: Int) async throws -> CharacterPageResponse    
+    func execute(page: Int) async throws -> CharacterPageResponse
 }

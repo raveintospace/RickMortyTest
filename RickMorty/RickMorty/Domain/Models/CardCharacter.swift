@@ -43,4 +43,15 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         }
         self.image = imageURL
     }
+    
+    // Init for Stubs and Testing
+    init(id: Int, name: String, status: CharacterStatus, gender: CharacterGender, species: String, type: String, image: URL) {
+        self.id = id
+        self.name = name
+        self.status = status
+        self.gender = gender
+        self.species = species
+        self.type = type
+        self.image = image
+    }
 }

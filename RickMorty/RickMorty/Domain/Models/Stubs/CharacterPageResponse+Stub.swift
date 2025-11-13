@@ -1,0 +1,25 @@
+//
+//  CharacterPageResponse+Stub.swift
+//  RickMorty
+//
+//  Created by Uri on 13/11/25.
+//
+
+import Foundation
+
+extension CharacterPageResponse {
+    
+    enum Stub {
+        static let stub1 = CharacterPageResponse(
+            info: PageInfo.Stub.stub1,
+            results: [CardCharacter.Stub.stub1, CardCharacter.Stub.stub2])
+        
+        static let stub2 = CharacterPageResponse(
+            info: PageInfo.Stub.stub2,
+            results: [CardCharacter.Stub.stub6, CardCharacter.Stub.stub8])
+        
+        static let stub42 = CharacterPageResponse(
+            info: PageInfo.Stub.stub42,
+            results: [CardCharacter.Stub.stub1, CardCharacter.Stub.stub2])
+    }
+}
