@@ -13,9 +13,22 @@ struct DatabaseCard: View {
     var onCardPressed: (() -> Void)?
     
     var body: some View {
-        VStack(alignment: .center) {
-            characterImage
-            characterInfo
+        ZStack {
+            Color.rmLime
+            
+            VStack(alignment: .center) {
+                characterImage
+                characterInfo
+            }
+            .foregroundStyle(.black)
+            .background(VStackBackground)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityAddTraits(onCardPressed != nil ? .isButton : .isStaticText)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(onCardPressed != nil ? "Go to Detail View" : "")
+        .onTapGesture {
+            onCardPressed?()
         }
     }
 }
@@ -23,9 +36,9 @@ struct DatabaseCard: View {
 #if DEBUG
 #Preview {
     
-    let previewContent = [CardCharacter.Stub.stub1, CardCharacter.Stub.stub2]
+    let previewContent = [CardCharacter.Stub.stub1, CardCharacter.Stub.stub6]
     
-    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 2),
+    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 2),
               alignment: .center,
               spacing: 4,
               pinnedViews: [],
@@ -33,14 +46,18 @@ struct DatabaseCard: View {
         DatabaseCard(character: character)
     }
     })
+    .padding()
 }
 #endif
 
 extension DatabaseCard {
     
+    // MARK - View components
     private var characterImage: some View {
-        ImageLoaderView(url: character.image, contentMode: .fill)
+        ImageLoaderView(url: character.image)
             .clipShape(.rect(cornerRadius: 10))
+            .padding(5)
+            .accessibilityLabel("Image of \(character.name)")
     }
     
     private var characterInfo: some View {
@@ -50,36 +67,50 @@ extension DatabaseCard {
                     .font(.headline)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(character.gender.rawValue)
+                    .lineLimit(1)
+                    .accessibilityHidden(true)
+                Text(character.gender.symbol)
                     .font(.title3)
                     .frame(width: 20)
+                    .accessibilityLabel("Gender: \(character.gender.rawValue)")
             }
-            Text("Status: \(character.status.rawValue)")
-                .font(.caption)
-                .fontWeight(.bold)
-            Text("Species: ")
-                .font(.caption)
-                .fontWeight(.semibold) +
-            Text(character.species)
-                .font(.caption)
-            Text("Type: ")
-                .font(.caption)
-                .fontWeight(.semibold) +
-            Text(character.type)
-                .font(.caption)
+            LabeledText(label: "Status: ", value: character.status.rawValue)
+                .accessibilityHidden(true)
+            LabeledText(label: "Species: ", value: character.species)
+                .accessibilityHidden(true)
+            LabeledText(label: "Type: ", value: character.type)
+                .accessibilityHidden(true)
         }
         .padding(.top, 0)
         .padding(.horizontal)
         .padding(.bottom)
     }
+    
+    private var VStackBackground: some View {
+        RoundedRectangle(cornerRadius: 10)
+            .stroke(.rmYellow, lineWidth: 5)
+            .accessibilityHidden(true)
+    }
+    
+    // MARK: - Accessibility
+    private var accessibilityLabel: String {
+        "Character name: \(character.name). Status: \(character.status.rawValue). Species: \(character.species). Type: \(character.type)"
+    }
 }
 
-/*
- id: 1,
- name: "Rick Sanchez",
- status: .alive,
- gender: .male,
- species: "Human",
- type: "",
- image: generateImageURL(id: 1)
- */
+fileprivate struct LabeledText: View {
+    let label: String
+    let value: String
+    
+    var body: some View {
+        HStack(spacing: 0) {
+            Text(label)
+                .font(.caption)
+                .fontWeight(.semibold)
+            Text(value)
+                .font(.caption)
+        }
+        .lineLimit(1)
+        .accessibilityElement(children: .combine)
+    }
+}
