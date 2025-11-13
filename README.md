@@ -18,10 +18,10 @@ The MVVM pattern ensures a clear separation of concerns:
 To improve modularity and testability, dependencies are injected via protocols into DataSources and UseCases. Protocols are defined in separate files, but I know they could also have been created inside the files that implement each protocol, as there is only one struct for each one. 
 
 3. FRAMEWORKS
-Kingfisher to save image cache, it is a solvent third-party library that I've used in my past projects too.
+-- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
 
 4. CHOICES
- -- nonisolated struct that conforms to Sendable
+-- nonisolated struct that conforms to Sendable
 Marks the structs as independent from any global actor (including the MainActor) and safe to pass between concurrency contexts.
 
 Conforming to Sendable and being nonisolated is required because:
