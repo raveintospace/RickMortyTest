@@ -25,10 +25,10 @@ final class DatabaseViewModel {
     }
     
     // MARK: - Dependency injection
-    private let fetchCharactersUseCase: FetchCardCharactersUseCaseProtocol
+    private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol
     
-    init(fetchCharactersUseCase: FetchCardCharactersUseCaseProtocol) {
-        self.fetchCharactersUseCase = fetchCharactersUseCase
+    init(fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol) {
+        self.fetchCardCharactersUseCase = fetchCardCharactersUseCase
     }
     
     // MARK: - Public methods
@@ -41,7 +41,7 @@ final class DatabaseViewModel {
         }
         
         do {
-            let response = try await fetchCharactersUseCase.execute(page: currentPage)
+            let response = try await fetchCardCharactersUseCase.execute(page: currentPage)
             
             await MainActor.run {
                 self.characters.append(contentsOf: response.results)

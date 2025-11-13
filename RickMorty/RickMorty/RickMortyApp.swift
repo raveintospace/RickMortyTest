@@ -9,9 +9,22 @@ import SwiftUI
 
 @main
 struct RickMortyApp: App {
+    
+    // ViewModels
+    private let databaseViewModel: DatabaseViewModel
+    
+    init() {
+        let dataService = DataService()
+        let dataSource = CardCharacterDataSourceImpl(dataService: dataService)
+        let fetchCardCharactersUseCase = FetchCardCharactersUseCaseImpl(dataSource: dataSource)
+        
+        self.databaseViewModel = DatabaseViewModel(fetchCardCharactersUseCase: fetchCardCharactersUseCase)
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DatabaseView()
         }
+        .environment(\.databaseViewModel, databaseViewModel)
     }
 }
