@@ -18,6 +18,7 @@ struct KingfisherImageLoader: View {
             .placeholder {
                 Image("RMPlaceholder")
                     .resizable()
+                    .grayscale(1)
             }
             .resizable()
             .onProgress({ _, _ in
@@ -35,8 +36,14 @@ struct KingfisherImageLoader: View {
 
 #if DEBUG
 #Preview {
-    KingfisherImageLoader(imageUrl: CardCharacter.Stub.stub1.image,
-                          contentMode: .fit)
-    .frame(width: 200, height: 200)
+    let wrongurl = URL(string: "fsafsd")!
+    
+    VStack {
+        KingfisherImageLoader(imageUrl: CardCharacter.Stub.stub1.image, contentMode: .fit)
+            .frame(width: 200, height: 200)
+        KingfisherImageLoader(imageUrl: wrongurl)
+            .frame(width: 200, height: 200)
+    }
+    
 }
 #endif
