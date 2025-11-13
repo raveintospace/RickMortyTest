@@ -14,3 +14,6 @@ Conforming to Sendable and being nonisolated is required because:
 Using an actor is a proactive thread-safety measure because it:
 1. Ensures that any future internal state (e.g., an in-memory cache for storing API results) can only be accessed by one thread at a time, eliminating the risk of "data races."
 2. Separates and isolates network access logic from the presentation layer (ViewModel), adhering to the Interface Segregation Principle (ISP) and the Dependency Inversion Principle (DIP).
+
+-- No Repository layer
+The project does not use several sources to fetch characters (ie network & local cache). The Character's Use Case requests the fetch of characters to the datasource, without using a pass-through repository with no added logic, therefore we avoid unnecessary abstraction
