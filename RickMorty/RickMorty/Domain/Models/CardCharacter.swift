@@ -31,8 +31,13 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         self.gender = try container.decode(CharacterGender.self, forKey: .gender)
         
         // These properties are not of "closed nature", we use fallback "N/A" if key is missing or nil
-        self.species = try container.decodeIfPresent(String.self, forKey: .species) ?? "N/A"
-        self.type = try container.decodeIfPresent(String.self, forKey: .type) ?? "N/A"
+        let rawSpecies = try container.decodeIfPresent(String.self, forKey: .species) ?? ""
+        let cleanedSpecies = rawSpecies.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.species = cleanedSpecies.isEmpty ? "N/A" : cleanedSpecies
+        
+        let rawType = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
+        let cleanedType = rawType.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.type = cleanedType.isEmpty ? "N/A" : cleanedType
         
         // API returns a String that we convert to a URL if it's a valid one
         let imageString = try container.decode(String.self, forKey: .image)
@@ -50,8 +55,8 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         self.name = name
         self.status = status
         self.gender = gender
-        self.species = species
-        self.type = type
+        self.species = species.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "N/A" : species
+        self.type = type.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "N/A" : type
         self.image = image
     }
 }
