@@ -15,6 +15,7 @@ struct DatabaseCard: View {
     var body: some View {
         ZStack {
             Color.rmLime
+                .padding(.vertical, 2)
             
             VStack(alignment: .center) {
                 characterImage
@@ -81,7 +82,7 @@ extension DatabaseCard {
             LabeledText(label: "Type: ", value: character.type)
                 .accessibilityHidden(true)
         }
-        .padding(.top, 0)
+        .padding(.top)
         .padding(.horizontal)
         .padding(.bottom)
     }
