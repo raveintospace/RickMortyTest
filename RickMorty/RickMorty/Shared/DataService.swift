@@ -7,14 +7,6 @@
 
 import Foundation
 
-/// The specific errors that could happen when fetching remote data
-enum RemoteDataSourceError: Error {
-    case badServerResponse
-    case decodingError(Error)
-    case httpError(statusCode: Int)
-    case invalidURL
-}
-
 /// Generic Data Service for fetching and decoding data from APIs
 final class DataService {
     

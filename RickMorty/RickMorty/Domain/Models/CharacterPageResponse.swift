@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct CharacterPageResponse: Decodable {
-    
+nonisolated struct CharacterPageResponse: Decodable, Sendable {
     let info: PageInfo
     let results: [CardCharacter]
 }

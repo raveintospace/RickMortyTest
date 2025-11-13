@@ -8,7 +8,7 @@
 import Foundation
 
 /// The essential pagination metadata
-struct PageInfo: Decodable {
+nonisolated struct PageInfo: Decodable, Sendable {
     let characterCount: Int
     let nextPage: URL?
     

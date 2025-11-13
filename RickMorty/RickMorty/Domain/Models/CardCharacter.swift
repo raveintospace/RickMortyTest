@@ -8,7 +8,7 @@
 import Foundation
 
 /// The character with the data needed for a Card Character view
-struct CardCharacter: Decodable, Identifiable, Equatable {
+nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
     let id: Int
     let name: String
     let status: CharacterStatus
