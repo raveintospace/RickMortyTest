@@ -27,6 +27,7 @@ struct DatabaseView: View {
                 }
                 
             }
+            
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {
@@ -67,7 +68,7 @@ extension DatabaseView {
         VStack {
             // titleheader
             filtersBar
-            // sort
+            sortBar
         }
         .padding()
         .padding(.top, -10)
@@ -84,6 +85,10 @@ extension DatabaseView {
         }, selectedFilter: databaseViewModel.selectedFilter
         )
         .padding(.leading, -10)
+    }
+    
+    private var sortBar: some View {
+        SortMenu()
     }
     
     private var displayedCardsGrid: some View {

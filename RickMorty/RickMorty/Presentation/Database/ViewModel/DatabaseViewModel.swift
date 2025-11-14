@@ -23,8 +23,8 @@ final class DatabaseViewModel {
     }
     
     // MARK: - Filters for characters
-    var genderFilters: [Filter] = []
-    var statusFilters: [Filter] = []
+    private(set) var genderFilters: [Filter] = []
+    private(set) var statusFilters: [Filter] = []
     var selectedFilter: Filter? = nil    // A gender or a status
     var selectedFilterOption: FilterOption = .gender {
         didSet {
@@ -36,7 +36,10 @@ final class DatabaseViewModel {
             }
         }
     }
-    var activeSubfilters: [Filter] = []  // Genders (4) or Status (3)
+    private(set) var activeSubfilters: [Filter] = []  // Genders (4) or Status (3)
+    
+    // MARK: - Sort order for characters
+    var sortOption: SortOption = .id
     
     // MARK: - Dependency injection
     private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol
@@ -118,4 +121,17 @@ final class DatabaseViewModel {
         }
     }
     
+    // MARK: - Sort logic
+    private func sortCharacters(characters: [CardCharacter]) -> [CardCharacter] {
+        switch sortOption {
+        case .id:
+            return characters.sorted { $0.id < $1.id }
+        case .idReversed:
+            return characters.sorted { $0.id > $1.id }
+        case .name:
+            return characters.sorted { $0.name < $1.name }
+        case .nameReversed:
+            return characters.sorted { $0.name > $1.name }
+        }
+    }
 }
