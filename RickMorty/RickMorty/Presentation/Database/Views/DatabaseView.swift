@@ -102,14 +102,14 @@ extension DatabaseView {
             spacing: 10,
             pinnedViews: [],
             content: {
-                ForEach(databaseViewModel.characters) { character in
+                ForEach(databaseViewModel.fetchedCharacters) { character in
                     DatabaseCard(character: character,
                                  onCardPressed: {
                         // go to detailview
                     }
                     )
                     .onAppear {
-                        if character == databaseViewModel.characters.last {
+                        if character == databaseViewModel.fetchedCharacters.last {
                             handleEndOfList()
                         }
                     }
@@ -122,7 +122,7 @@ extension DatabaseView {
     private var scrollableCharactersList: some View {
         ScrollViewReader { proxy in
             ScrollView {
-                    if databaseViewModel.isLoading && databaseViewModel.characters.isEmpty {
+                    if databaseViewModel.isLoading && databaseViewModel.fetchedCharacters.isEmpty {
                         ProgressColorBarsView()
                     } else if let error = databaseViewModel.errorMessage {
                         Text(error)
@@ -139,13 +139,13 @@ extension DatabaseView {
     private func allCharactersLoadedAlert() -> Alert {
         return Alert(
             title: Text("All characters are loaded"),
-            message: Text("You have \(databaseViewModel.characters.count) characters available."),
+            message: Text("You have \(databaseViewModel.fetchedCharactersCount) characters available."),
             dismissButton: .default(Text("OK"))
         )
     }
     
     private func handleEndOfList() {
-        if databaseViewModel.canLoadMore {
+        if databaseViewModel.canFetchMore {
             Task {
                 await databaseViewModel.loadCharacters()
             }

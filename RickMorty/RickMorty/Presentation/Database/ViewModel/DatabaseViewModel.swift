@@ -11,15 +11,15 @@ import Foundation
 final class DatabaseViewModel {
     
     // MARK: - Properties
-    private(set) var characters: [CardCharacter] = []
+    private(set) var fetchedCharacters: [CardCharacter] = []
     private(set) var totalCharacterCount: Int = 0
     private(set) var isLoading: Bool = false
-    private(set) var canLoadMore: Bool = true
+    private(set) var canFetchMore: Bool = true
     private(set) var currentPage: Int = 1
     private(set) var errorMessage: String?
     
-    var downloadedCharactersCount: Int {
-        characters.count
+    var fetchedCharactersCount: Int {
+        fetchedCharacters.count
     }
     
     // MARK: - Search characters
@@ -64,36 +64,29 @@ final class DatabaseViewModel {
     }
     
     // MARK: - Fetch characters
+    @MainActor
     func loadCharacters() async {
-        guard !isLoading && canLoadMore else { return }
+        guard !isLoading && canFetchMore else { return }
         
-        await MainActor.run {
-            self.isLoading = true
-            self.errorMessage = nil // Clean previous errors
-        }
+        self.isLoading = true
+        self.errorMessage = nil // Clean previous errors
         
         do {
             let response = try await fetchCardCharactersUseCase.execute(page: currentPage)
             
-            await MainActor.run {
-                self.characters.append(contentsOf: response.results)
-                
-                self.totalCharacterCount = response.info.objectCount
-                
-                // Update properties for the next fetch
-                self.canLoadMore = response.info.nextPage != nil
-                self.currentPage += 1
-            }
+            self.fetchedCharacters.append(contentsOf: response.results)
+            
+            self.totalCharacterCount = response.info.objectCount
+            
+            // Update properties for the next fetch
+            self.canFetchMore = response.info.nextPage != nil
+            self.currentPage += 1
         } catch {
-            await MainActor.run {
-                self.errorMessage = "Error loading characters on page \(self.currentPage): \(error.localizedDescription)"
-                self.canLoadMore = false
-            }
+            self.errorMessage = "Error loading characters on page \(self.currentPage): \(error.localizedDescription)"
+            self.canFetchMore = false
         }
         
-        await MainActor.run {
-            self.isLoading = false
-        }
+        self.isLoading = false
     }
     
     // MARK: - Load filters
@@ -117,6 +110,7 @@ final class DatabaseViewModel {
         }
     }
     
+    @MainActor
     private func updateActiveSubfilters() async {
         switch selectedFilterOption {
         case .gender:
