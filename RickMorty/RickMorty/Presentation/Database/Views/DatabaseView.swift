@@ -27,7 +27,11 @@ struct DatabaseView: View {
                 }
                 
             }
-            
+            .searchable(text: Binding(
+                get: { databaseViewModel.searchText },
+                set: { databaseViewModel.searchText = $0 }
+            ),
+                        prompt: "Search displayed characters")
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {

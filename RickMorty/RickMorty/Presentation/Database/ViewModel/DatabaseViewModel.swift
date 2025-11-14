@@ -22,6 +22,13 @@ final class DatabaseViewModel {
         characters.count
     }
     
+    // MARK: - Search characters
+    var searchText: String = ""
+    
+    var isSearching: Bool {
+        !searchText.isEmpty
+    }
+    
     // MARK: - Filters for characters
     private(set) var genderFilters: [Filter] = []
     private(set) var statusFilters: [Filter] = []
