@@ -29,6 +29,11 @@ final class DatabaseViewModel {
         !searchText.isEmpty
     }
     
+    // MARK: - Computed properties to react when filtering or searching
+    var isFilteringOrSearching: Bool {
+        return selectedFilter != nil || !searchText.isEmpty
+    }
+    
     // MARK: - Filters for characters
     private(set) var genderFilters: [Filter] = []
     private(set) var statusFilters: [Filter] = []

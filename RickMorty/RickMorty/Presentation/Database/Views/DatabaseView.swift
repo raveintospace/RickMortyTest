@@ -92,6 +92,7 @@ extension DatabaseView {
     }
     
     private var sortBar: some View {
+        // HSTack counter + spacer + sortmenu
         SortMenu()
     }
     
@@ -109,14 +110,15 @@ extension DatabaseView {
                     }
                     )
                     .onAppear {
-                        if character == databaseViewModel.fetchedCharacters.last {
+                        if character == databaseViewModel.fetchedCharacters.last &&
+                            !databaseViewModel.isFilteringOrSearching {
                             handleEndOfList()
                         }
                     }
                 }
             }
         )
-        .padding()
+        .padding(.horizontal)
     }
     
     private var scrollableCharactersList: some View {
@@ -129,6 +131,13 @@ extension DatabaseView {
                             .padding()
                     } else {
                         displayedCardsGrid
+                        
+                        if databaseViewModel.isFilteringOrSearching {
+                            FetchMoreDisabledView()
+                                .onDisappear {
+                                    handleEndOfList()
+                                }
+                        }
                     }
             }
         }
