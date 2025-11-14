@@ -13,8 +13,11 @@ final class DeveloperPreview {
     static let instance = DeveloperPreview()
     
     private let dataService: DataService
-    private let dataSource: CardCharacterDataSourceImpl
-    private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseImpl
+    private let dataSource: CardCharacterDataSourceProtocol
+    private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol
+    
+    private let filtersRepository: FiltersRepositoryProtocol
+    private let getFiltersUseCase: GetFiltersUseCaseProtocol
     
     let databaseViewModel: DatabaseViewModel
     
@@ -22,6 +25,12 @@ final class DeveloperPreview {
         self.dataService = DataService()
         self.dataSource = CardCharacterDataSourceImpl(dataService: dataService)
         self.fetchCardCharactersUseCase = FetchCardCharactersUseCaseImpl(dataSource: dataSource)
-        self.databaseViewModel = DatabaseViewModel(fetchCardCharactersUseCase: fetchCardCharactersUseCase)
+        self.filtersRepository = FiltersRepositoryImpl()
+        self.getFiltersUseCase = GetFiltersUseCaseImpl(repository: filtersRepository)
+        
+        self.databaseViewModel = DatabaseViewModel(
+            fetchCardCharactersUseCase: fetchCardCharactersUseCase,
+            getFiltersUseCase: getFiltersUseCase
+        )
     }
 }

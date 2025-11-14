@@ -13,13 +13,17 @@ struct DatabaseView: View {
     
     @State private var showAlertOnEndOfList: Bool = false
     
+    // MARK: - Navigation to other views
+    @State private var showFiltersSheet: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
                 databaseWallpaper
                 
-                ScrollView {
-                    displayedCardsGrid
+                VStack(spacing: 0) {
+                    fullHeader
+                    scrollableCharactersList
                 }
                 
             }
@@ -30,6 +34,13 @@ struct DatabaseView: View {
             }
             .alert(isPresented: $showAlertOnEndOfList) {
                 allCharactersLoadedAlert()
+            }
+            .sheet(isPresented: $showFiltersSheet) {
+                FiltersSheet(selection: Binding(
+                    get: { databaseViewModel.selectedFilterOption },
+                    set: { databaseViewModel.selectedFilterOption = $0 }
+                ))
+                .presentationDetents([.medium])
             }
         }
     }
@@ -50,6 +61,29 @@ extension DatabaseView {
             .resizable()
             .ignoresSafeArea()
             .opacity(0.15)
+    }
+    
+    private var fullHeader: some View {
+        VStack {
+            // titleheader
+            filtersBar
+            // sort
+        }
+        .padding()
+        .padding(.top, -10)
+    }
+    
+    private var filtersBar: some View {
+        FiltersBar(filters: databaseViewModel.activeSubfilters,
+                   onXMarkPressed: {
+            databaseViewModel.selectedFilter = nil
+        }, onFilterPressed: { newFilter in
+            databaseViewModel.selectedFilter = newFilter
+        }, onOptionButtonPressed: {
+            showFiltersSheet = true
+        }, selectedFilter: databaseViewModel.selectedFilter
+        )
+        .padding(.leading, -10)
     }
     
     private var displayedCardsGrid: some View {
@@ -74,6 +108,22 @@ extension DatabaseView {
             }
         )
         .padding()
+    }
+    
+    private var scrollableCharactersList: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                    if databaseViewModel.isLoading && databaseViewModel.characters.isEmpty {
+                        ProgressColorBarsView()
+                    } else if let error = databaseViewModel.errorMessage {
+                        Text(error)
+                            .padding()
+                    } else {
+                        displayedCardsGrid
+                    }
+            }
+        }
+        .scrollIndicators(.hidden)
     }
     
     // MARK: - Private methods

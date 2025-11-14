@@ -17,8 +17,13 @@ struct RickMortyApp: App {
         let dataService = DataService()
         let dataSource = CardCharacterDataSourceImpl(dataService: dataService)
         let fetchCardCharactersUseCase = FetchCardCharactersUseCaseImpl(dataSource: dataSource)
+        let filtersRepository = FiltersRepositoryImpl()
+        let getFiltersUseCase = GetFiltersUseCaseImpl(repository: filtersRepository)
         
-        self.databaseViewModel = DatabaseViewModel(fetchCardCharactersUseCase: fetchCardCharactersUseCase)
+        self.databaseViewModel = DatabaseViewModel(
+            fetchCardCharactersUseCase: fetchCardCharactersUseCase,
+            getFiltersUseCase: getFiltersUseCase
+        )
     }
     
     var body: some Scene {

@@ -34,8 +34,10 @@ Using an actor is a proactive thread-safety measure because it:
 1. Ensures that any future internal state (e.g., an in-memory cache for storing API results) can only be accessed by one thread at a time, eliminating the risk of "data races."
 2. Separates and isolates network access logic from the presentation layer (ViewModel), adhering to the Interface Segregation Principle (ISP) and the Dependency Inversion Principle (DIP).
 
--- No Repository layer
-The project does not use several sources to fetch characters (ie network & local cache). The Character's Use Case requests the fetch of characters to the datasource, without using a pass-through repository with no added logic, therefore we avoid unnecessary abstraction
+-- No Repository layer to fetch characters
+The project does not use several sources to fetch characters (ie network & local cache). The Character's Use Case requests the fetch of characters to the datasource, without using a pass-through repository with no added logic, therefore we avoid unnecessary abstraction.
+
+The Filter layer maintains both a Repository and a Use Case to encapsulate the data source (currently static/hardcoded) and prepare for future integration with an API or local persistence, which would require source switching logic within the Repository. In contrast, the Character layer skips the Repository because it only uses a single, direct network data source, making a pass-through Repository an unnecessary abstraction.
 
 -- Asynchronous Code: async/await instead of completion handlers for API calls and concurrency management.
 

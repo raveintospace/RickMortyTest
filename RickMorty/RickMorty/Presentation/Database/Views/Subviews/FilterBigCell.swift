@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Button style is set on FiltersSheet
 struct FilterBigCell: View {
     
     let filterOption: FilterOption
@@ -21,11 +22,16 @@ struct FilterBigCell: View {
         } label: {
             Text(filterOption.displayName)
                 .font(.largeTitle)
-                .padding(8)
-                .fontWeight(selection == filterOption ? .semibold : .light)
+          //      .fontWeight(selection == filterOption ? .semibold : .light)
+                .padding(14)
         }
-        .buttonStyle(.glass)
         .foregroundStyle(selection == filterOption ? .rmLime : .primary)
+        .background(
+            Capsule(style: .circular)
+                .stroke(lineWidth: 2)
+                .foregroundStyle(selection == filterOption ? .rmLime : .primary)
+                .accessibilityHidden(true)
+        )
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Select \(filterOption.displayName) filter")
         .accessibilityAddTraits(selection == filterOption ? [.isSelected, .isButton] : [.isButton])

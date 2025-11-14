@@ -21,10 +21,15 @@ import SwiftUI
 private struct DatabaseViewModelKey: EnvironmentKey {
     
     static let defaultValue: DatabaseViewModel = {
-        let mockUseCase = MockFetchCardCharactersUseCase()
-        mockUseCase.mockResponse = CharacterPageResponse.Stub.stub1
+        let mockFetchUseCase = MockFetchCardCharactersUseCase()
+        mockFetchUseCase.mockResponse = CharacterPageResponse.Stub.stub1
         
-        return DatabaseViewModel(fetchCardCharactersUseCase: mockUseCase)
+        let mockFiltersUseCase = MockGetFiltersUseCase()
+        
+        return DatabaseViewModel(
+            fetchCardCharactersUseCase: mockFetchUseCase,
+            getFiltersUseCase: mockFiltersUseCase
+        )
     }()
 }
 
