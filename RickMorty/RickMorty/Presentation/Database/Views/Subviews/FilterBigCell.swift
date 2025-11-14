@@ -22,7 +22,6 @@ struct FilterBigCell: View {
         } label: {
             Text(filterOption.displayName)
                 .font(.largeTitle)
-          //      .fontWeight(selection == filterOption ? .semibold : .light)
                 .padding(14)
         }
         .foregroundStyle(selection == filterOption ? .rmLime : .primary)
@@ -33,9 +32,10 @@ struct FilterBigCell: View {
                 .accessibilityHidden(true)
         )
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Select \(filterOption.displayName) filter")
+        .accessibilityLabel("Select \(filterOption.displayName) filter category")
         .accessibilityAddTraits(selection == filterOption ? [.isSelected, .isButton] : [.isButton])
-        .accessibilityHint(selection == filterOption ? "Currently selected filter" : "Tap to choose this filter")
+        .accessibilityHint(selection == filterOption ? "Currently selected filter category" :
+                            "Tap to choose this filter category")
     }
 }
 
