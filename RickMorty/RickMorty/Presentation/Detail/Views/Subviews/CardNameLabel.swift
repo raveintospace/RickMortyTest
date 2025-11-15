@@ -18,6 +18,7 @@ struct CardNameLabel: View {
             .multilineTextAlignment(.center)
             .lineLimit(3)
             .minimumScaleFactor(0.7)
+            .shadow(color: .rmLime, radius: 2)
             .padding(.horizontal)
             .accessibilityLabel("Character name: \(name)")
             .accessibilityAddTraits(.isStaticText)
