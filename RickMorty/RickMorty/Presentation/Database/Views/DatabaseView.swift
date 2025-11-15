@@ -63,7 +63,7 @@ struct DatabaseView: View {
             }
             .navigationDestination(isPresented: $showDetailView) {
                 if let character = selectedCharacter {
-                    DetailView()
+                    DetailView(characterID: character.id)
                 }
             }
         }
