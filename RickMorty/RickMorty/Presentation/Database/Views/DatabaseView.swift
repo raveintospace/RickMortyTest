@@ -163,9 +163,6 @@ extension DatabaseView {
                         
                         if databaseViewModel.isFilteringOrSearching {
                             FetchMoreDisabledView()
-                                .onDisappear {
-                                    handleEndOfList()
-                                }
                         }
                     }
                 }
