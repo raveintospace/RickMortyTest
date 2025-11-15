@@ -35,7 +35,9 @@ struct DatabaseView: View {
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {
-                await databaseViewModel.loadCharacters()
+                if databaseViewModel.fetchedCharacters.isEmpty {
+                    await databaseViewModel.loadCharacters()
+                }
             }
             .alert(isPresented: $showAlertOnEndOfList) {
                 allCharactersLoadedAlert()
@@ -103,7 +105,7 @@ extension DatabaseView {
             spacing: 10,
             pinnedViews: [],
             content: {
-                ForEach(databaseViewModel.fetchedCharacters) { character in
+                ForEach(databaseViewModel.displayedCharacters) { character in
                     DatabaseCard(character: character,
                                  onCardPressed: {
                         // go to detailview

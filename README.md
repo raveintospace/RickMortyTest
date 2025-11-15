@@ -46,5 +46,3 @@ The Filter layer maintains both a Repository and a Use Case to encapsulate the d
 -- Testing Framework: Used Testing instead of XCTest to enhance test readability and maintainability.
 
 -- Some subviews use basic property types (e.g., String, Int, etc.) instead of custom models (e.g., CardCharacter) to enhance reusability across different projects.
-
--- Some ViewModel properties have to be explicitly declared as @Published to work with Combine, even them being on a @Observable class

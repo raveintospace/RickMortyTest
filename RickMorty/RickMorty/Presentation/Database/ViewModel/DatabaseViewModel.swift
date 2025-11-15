@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 @Observable
 final class DatabaseViewModel {
@@ -32,7 +31,19 @@ final class DatabaseViewModel {
     private(set) var errorMessage: String?
     
     // MARK: - Search characters
-    @Published var searchText: String = ""
+    private var searchDebounceTask: Task<Void, Error>?
+    
+    var searchText: String = "" {
+        didSet {
+            searchDebounceTask?.cancel()
+            
+            searchDebounceTask = Task {
+                try await Task.sleep(for: .milliseconds(300)) // 3 seconds
+                
+                try Task.checkCancellation()
+            }
+        }
+    }
     
     var isSearching: Bool {
         !searchText.isEmpty
@@ -58,8 +69,9 @@ final class DatabaseViewModel {
     // MARK: - Filters for characters
     private(set) var genderFilters: [Filter] = []
     private(set) var statusFilters: [Filter] = []
-    @Published var selectedFilter: Filter? = nil    // A gender or a status
-    @Published var selectedFilterOption: FilterOption = .gender {
+    var selectedFilter: Filter? = nil    // A gender or a status
+    
+    var selectedFilterOption: FilterOption = .gender {
         didSet {
             if oldValue != selectedFilterOption {
                 selectedFilter = nil        // Reset it when changing selectedFilterOption
@@ -69,13 +81,11 @@ final class DatabaseViewModel {
             }
         }
     }
+    
     private(set) var activeSubfilters: [Filter] = []  // Genders (4) or Status (3)
     
     // MARK: - Sort order for characters
-    @Published var sortOption: SortOption = .id
-    
-    // Combine
-    private var cancellables = Set<AnyCancellable>()
+    var sortOption: SortOption = .id
     
     // MARK: - Dependency injection
     private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol
@@ -86,8 +96,6 @@ final class DatabaseViewModel {
     ) {
         self.fetchCardCharactersUseCase = fetchCardCharactersUseCase
         self.getFiltersUseCase = getFiltersUseCase
-        
-        addSubscribers()
         
         Task {
             await updateActiveSubfilters()
@@ -151,27 +159,6 @@ final class DatabaseViewModel {
             await loadStatusFilters()
             activeSubfilters = statusFilters
         }
-    }
-    
-    // MARK: - Combine subscriptions
-    private func addSubscribers() {
-        $searchText
-            .combineLatest($selectedFilter, $selectedFilterOption, $sortOption)
-            .debounce(for: 0.3, scheduler: DispatchQueue.main)
-            .sink { [weak self] (searchText, selectedFilter, selectedFilterOption, sortOption) in
-                guard let self = self else { return }
-                // property displayedCharacters calls the logic
-            }
-            .store(in: &cancellables)
-        
-        $selectedFilterOption
-            .sink { [weak self] filterOption in
-                guard let self = self else { return }
-                Task {
-                    await self.updateActiveSubfilters()
-                }
-            }
-            .store(in: &cancellables)
     }
     
     // MARK: - Filter logic, combining searchText & Filters
