@@ -11,7 +11,7 @@ import SwiftUI
 /// We can add several SDKs with this struct (if SDWeb... else Kingfisher)
 struct ImageLoaderView: View {
     
-    let url: URL
+    let url: URL?
     var contentMode: ContentMode = .fit
     
     /// .allowsHitTesting(false) - only rectangle frame is clickable

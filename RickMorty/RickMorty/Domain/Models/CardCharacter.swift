@@ -15,7 +15,7 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
     let gender: CharacterGender
     let species: String
     let type: String
-    let image: URL
+    let image: URL?
     
     enum CodingKeys: String, CodingKey {
         case id, name, status, species, type, gender, image
@@ -39,14 +39,18 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         let cleanedType = rawType.trimmingCharacters(in: .whitespacesAndNewlines)
         self.type = cleanedType.isEmpty ? "N/A" : cleanedType
         
-        // API returns a String that we convert to a URL if it's a valid one
-        let imageString = try container.decode(String.self, forKey: .image)
-        guard let imageURL = URL(string: imageString) else {
-            throw DecodingError.dataCorruptedError(forKey: .image,
-                                                   in: container,
-                                                   debugDescription: "Invalid URL string for image")
+        /// API returns a String that we convert to a URL?.
+        /// We use `decodeIfPresent` and check for an empty string ("") to ensure robust decodability.
+        /// If the URL is null, empty, or invalid, the property is set to nil,
+        /// preventing a `DecodingError.dataCorruptedError` that would abort the decoding of the entire object.
+        /// Our ImageLoaderView has a placeholder image if image = nil
+        let imageString = try container.decodeIfPresent(String.self, forKey: .image)
+        
+        if let string = imageString, !string.isEmpty {
+            self.image = URL(string: string)
+        } else {
+            self.image = nil
         }
-        self.image = imageURL
     }
     
     // Init for Stubs and Testing
