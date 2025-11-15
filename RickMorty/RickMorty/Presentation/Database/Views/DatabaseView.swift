@@ -99,8 +99,11 @@ extension DatabaseView {
     }
     
     private var sortBar: some View {
-        // HSTack counter + spacer + sortmenu
-        SortMenu()
+        HStack {
+            CounterLabel()
+            SortMenu()
+        }
+        
     }
     
     private var noCharactersView: some View {
@@ -158,7 +161,7 @@ extension DatabaseView {
                 }
                 .id(0)
             }
-            .scrollIndicators(.hidden)
+            .scrollIndicators(.visible)
             .onChange(of: databaseViewModel.sortOption) { _, _ in
                 withAnimation(.smooth) { proxy.scrollTo(0, anchor: .top) }
             }

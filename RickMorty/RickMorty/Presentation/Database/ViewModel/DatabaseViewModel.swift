@@ -24,6 +24,10 @@ final class DatabaseViewModel {
                                                            characters: fetchedCharacters))
     }
     
+    var displayedCharactersCount: Int {
+        displayedCharacters.count
+    }
+    
     // MARK: - Fetch properties
     private(set) var isLoading: Bool = false
     private(set) var canFetchMore: Bool = true
