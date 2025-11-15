@@ -140,15 +140,16 @@ extension DatabaseView {
                     DatabaseCard(character: character,
                                  onCardPressed: {
                         segue(character: character)
-                    }
-                    )
+                    })
+                }
+                
+                Color.clear
+                    .frame(height: 1)
                     .onAppear {
-                        if character == databaseViewModel.fetchedCharacters.last &&
-                            !databaseViewModel.isFilteringOrSearching {
+                        if !databaseViewModel.isFilteringOrSearching {
                             handleEndOfList()
                         }
                     }
-                }
             }
         )
         .padding(.horizontal)

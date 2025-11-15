@@ -33,6 +33,8 @@ final class DetailViewModel {
         isLoading = true
         errorMessage = nil
         
+        defer { isLoading = false }
+        
         do {
             let fetchedCharacter = try await fetchDetailCharacterUseCase.execute(id: characterID)
             
@@ -40,7 +42,5 @@ final class DetailViewModel {
         } catch {
             self.errorMessage = "Error loading the character: \(error.localizedDescription)"
         }
-        
-        self.isLoading = false
     }
 }

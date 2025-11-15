@@ -114,6 +114,8 @@ final class DatabaseViewModel {
         self.isLoading = true
         self.errorMessage = nil // Clean previous errors
         
+        defer { isLoading = false }
+        
         do {
             let response = try await fetchCardCharactersUseCase.execute(page: currentPage)
             
@@ -128,8 +130,6 @@ final class DatabaseViewModel {
             self.errorMessage = "Error loading characters on page \(self.currentPage): \(error.localizedDescription)"
             self.canFetchMore = false
         }
-        
-        self.isLoading = false
     }
     
     // MARK: - Load filters
