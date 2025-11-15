@@ -19,6 +19,11 @@ struct DatabaseView: View {
     // MARK: - ScrollList behaviour
     @State private var setScrollToZero: Bool = false
     
+    // iPad detector
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -37,7 +42,7 @@ struct DatabaseView: View {
             .onSubmit(of: .search) {
                 setScrollToZero = true
             }
-            .toolbar(.hidden, for: .navigationBar)
+            .toolbar(isPad ? .visible : .hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {
                 if databaseViewModel.fetchedCharacters.isEmpty {
@@ -77,12 +82,17 @@ extension DatabaseView {
     
     private var fullHeader: some View {
         VStack {
-            // titleheader
+            databaseTitleHeader
             filtersBar
             sortBar
         }
         .padding()
-        .padding(.top, -10)
+        .padding(.top, -20)
+    }
+    
+    private var databaseTitleHeader: some View {
+        TitleHeader()
+            .frame(height: 50)
     }
     
     private var filtersBar: some View {
@@ -114,9 +124,9 @@ extension DatabaseView {
     
     private var displayedCardsGrid: some View {
         LazyVGrid(
-            columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 2),
+            columns: Array(repeating: GridItem(.flexible(), spacing: isPad ? 20: 10), count: isPad ? 3 : 2),
             alignment: .center,
-            spacing: 10,
+            spacing: isPad ? 20: 10,
             pinnedViews: [],
             content: {
                 ForEach(databaseViewModel.displayedCharacters) { character in
