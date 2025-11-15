@@ -14,8 +14,8 @@ struct CardImageView: View {
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            
             ImageLoaderView(url: imageURL)
+                .clipShape(RoundedRectangle(cornerRadius: 5))
             
             Text("#\(id)")
                 .font(.caption)
@@ -29,8 +29,11 @@ struct CardImageView: View {
                         .stroke(.rmYellow, lineWidth: 3)
                 )
                 .padding(10)
-                .offset(x: 10)
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(.rmYellow, lineWidth: 3)
+        )
     }
 }
 
@@ -39,5 +42,6 @@ struct CardImageView: View {
     let character = DetailCharacter.Stub.stub1
     
     CardImageView(id: 150, imageURL: character.image)
+        .safeAreaPadding()
 }
 #endif

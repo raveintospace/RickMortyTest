@@ -46,7 +46,7 @@ extension DetailCharacter {
             status: .dead,
             gender: .male,
             species: "Human",
-            type: "StringSuperhuman (Ghost trains summoner)",
+            type: "Superhuman (Ghost trains summoner)",
             image: generateImageURL(id: 10),
             episode: ["https://rickandmortyapi.com/api/episode/25"],
             origin: CharacterLocation(name: "unknown",
