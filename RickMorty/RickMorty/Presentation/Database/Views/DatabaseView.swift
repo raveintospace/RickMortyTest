@@ -155,6 +155,8 @@ extension DatabaseView {
                         ProgressColorBarsView()
                     } else if let error = databaseViewModel.errorMessage {
                         Text(error)
+                            .font(.title3)
+                            .foregroundStyle(.rmLime)
                             .padding()
                     } else if databaseViewModel.showNoResultsView {
                         noCharactersView
