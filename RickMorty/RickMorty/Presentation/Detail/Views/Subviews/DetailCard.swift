@@ -15,6 +15,7 @@ struct DetailCard: View {
         
         VStack(spacing: 0) {
             CardNameLabel(name: character.name)
+            CardImageView(id: character.id, imageURL: character.image)
         }
     }
 }
