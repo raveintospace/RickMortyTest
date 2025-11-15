@@ -11,6 +11,7 @@ struct TitleHeader: View {
     
     var body: some View {
         HorizontalLogoImage(isAnimationEnabled: false)
+            .shadow(radius: 5)
     }
 }
 
