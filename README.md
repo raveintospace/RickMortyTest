@@ -52,3 +52,6 @@ We want to ensure robust decodability of the entire object. By making "image: UR
 
 -- Optional URL property type in imageLoaders
 The component accepts URL? to directly manage the optionality inherited from the model. When imageUrl is passed as nil, Kingfisher automatically bypasses the network request phase and proceeds immediately to render the placeholder image.
+
+-- Default empty & "N/A" values on property models
+Some properties have a default "N/A" value if the returned String is empty or nil. We want to display a N/A on the UI as sort of a placeholder.

@@ -26,7 +26,6 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         
         self.id = try container.decode(Int.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
-        
         self.status = try container.decode(CharacterStatus.self, forKey: .status)
         self.gender = try container.decode(CharacterGender.self, forKey: .gender)
         
