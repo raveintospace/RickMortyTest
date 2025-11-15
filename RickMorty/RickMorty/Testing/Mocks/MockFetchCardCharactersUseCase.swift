@@ -22,7 +22,7 @@ final class MockFetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol {
         if shouldFail {
             throw NSError(domain: "MockError",
                           code: 404,
-                          userInfo: [NSLocalizedDescriptionKey: "Mocked fetch failure"])
+                          userInfo: [NSLocalizedDescriptionKey: "Mocked card character fetch failure"])
         }
         
         guard let response = mockResponse else {
