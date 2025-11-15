@@ -26,7 +26,6 @@ struct DetailLocation: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.name = try container.decode(String.self, forKey: .name)
-        self.residents = try container.decode([String].self, forKey: .residents)
         
         // These properties are not of "closed nature", we use fallback "N/A" if key is missing or nil
         let rawType = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
@@ -36,6 +35,14 @@ struct DetailLocation: Decodable {
         let rawDimension = try container.decodeIfPresent(String.self, forKey: .dimension) ?? ""
         let cleanedDimension = rawDimension.trimmingCharacters(in: .whitespacesAndNewlines)
         self.dimension = cleanedDimension.isEmpty ? "N/A" : cleanedDimension
+        
+        let residentsURLs = try container.decodeIfPresent([String].self, forKey: .residents) ?? []
+        self.residents = residentsURLs
+        
+        /*
+         let episodeURLs = try container.decodeIfPresent([String].self, forKey: .episode) ?? []
+         self.episode = episodeURLs
+         */
     }
     
     // Init for Stubs and Testing
