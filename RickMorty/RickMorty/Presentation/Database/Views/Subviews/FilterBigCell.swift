@@ -27,7 +27,7 @@ struct FilterBigCell: View {
         .foregroundStyle(selection == filterOption ? .rmLime : .primary)
         .background(
             Capsule(style: .circular)
-                .stroke(lineWidth: 2)
+                .stroke(lineWidth: 3)
                 .foregroundStyle(selection == filterOption ? .rmLime : .primary)
                 .accessibilityHidden(true)
         )

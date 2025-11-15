@@ -24,12 +24,12 @@ struct FiltersBar: View {
             ScrollViewReader { scrollViewProxy in
                 ScrollView(.horizontal) {
                     HStack(spacing: 8) {
-                        
                         if selectedFilter != nil {
                             Button {
                                 onXMarkPressed?()
                             } label: {
                                 Image(systemName: "xmark.circle")
+                                    .font(.title)
                                     .tint(.rmLime)
                             }
                             .accessibilityLabel("Clear selected filter")

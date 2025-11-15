@@ -16,6 +16,9 @@ struct DatabaseView: View {
     // MARK: - Navigation to other views
     @State private var showFiltersSheet: Bool = false
     
+    // MARK: - ScrollList behaviour
+    @State private var setScrollToZero: Bool = false
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -30,8 +33,10 @@ struct DatabaseView: View {
             .searchable(text: Binding(
                 get: { databaseViewModel.searchText },
                 set: { databaseViewModel.searchText = $0 }
-            ),
-                        prompt: "Search displayed characters")
+            ), prompt: "Search displayed characters")
+            .onSubmit(of: .search) {
+                setScrollToZero = true
+            }
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {
@@ -98,6 +103,12 @@ extension DatabaseView {
         SortMenu()
     }
     
+    private var noCharactersView: some View {
+        NoResultsView(imageName: "person.slash",
+                      mainText: "No Characters",
+                      callToActionText: "There are no characters that match your search. Try with other filters or keywords.")
+    }
+    
     private var displayedCardsGrid: some View {
         LazyVGrid(
             columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 2),
@@ -126,11 +137,14 @@ extension DatabaseView {
     private var scrollableCharactersList: some View {
         ScrollViewReader { proxy in
             ScrollView {
+                Group {
                     if databaseViewModel.isLoading && databaseViewModel.fetchedCharacters.isEmpty {
                         ProgressColorBarsView()
                     } else if let error = databaseViewModel.errorMessage {
                         Text(error)
                             .padding()
+                    } else if databaseViewModel.showNoResultsView {
+                        noCharactersView
                     } else {
                         displayedCardsGrid
                         
@@ -141,9 +155,20 @@ extension DatabaseView {
                                 }
                         }
                     }
+                }
+                .id(0)
+            }
+            .scrollIndicators(.hidden)
+            .onChange(of: databaseViewModel.sortOption) { _, _ in
+                withAnimation(.smooth) { proxy.scrollTo(0, anchor: .top) }
+            }
+            .onChange(of: databaseViewModel.selectedFilter) { _, _ in
+                withAnimation(.smooth) { proxy.scrollTo(0, anchor: .top) }
+            }
+            .onChange(of: setScrollToZero) { _, _ in
+                withAnimation(.smooth) { proxy.scrollTo(0, anchor: .top) }
             }
         }
-        .scrollIndicators(.hidden)
     }
     
     // MARK: - Private methods

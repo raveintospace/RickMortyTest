@@ -43,7 +43,7 @@ extension FiltersSheet {
     private var filtersSheetTitle: some View {
         Text("Select how to filter the characters")
             .bold()
-            .font(.system(size: 25))
+            .font(.title)
             .multilineTextAlignment(.center)
             .padding(.horizontal, 40)
     }

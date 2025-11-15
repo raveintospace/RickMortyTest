@@ -75,7 +75,7 @@ extension DatabaseCard {
                     .frame(width: 20)
                     .accessibilityLabel("Gender: \(character.gender.rawValue)")
             }
-            LabeledText(label: "Status: ", value: character.status.rawValue)
+            LabeledText(label: "Status: ", value: character.status.rawValue.capitalized)
                 .accessibilityHidden(true)
             LabeledText(label: "Species: ", value: character.species)
                 .accessibilityHidden(true)
