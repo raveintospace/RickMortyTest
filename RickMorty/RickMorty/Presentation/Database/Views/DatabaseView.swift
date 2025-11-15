@@ -15,6 +15,8 @@ struct DatabaseView: View {
     
     // MARK: - Navigation to other views
     @State private var showFiltersSheet: Bool = false
+    @State private var showDetailView: Bool = false
+    @State private var selectedCharacter: CardCharacter?
     
     // MARK: - ScrollList behaviour
     @State private var setScrollToZero: Bool = false
@@ -58,6 +60,11 @@ struct DatabaseView: View {
                     set: { databaseViewModel.selectedFilterOption = $0 }
                 ))
                 .presentationDetents([.medium])
+            }
+            .navigationDestination(isPresented: $showDetailView) {
+                if let character = selectedCharacter {
+                    DetailView()
+                }
             }
         }
     }
@@ -132,7 +139,7 @@ extension DatabaseView {
                 ForEach(databaseViewModel.displayedCharacters) { character in
                     DatabaseCard(character: character,
                                  onCardPressed: {
-                        // go to detailview
+                        segue(character: character)
                     }
                     )
                     .onAppear {
@@ -200,5 +207,10 @@ extension DatabaseView {
         } else {
             showAlertOnEndOfList = true
         }
+    }
+    
+    private func segue(character: CardCharacter) {
+        selectedCharacter = character
+        showDetailView = true
     }
 }
