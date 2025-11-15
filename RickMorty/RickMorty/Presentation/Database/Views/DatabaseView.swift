@@ -172,6 +172,7 @@ extension DatabaseView {
                         
                         if databaseViewModel.isFilteringOrSearching {
                             FetchMoreDisabledView()
+                                .padding(.top, 15)
                         }
                     }
                 }

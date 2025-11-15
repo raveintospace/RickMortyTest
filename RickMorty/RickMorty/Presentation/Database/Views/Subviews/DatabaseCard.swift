@@ -64,7 +64,7 @@ extension DatabaseCard {
     private var characterInfo: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
-                Text(character.name)
+                Text(character.name.capitalized)
                     .font(.headline)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -75,11 +75,12 @@ extension DatabaseCard {
                     .frame(width: 20)
                     .accessibilityLabel("Gender: \(character.gender.rawValue)")
             }
+            LabeledText(label: "ID: ", value: "\(character.id)")
             LabeledText(label: "Status: ", value: character.status.rawValue.capitalized)
                 .accessibilityHidden(true)
-            LabeledText(label: "Species: ", value: character.species)
+            LabeledText(label: "Species: ", value: character.species.capitalized)
                 .accessibilityHidden(true)
-            LabeledText(label: "Type: ", value: character.type)
+            LabeledText(label: "Type: ", value: character.type.capitalized)
                 .accessibilityHidden(true)
         }
         .padding(.top)
@@ -95,7 +96,7 @@ extension DatabaseCard {
     
     // MARK: - Accessibility
     private var accessibilityLabel: String {
-        "Character name: \(character.name). Status: \(character.status.rawValue). Species: \(character.species). Type: \(character.type)"
+        "Character name: \(character.name). ID: \(character.id). Status: \(character.status.rawValue). Species: \(character.species). Type: \(character.type)"
     }
 }
 
