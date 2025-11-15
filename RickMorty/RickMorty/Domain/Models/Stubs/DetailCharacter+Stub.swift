@@ -50,7 +50,7 @@ extension DetailCharacter {
             image: generateImageURL(id: 10),
             episode: ["https://rickandmortyapi.com/api/episode/25"],
             origin: CharacterLocation(name: "unknown",
-                                      url: URL(string: "")!),
+                                      url: URL(string: "")),
             location: CharacterLocation(name: "Worldender's lair",
                                         url: URL(string: "https://rickandmortyapi.com/api/location/4")!)
         )
@@ -65,7 +65,7 @@ extension DetailCharacter {
             image: generateImageURL(id: 50),
             episode: ["https://rickandmortyapi.com/api/episode/14"],
             origin: CharacterLocation(name: "unknown",
-                                      url: URL(string: "")!),
+                                      url: URL(string: "")),
             location: CharacterLocation(name: "Earth (Replacement Dimension)",
                                         url: URL(string: "https://rickandmortyapi.com/api/location/20")!)
         )
