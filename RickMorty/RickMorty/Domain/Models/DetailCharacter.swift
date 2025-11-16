@@ -27,6 +27,17 @@ nonisolated struct DetailCharacter: Decodable, Sendable {
         episode.count
     }
     
+    var episodeCountText: String {
+        switch episodeCount {
+        case 0:
+            return "· Appears on no episodes ·"
+        case 1:
+            return "· Appears on 1 episode ·"
+        default:
+            return "· Appears on \(episodeCount) episodes ·"
+        }
+    }
+    
     var hasValidOriginURL: Bool {
         return origin?.url != nil
     }

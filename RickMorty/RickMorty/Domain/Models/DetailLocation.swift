@@ -18,6 +18,18 @@ nonisolated struct DetailLocation: Decodable, Sendable {
         residents.count
     }
     
+    // Computed property for UI
+    var residentCountText: String {
+        switch residentCount {
+        case 0:
+            return "This location has no residents."
+        case 1:
+            return "This location has 1 resident."
+        default:
+            return "This location has \(residentCount) residents."
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case name, type, dimension, residents
     }
