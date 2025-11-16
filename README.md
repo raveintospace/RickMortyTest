@@ -27,7 +27,7 @@ Marks the structs as independent from any global actor (including the MainActor)
 Conforming to Sendable and being nonisolated is required because:
 1. The models only contain thread-safe types (Int, String, URL, Enums) and manage no mutable state, making them intrinsically safe to transfer (Sendable).
 2. We prevent the compiler, especially in Swift 6 mode, from inferring that the Decodable protocol is bound to the MainActor (default behaviour).
-3. It allows the CardCharacterDataSourceImpl actor to return data without costly copies or isolation bridging, ensuring efficiency.
+3. It allows the DataSourceImpls actor to return data without costly copies or isolation bridging, ensuring efficiency.
 
 -- The Data Source implementation is declared as an 'actor' to guarantee isolation.
 Using an actor is a proactive thread-safety measure because it:
