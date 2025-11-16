@@ -15,6 +15,11 @@ struct DetailBottomButtons: View {
     var showLocationButton: Bool
     var onLocationButtonPressed: () -> Void
     
+    // iPad detector
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
             if showOriginButton {
@@ -26,6 +31,7 @@ struct DetailBottomButtons: View {
                         .frame(maxWidth: .infinity)
                 }
                 .detailButtonStyle()
+                .font(isPad ? .title : .title3)
                 .accessibilityHidden(!showOriginButton)
                 .accessibilityLabel("View details of character's origin")
             }
@@ -39,6 +45,7 @@ struct DetailBottomButtons: View {
                         .frame(maxWidth: .infinity)
                 }
                 .detailButtonStyle()
+                .font(isPad ? .title : .title3)
                 .accessibilityHidden(!showLocationButton)
                 .accessibilityLabel("View details of character's location")
             }
@@ -61,7 +68,6 @@ extension Button {
     
     func detailButtonStyle() -> some View {
         self
-            .font(.title3)
             .buttonStyle(.glass)
             .buttonBorderShape(.roundedRectangle(radius: 15))
             .shadow(color: .rmLime, radius: 3)

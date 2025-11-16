@@ -11,6 +11,11 @@ struct CardInsightsView: View {
     
     let character: DetailCharacter
     
+    // iPad detector
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             InsightRow(label: "· Gender", value: character.gender.rawValue.capitalized)
@@ -27,7 +32,7 @@ struct CardInsightsView: View {
             
             episodeLabel
         }
-        .font(.headline)
+        .font(isPad ? .title : .headline)
         .shadow(color: .rmLime, radius: 1)
     }
 }

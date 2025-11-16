@@ -11,9 +11,14 @@ struct CardNameLabel: View {
     
     let name: String
     
+    // iPad detector
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         Text(name.capitalized)
-            .font(.title)
+            .font(isPad ? .largeTitle : .title)
             .fontWeight(.bold)
             .multilineTextAlignment(.center)
             .lineLimit(3)

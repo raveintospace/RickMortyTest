@@ -16,6 +16,11 @@ struct DetailView: View {
     // MARK: - Navigation to sheets
     @State private var activeSheet: LocationSheet? = nil
     
+    // iPad detector
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     init(characterID: Int) {
         _detailViewModel = State(initialValue: DetailViewModel(characterID: characterID, fetchDetailCharacterUseCase: FetchDetailCharacterUseCaseImpl(dataSource: DetailCharacterDataSourceImpl(dataService: DataService()))))
         
@@ -60,10 +65,10 @@ struct DetailView: View {
                         switch sheet {
                         case .origin(let url):
                             LocationView(locationURL: url, locationTitle: "Origin")
-                                .presentationDetents([.medium, .large])
+                                .presentationDetents(isPad ? [.large] : [.medium, .large])
                         case .location(let url):
                             LocationView(locationURL: url, locationTitle: "Location")
-                                .presentationDetents([.medium, .large])
+                                .presentationDetents(isPad ? [.large] : [.medium, .large])
                         }
                     }
                 }
