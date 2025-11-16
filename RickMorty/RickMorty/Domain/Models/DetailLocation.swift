@@ -8,7 +8,7 @@
 import Foundation
 
 // The Location details displayed on a sheet presented on DetailView
-struct DetailLocation: Decodable {
+nonisolated struct DetailLocation: Decodable, Sendable {
     let name: String
     let type: String
     let dimension: String

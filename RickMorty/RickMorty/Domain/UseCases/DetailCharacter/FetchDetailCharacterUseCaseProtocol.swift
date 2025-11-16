@@ -5,7 +5,7 @@
 //  Created by Uri on 15/11/25.
 //
 
-/// Defines the contract for fetching a list of characters for the Database view
+/// Defines the contract for fetching a Character for the DetailView
 protocol FetchDetailCharacterUseCaseProtocol {
     
     /// Retrieves a single character from the API

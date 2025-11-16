@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DetailCharacterDataSourceImpl: DetailCharacterDataSourceProtocol {
+actor DetailCharacterDataSourceImpl: DetailCharacterDataSourceProtocol {
     
     private let dataService: DataService
     

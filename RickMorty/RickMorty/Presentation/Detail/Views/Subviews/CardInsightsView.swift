@@ -36,8 +36,6 @@ struct CardInsightsView: View {
 #if DEBUG
 #Preview {
     let character = DetailCharacter.Stub.stub10
-    let origin = CharacterLocation.Stub.stub1
-    let location = CharacterLocation.Stub.stub20
     
     CardInsightsView(character: character)
         .padding()

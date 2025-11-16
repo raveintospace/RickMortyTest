@@ -8,7 +8,7 @@
 import Foundation
 
 // Location info displayed on DetailView
-struct CharacterLocation: Decodable {
+nonisolated struct CharacterLocation: Decodable, Sendable {
     let name: String
     let url: URL?
     
