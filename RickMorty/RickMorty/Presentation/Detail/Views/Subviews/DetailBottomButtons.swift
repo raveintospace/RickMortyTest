@@ -16,31 +16,34 @@ struct DetailBottomButtons: View {
     var onLocationButtonPressed: () -> Void
     
     var body: some View {
-        VStack(spacing: 12) {
-            Button {
-                onOriginButtonPressed()
-            } label: {
-                Text("Origin Details")
-                    .shadow(color: .rmLime, radius: 1)
-                    .frame(maxWidth: .infinity)
+        VStack(spacing: 20) {
+            if showOriginButton {
+                Button {
+                    onOriginButtonPressed()
+                } label: {
+                    Text("Origin Details")
+                        .shadow(color: .rmLime, radius: 1)
+                        .frame(maxWidth: .infinity)
+                }
+                .detailButtonStyle()
+                .accessibilityHidden(!showOriginButton)
+                .accessibilityLabel("View details of character's origin")
             }
-            .detailButtonStyle()
-            .opacity(showOriginButton ? 1 : 0)
-            .accessibilityHidden(!showOriginButton)
-            .accessibilityLabel("View details of character's origin")
             
-            Button {
-                onLocationButtonPressed()
-            } label: {
-                Text("Location Details")
-                    .shadow(color: .rmLime, radius: 1)
-                    .frame(maxWidth: .infinity)
+            if showLocationButton {
+                Button {
+                    onLocationButtonPressed()
+                } label: {
+                    Text("Location Details")
+                        .shadow(color: .rmLime, radius: 1)
+                        .frame(maxWidth: .infinity)
+                }
+                .detailButtonStyle()
+                .accessibilityHidden(!showLocationButton)
+                .accessibilityLabel("View details of character's location")
             }
-            .detailButtonStyle()
-            .opacity(showLocationButton ? 1 : 0)
-            .accessibilityHidden(!showLocationButton)
-            .accessibilityLabel("View details of character's location")
         }
+        .padding(.horizontal, 40)
         
     }
 }
