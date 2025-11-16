@@ -24,43 +24,47 @@ struct DetailView: View {
     
     var body: some View {
         NavigationStack {
-            if detailViewModel.isLoading && detailViewModel.character == nil {
-                ProgressColorBarsView()
-            } else if let error = detailViewModel.errorMessage {
-                Text(error)
-                    .font(.title3)
-                    .foregroundStyle(.rmLime)
-                    .padding()
-            } else if let character = detailViewModel.character {
-                ScrollView {
-                    VStack {
-                        DetailCard(character: character)
-                        
-                        DetailBottomButtons(
-                            showOriginButton: character.hasValidOriginURL,
-                            onOriginButtonPressed: {
-                                if let url = character.origin?.url {
-                                    activeSheet = .origin(url: url)
+            ZStack {
+                detailWallpaper
+                
+                if detailViewModel.isLoading && detailViewModel.character == nil {
+                    ProgressColorBarsView()
+                } else if let error = detailViewModel.errorMessage {
+                    Text(error)
+                        .font(.title3)
+                        .foregroundStyle(.rmLime)
+                        .padding()
+                } else if let character = detailViewModel.character {
+                    ScrollView {
+                        VStack {
+                            DetailCard(character: character)
+                            
+                            DetailBottomButtons(
+                                showOriginButton: character.hasValidOriginURL,
+                                onOriginButtonPressed: {
+                                    if let url = character.origin?.url {
+                                        activeSheet = .origin(url: url)
+                                    }
+                                },
+                                showLocationButton: character.hasValidLocationURL,
+                                onLocationButtonPressed: {
+                                    if let url = character.location?.url {
+                                        activeSheet = .location(url: url)
+                                    }
                                 }
-                            },
-                            showLocationButton: character.hasValidLocationURL,
-                            onLocationButtonPressed: {
-                                if let url = character.location?.url {
-                                    activeSheet = .location(url: url)
-                                }
-                            }
-                        )
+                            )
+                        }
                     }
-                }
-                .scrollIndicators(.hidden)
-                .sheet(item: $activeSheet) { sheet in
-                    switch sheet {
-                    case .origin(let url):
-                        LocationView(locationURL: url, locationTitle: "Origin")
-                            .presentationDetents([.large])
-                    case .location(let url):
-                        LocationView(locationURL: url, locationTitle: "Location")
-                            .presentationDetents([.large])
+                    .scrollIndicators(.hidden)
+                    .sheet(item: $activeSheet) { sheet in
+                        switch sheet {
+                        case .origin(let url):
+                            LocationView(locationURL: url, locationTitle: "Origin")
+                                .presentationDetents([.medium, .large])
+                        case .location(let url):
+                            LocationView(locationURL: url, locationTitle: "Location")
+                                .presentationDetents([.medium, .large])
+                        }
                     }
                 }
             }
@@ -78,6 +82,15 @@ struct DetailView: View {
     }
 }
 #endif
+
+extension DetailView {
+    private var detailWallpaper: some View {
+        Image("detailWallpaper")
+            .resizable()
+            .ignoresSafeArea()
+            .opacity(0.15)
+    }
+}
 
 fileprivate enum LocationSheet: Identifiable {
     case origin(url: URL)

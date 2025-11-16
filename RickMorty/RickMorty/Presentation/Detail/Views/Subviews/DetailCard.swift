@@ -19,6 +19,7 @@ struct DetailCard: View {
                 .padding(.bottom, 6)
             CardInsightsView(character: character)
         }
+        .foregroundStyle(.black)
         .padding(30)
         .background(
             cardFrame
@@ -38,6 +39,10 @@ extension DetailCard {
     
     private var cardFrame: some View {
         ZStack {
+            RoundedRectangle(cornerRadius: 15)
+                .fill(.white)
+                .accessibilityHidden(true)
+            
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.rmPink, lineWidth: 6)
                 .accessibilityHidden(true)
