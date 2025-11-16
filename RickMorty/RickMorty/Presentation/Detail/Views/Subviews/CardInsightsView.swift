@@ -25,8 +25,7 @@ struct CardInsightsView: View {
             
             RMDivider()
             
-            episodeLabelFactory()
-                .frame(maxWidth: .infinity, alignment: .center)
+            episodeLabel
         }
         .font(.headline)
         .shadow(color: .rmLime, radius: 1)
@@ -44,15 +43,10 @@ struct CardInsightsView: View {
 
 extension CardInsightsView {
     
-    @ViewBuilder
-    private func episodeLabelFactory() -> some View {
-        if character.episodeCount > 1 {
-            Text("· Appears on **\(character.episodeCount)** episodes ·")
-                .accessibilityLabel("Character appears on \(character.episodeCount) episodes")
-        } else {
-            Text("· Appears on **\(character.episodeCount)** episode ·")
-                .accessibilityLabel("Character appears on one episode")
-        }
+    private var episodeLabel: some View {
+        Text(character.episodeCountText)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .accessibilityLabel(character.episodeCountText)
     }
 }
 
