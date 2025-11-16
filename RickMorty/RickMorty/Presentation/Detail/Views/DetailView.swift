@@ -41,14 +41,12 @@ struct DetailView: View {
                             onOriginButtonPressed: {
                                 if let url = character.origin?.url {
                                     activeSheet = .origin(url: url)
-                                    debugPrint("\(url)")
                                 }
                             },
                             showLocationButton: character.hasValidLocationURL,
                             onLocationButtonPressed: {
                                 if let url = character.location?.url {
                                     activeSheet = .location(url: url)
-                                    debugPrint("\(url)")
                                 }
                             }
                         )
@@ -59,10 +57,10 @@ struct DetailView: View {
                     switch sheet {
                     case .origin(let url):
                         LocationView(locationURL: url, locationTitle: "Origin")
-                            .presentationDetents([.medium])
+                            .presentationDetents([.large])
                     case .location(let url):
                         LocationView(locationURL: url, locationTitle: "Location")
-                            .presentationDetents([.medium])
+                            .presentationDetents([.large])
                     }
                 }
             }
