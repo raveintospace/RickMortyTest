@@ -16,8 +16,10 @@ struct DetailCard: View {
             CardNameLabel(name: character.name)
                 .padding(.bottom, 4)
             CardImageView(id: character.id, imageURL: character.image)
+                .layoutPriority(1)
                 .padding(.bottom, 6)
             CardInsightsView(character: character)
+                .layoutPriority(0)
         }
         .padding(30)
         .background(

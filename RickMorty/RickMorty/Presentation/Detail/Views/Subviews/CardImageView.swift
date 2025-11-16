@@ -15,6 +15,7 @@ struct CardImageView: View {
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ImageLoaderView(url: imageURL)
+                .fixedSize()
                 .clipShape(RoundedRectangle(cornerRadius: 5))
             
             Text("#\(id)")
@@ -28,7 +29,8 @@ struct CardImageView: View {
                     Circle()
                         .stroke(.rmYellow, lineWidth: 3)
                 )
-                .padding(10)
+                .padding(5)
+                .offset(y: -5)
         }
         .overlay(
             RoundedRectangle(cornerRadius: 5)

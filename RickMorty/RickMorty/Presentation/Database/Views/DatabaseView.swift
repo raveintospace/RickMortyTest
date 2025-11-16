@@ -35,7 +35,6 @@ struct DatabaseView: View {
                     fullHeader
                     scrollableCharactersList
                 }
-                
             }
             .searchable(text: Binding(
                 get: { databaseViewModel.searchText },

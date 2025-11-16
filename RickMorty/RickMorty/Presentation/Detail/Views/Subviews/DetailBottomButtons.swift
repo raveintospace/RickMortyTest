@@ -61,9 +61,9 @@ extension Button {
     
     func detailButtonStyle() -> some View {
         self
-            .font(.title2)
+            .font(.title3)
             .buttonStyle(.glass)
-            .buttonBorderShape(.roundedRectangle(radius: 20))
+            .buttonBorderShape(.roundedRectangle(radius: 15))
             .shadow(color: .rmLime, radius: 3)
             .controlSize(.large)
     }

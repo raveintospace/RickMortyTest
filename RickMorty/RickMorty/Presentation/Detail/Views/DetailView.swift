@@ -11,6 +11,10 @@ struct DetailView: View {
     
     @State private var detailViewModel: DetailViewModel
     
+    // MARK: - Navigation to sheets
+    @State private var showOriginSheet: Bool = false
+    @State private var showLocationSheet: Bool = false
+    
     let characterID: Int
     
     init(characterID: Int) {
@@ -30,14 +34,23 @@ struct DetailView: View {
                         .foregroundStyle(.rmLime)
                         .padding()
                 } else if let character = detailViewModel.character {
-                    VStack {
-                        Text(character.name)
-                        Text(character.species)
-                        Text("\(character.episodeCount)")
-                        Text(character.origin?.name ?? "Fato")
-                        Text(character.location?.name ?? "Fato")
-                        Text(character.status.rawValue)
+                    ScrollView {
+                        VStack {
+                            DetailCard(character: character)
+                            
+                            DetailBottomButtons(
+                                showOriginButton: character.hasValidOriginURL,
+                                onOriginButtonPressed: {
+                                    showOriginSheet = true
+                                },
+                                showLocationButton: character.hasValidLocationURL,
+                                onLocationButtonPressed: {
+                                    showLocationSheet = true
+                                }
+                            )
+                        }
                     }
+                    .scrollIndicators(.hidden)
                 }
             }
             .task {

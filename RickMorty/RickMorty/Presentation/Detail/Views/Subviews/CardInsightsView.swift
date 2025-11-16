@@ -63,7 +63,7 @@ fileprivate struct InsightRow: View {
     let value: String
     
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(alignment: .top, spacing: 4) {
             Text("\(label):")
             Text(value)
                 .lineLimit(3)
@@ -79,7 +79,7 @@ fileprivate struct LocationRow: View {
     let location: CharacterLocation?
     
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(alignment: .top, spacing: 4) {
             Text("\(title):")
             
             if let loc = location {
