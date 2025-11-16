@@ -58,7 +58,7 @@ struct DatabaseView: View {
                     get: { databaseViewModel.selectedFilterOption },
                     set: { databaseViewModel.selectedFilterOption = $0 }
                 ))
-                .presentationDetents([.medium])
+                .presentationDetents(isPad ? [.large] : [.medium])
             }
             .navigationDestination(isPresented: $showDetailView) {
                 if let character = selectedCharacter {
@@ -98,7 +98,7 @@ extension DatabaseView {
     
     private var databaseTitleHeader: some View {
         TitleHeader()
-            .frame(height: 50)
+            .frame(height: isPad ? 100 : 50)
     }
     
     private var filtersBar: some View {

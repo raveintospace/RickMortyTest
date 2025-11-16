@@ -10,7 +10,11 @@ import SwiftUI
 struct TitleHeader: View {
     
     var body: some View {
-        HorizontalLogoImage(isAnimationEnabled: false)
+        Image("RMHorizontal")
+            .resizable()
+            .scaledToFit()
+            .accessibilityLabel("Rick and Morty logo")
+            .accessibilityAddTraits(.isImage)
             .shadow(color: .black, radius: 3)
     }
 }
