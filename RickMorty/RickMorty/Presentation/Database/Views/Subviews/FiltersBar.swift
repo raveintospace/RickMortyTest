@@ -17,8 +17,6 @@ struct FiltersBar: View {
     // The value is passed by the parent view
     var selectedFilter: Filter?
     
-    @State private var trigger: Bool = false
-    
     var body: some View {
         HStack(spacing: 0) {
             ScrollViewReader { scrollViewProxy in
@@ -34,7 +32,6 @@ struct FiltersBar: View {
                             }
                             .accessibilityLabel("Clear selected filter")
                             .accessibilityAddTraits(.isButton)
-                            .sensoryFeedback(.impact, trigger: trigger)
                             .transition(.move(edge: .leading).combined(with: .opacity))
                             .padding(.leading, 4)
                             .padding(.trailing, 4) // avoids hitting another cell

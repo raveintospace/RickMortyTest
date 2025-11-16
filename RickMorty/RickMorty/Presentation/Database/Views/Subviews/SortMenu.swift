@@ -11,6 +11,10 @@ struct SortMenu: View {
     
     @Environment(\.databaseViewModel) private var databaseViewModel
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         HStack {
             Menu {
@@ -19,6 +23,8 @@ struct SortMenu: View {
                         databaseViewModel.sortOption = sortOption
                     }) {
                         sortOption.displayName()
+                            .font(isPad ? .title : .body)
+                        
                     }
                 }
             } label: {
@@ -41,5 +47,6 @@ struct SortMenu: View {
 extension SortMenu {
     private func menuTitleView(sortOption: SortOption) -> some View {
         sortOption.displayName()
+            .font(isPad ? .title : .body)
     }
 }

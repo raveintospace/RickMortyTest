@@ -119,7 +119,6 @@ extension DatabaseView {
             CounterLabel()
             SortMenu()
         }
-        
     }
     
     private var noCharactersView: some View {

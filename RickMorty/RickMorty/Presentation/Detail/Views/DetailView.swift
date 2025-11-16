@@ -16,7 +16,6 @@ struct DetailView: View {
     // MARK: - Navigation to sheets
     @State private var activeSheet: LocationSheet? = nil
     
-    // iPad detector
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }

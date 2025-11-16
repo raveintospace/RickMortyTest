@@ -12,6 +12,10 @@ struct DatabaseCard: View {
     let character: CardCharacter
     var onCardPressed: (() -> Void)?
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         ZStack {
             Color.rmLime
@@ -65,23 +69,31 @@ extension DatabaseCard {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
                 Text(character.name.capitalized)
-                    .font(.headline)
+                    .font(isPad ? .title : .headline)
                     .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(1)
                     .accessibilityHidden(true)
                 Text(character.gender.symbol)
-                    .font(.title3)
-                    .frame(width: 20)
+                    .font(isPad ? .title : .title3)
+                    .frame(width: isPad ? 40 : 20)
                     .accessibilityLabel("Gender: \(character.gender.rawValue)")
             }
-            LabeledText(label: "ID: ", value: "\(character.id)")
-            LabeledText(label: "Status: ", value: character.status.rawValue.capitalized)
-                .accessibilityHidden(true)
-            LabeledText(label: "Species: ", value: character.species.capitalized)
-                .accessibilityHidden(true)
-            LabeledText(label: "Type: ", value: character.type.capitalized)
-                .accessibilityHidden(true)
+            LabeledText(label: "ID: ",
+                        value: "\(character.id)")
+            .font(isPad ? .title3 : .caption)
+            LabeledText(label: "Status: ",
+                        value: character.status.rawValue.capitalized)
+            .font(isPad ? .title3 : .caption)
+            .accessibilityHidden(true)
+            LabeledText(label: "Species: ",
+                        value: character.species.capitalized)
+            .font(isPad ? .title3 : .caption)
+            .accessibilityHidden(true)
+            LabeledText(label: "Type: ",
+                        value: character.type.capitalized)
+            .font(isPad ? .title3 : .caption)
+            .accessibilityHidden(true)
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 10)
@@ -106,10 +118,8 @@ fileprivate struct LabeledText: View {
     var body: some View {
         HStack(spacing: 0) {
             Text(label)
-                .font(.caption)
                 .fontWeight(.semibold)
             Text(value)
-                .font(.caption)
         }
         .lineLimit(1)
         .accessibilityElement(children: .combine)

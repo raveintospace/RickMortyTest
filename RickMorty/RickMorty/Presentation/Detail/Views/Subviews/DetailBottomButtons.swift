@@ -14,8 +14,7 @@ struct DetailBottomButtons: View {
     
     var showLocationButton: Bool
     var onLocationButtonPressed: () -> Void
-    
-    // iPad detector
+
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }

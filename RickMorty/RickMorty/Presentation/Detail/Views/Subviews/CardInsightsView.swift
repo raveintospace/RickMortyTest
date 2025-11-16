@@ -11,7 +11,6 @@ struct CardInsightsView: View {
     
     let character: DetailCharacter
     
-    // iPad detector
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }

@@ -11,7 +11,6 @@ struct CardNameLabel: View {
     
     let name: String
     
-    // iPad detector
     private var isPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
     }
