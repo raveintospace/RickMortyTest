@@ -12,11 +12,13 @@ struct LocationView: View {
     @State private var locationViewModel: LocationViewModel
     
     let locationURL: URL
+    let locationTitle: String
     
-    init(locationURL: URL) {
+    init(locationURL: URL, locationTitle: String) {
         _locationViewModel = State(initialValue: LocationViewModel(locationURL: locationURL, fetchLocationUseCase: FetchLocationUseCaseImpl(dataSource: LocationDataSourceImpl(dataService: DataService()))))
         
         self.locationURL = locationURL
+        self.locationTitle = locationTitle
     }
     
     var body: some View {
@@ -29,12 +31,24 @@ struct LocationView: View {
                     .foregroundStyle(.rmLime)
                     .padding()
             } else if let location = locationViewModel.location {
-                VStack {
-                    Text(location.name.capitalized)
-                    Text(location.dimension.capitalized)
-                    Text(location.type.capitalized)
-                    Text("\(location.residentCount) residents")
+                VStack(spacing: 20) {
+                    sheetHeader
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        LocationRow(title: "Name",
+                                    value: location.name.capitalized)
+                        LocationRow(title: "Dimension",
+                                    value: location.dimension.capitalized)
+                        LocationRow(title: "Type",
+                                    value: location.type.capitalized)
+                        LocationRow(title: "Residents", value: "This location has \(location.residentCount) residents.")
+                    }
+                    
+                    DismissSheetButton()
                 }
+                .shadow(color: .rmLime, radius: 1)
+                .modifier(GlassSheetModifier())
+                .shadow(color: .rmLime, radius: 3)
             }
         }
         .task {
@@ -47,7 +61,40 @@ struct LocationView: View {
 #if DEBUG
 #Preview {
     NavigationStack {
-        LocationView(locationURL: (DetailCharacter.Stub.stub1.origin?.url)!)
+        LocationView(locationURL: (DetailCharacter.Stub.stub1.origin?.url)!,
+                     locationTitle: "Origin"
+        )
     }
 }
 #endif
+
+extension LocationView {
+    
+    private var sheetHeader: some View {
+        Text(locationTitle.uppercased())
+            .font(.title)
+            .fontWeight(.semibold)
+            .underline()
+            .multilineTextAlignment(.center)
+            .accessibilityAddTraits(.isHeader)
+    }
+}
+
+fileprivate struct LocationRow: View {
+    
+    let title: String
+    let value: String
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(.title2)
+            Text(value)
+                .font(.title3)
+                .lineLimit(3)
+                .minimumScaleFactor(0.7)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(title): \(value)")
+    }
+}

@@ -58,10 +58,10 @@ struct DetailView: View {
                 .sheet(item: $activeSheet) { sheet in
                     switch sheet {
                     case .origin(let url):
-                        LocationView(locationURL: url)
+                        LocationView(locationURL: url, locationTitle: "Origin")
                             .presentationDetents([.medium])
                     case .location(let url):
-                        LocationView(locationURL: url)
+                        LocationView(locationURL: url, locationTitle: "Location")
                             .presentationDetents([.medium])
                     }
                 }
