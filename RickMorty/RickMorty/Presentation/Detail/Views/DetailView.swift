@@ -11,11 +11,10 @@ struct DetailView: View {
     
     @State private var detailViewModel: DetailViewModel
     
-    // MARK: - Navigation to sheets
-    @State private var showOriginSheet: Bool = false
-    @State private var showLocationSheet: Bool = false
-    
     let characterID: Int
+    
+    // MARK: - Navigation to sheets
+    @State private var activeSheet: LocationSheet? = nil
     
     init(characterID: Int) {
         _detailViewModel = State(initialValue: DetailViewModel(characterID: characterID, fetchDetailCharacterUseCase: FetchDetailCharacterUseCaseImpl(dataSource: DetailCharacterDataSourceImpl(dataService: DataService()))))
@@ -25,37 +24,51 @@ struct DetailView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
-                if detailViewModel.isLoading && detailViewModel.character == nil {
-                    ProgressColorBarsView()
-                } else if let error = detailViewModel.errorMessage {
-                    Text(error)
-                        .font(.title3)
-                        .foregroundStyle(.rmLime)
-                        .padding()
-                } else if let character = detailViewModel.character {
-                    ScrollView {
-                        VStack {
-                            DetailCard(character: character)
-                            
-                            DetailBottomButtons(
-                                showOriginButton: character.hasValidOriginURL,
-                                onOriginButtonPressed: {
-                                    showOriginSheet = true
-                                },
-                                showLocationButton: character.hasValidLocationURL,
-                                onLocationButtonPressed: {
-                                    showLocationSheet = true
+            if detailViewModel.isLoading && detailViewModel.character == nil {
+                ProgressColorBarsView()
+            } else if let error = detailViewModel.errorMessage {
+                Text(error)
+                    .font(.title3)
+                    .foregroundStyle(.rmLime)
+                    .padding()
+            } else if let character = detailViewModel.character {
+                ScrollView {
+                    VStack {
+                        DetailCard(character: character)
+                        
+                        DetailBottomButtons(
+                            showOriginButton: character.hasValidOriginURL,
+                            onOriginButtonPressed: {
+                                if let url = character.origin?.url {
+                                    activeSheet = .origin(url: url)
+                                    debugPrint("\(url)")
                                 }
-                            )
-                        }
+                            },
+                            showLocationButton: character.hasValidLocationURL,
+                            onLocationButtonPressed: {
+                                if let url = character.location?.url {
+                                    activeSheet = .location(url: url)
+                                    debugPrint("\(url)")
+                                }
+                            }
+                        )
                     }
-                    .scrollIndicators(.hidden)
+                }
+                .scrollIndicators(.hidden)
+                .sheet(item: $activeSheet) { sheet in
+                    switch sheet {
+                    case .origin(let url):
+                        LocationView(locationURL: url)
+                            .presentationDetents([.medium])
+                    case .location(let url):
+                        LocationView(locationURL: url)
+                            .presentationDetents([.medium])
+                    }
                 }
             }
-            .task {
-                await detailViewModel.loadCharacter()
-            }
+        }
+        .task {
+            await detailViewModel.loadCharacter()
         }
     }
 }
@@ -67,3 +80,15 @@ struct DetailView: View {
     }
 }
 #endif
+
+fileprivate enum LocationSheet: Identifiable {
+    case origin(url: URL)
+    case location(url: URL)
+    
+    var id: String {
+        switch self {
+        case .origin: return "origin"
+        case .location: return "location"
+        }
+    }
+}
