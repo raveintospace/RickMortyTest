@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Used to replicate the real implementation
+/// Should use EnvironmentKey to test with DatabaseVM mock
 @MainActor
 final class DeveloperPreview {
     
