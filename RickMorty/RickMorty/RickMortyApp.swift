@@ -28,8 +28,10 @@ struct RickMortyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            DatabaseView()
+            NavigationStack {
+                DatabaseView()
+                    .environment(\.databaseViewModel, databaseViewModel)
+            }
         }
-        .environment(\.databaseViewModel, databaseViewModel)
     }
 }
