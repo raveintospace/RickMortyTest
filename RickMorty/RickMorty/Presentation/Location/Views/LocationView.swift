@@ -41,14 +41,17 @@ struct LocationView: View {
                                     value: location.dimension.capitalized)
                         LocationRow(title: "Type",
                                     value: location.type.capitalized)
-                        LocationRow(title: "Residents", value: "This location has \(location.residentCount) residents.")
+                        LocationRow(title: "Residents",
+                                    value: location.residentCountText)
                     }
                     
                     DismissSheetButton()
+                        .padding(.top, 10)
                 }
                 .shadow(color: .rmLime, radius: 1)
                 .modifier(GlassSheetModifier())
                 .shadow(color: .rmLime, radius: 3)
+                .accessibilityElement(children: .contain)
             }
         }
         .task {
@@ -89,6 +92,7 @@ fileprivate struct LocationRow: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.title2)
+                .fontWeight(.medium)
             Text(value)
                 .font(.title3)
                 .lineLimit(3)
