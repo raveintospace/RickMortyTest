@@ -11,16 +11,13 @@ struct DetailCard: View {
     
     let character: DetailCharacter
     
-    @Binding var shouldShowSheet: Bool
-    @Binding var selectedLocation: CharacterLocation?
-    
     var body: some View {
         VStack(spacing: 8) {
             CardNameLabel(name: character.name)
+                .padding(.bottom, 4)
             CardImageView(id: character.id, imageURL: character.image)
-            CardInsightsView(character: character,
-                             showSheet: $shouldShowSheet,
-                             selectedLocation: $selectedLocation)
+                .padding(.bottom, 6)
+            CardInsightsView(character: character)
         }
         .padding(30)
         .background(
@@ -33,10 +30,7 @@ struct DetailCard: View {
 
 #if DEBUG
 #Preview {
-    DetailCard(character: DetailCharacter.Stub.stub1,
-               shouldShowSheet: .constant(false),
-               selectedLocation: .constant(CharacterLocation.Stub.stub20)
-    )
+    DetailCard(character: DetailCharacter.Stub.stub1)
 }
 #endif
 

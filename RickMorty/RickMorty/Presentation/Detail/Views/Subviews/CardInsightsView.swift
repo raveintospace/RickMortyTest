@@ -11,9 +11,6 @@ struct CardInsightsView: View {
     
     let character: DetailCharacter
     
-    @Binding var showSheet: Bool
-    @Binding var selectedLocation: CharacterLocation?
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             InsightRow(label: "· Gender", value: character.gender.rawValue.capitalized)
@@ -23,14 +20,16 @@ struct CardInsightsView: View {
             
             RMDivider()
             
-            episodeLabelFactory()
-                .shadow(color: .rmLime, radius: 1)
+            LocationRow(title: "· Origin", location: character.origin)
+            LocationRow(title: "· Location", location: character.location)
             
             RMDivider()
             
-            LocationLinkView(title: "· Origin", location: character.origin, onTap: handleLocationTap)
-            LocationLinkView(title: "· Location", location: character.location, onTap: handleLocationTap)
+            episodeLabelFactory()
+                .frame(maxWidth: .infinity, alignment: .center)
         }
+        .font(.headline)
+        .shadow(color: .rmLime, radius: 1)
     }
 }
 
@@ -40,7 +39,7 @@ struct CardInsightsView: View {
     let origin = CharacterLocation.Stub.stub1
     let location = CharacterLocation.Stub.stub20
     
-    CardInsightsView(character: character, showSheet: .constant(false), selectedLocation: .constant(origin))
+    CardInsightsView(character: character)
         .padding()
 }
 #endif
@@ -50,20 +49,11 @@ extension CardInsightsView {
     @ViewBuilder
     private func episodeLabelFactory() -> some View {
         if character.episodeCount > 1 {
-            Text("· Appears on **\(character.episodeCount)** episodes.")
-                .font(.headline)
+            Text("· Appears on **\(character.episodeCount)** episodes ·")
                 .accessibilityLabel("Character appears on \(character.episodeCount) episodes")
         } else {
-            Text("· Appears on **\(character.episodeCount)** episode.")
-                .font(.headline)
+            Text("· Appears on **\(character.episodeCount)** episode ·")
                 .accessibilityLabel("Character appears on one episode")
-        }
-    }
-    
-    private func handleLocationTap(location: CharacterLocation) {
-        if location.url != nil {
-            selectedLocation = location
-            showSheet = true
         }
     }
 }
@@ -77,44 +67,29 @@ fileprivate struct InsightRow: View {
             Text("\(label):")
             Text(value)
                 .lineLimit(3)
-                .minimumScaleFactor(0.8)
+                .fontWeight(.light)
         }
-        .font(.headline)
-        .shadow(color: .rmLime, radius: 1)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(label.replacingOccurrences(of: "· ", with: "")). \(value)")
     }
 }
 
-fileprivate struct LocationLinkView: View {
+fileprivate struct LocationRow: View {
     let title: String
     let location: CharacterLocation?
-    let onTap: (CharacterLocation) -> Void
     
     var body: some View {
-        HStack {
+        HStack(spacing: 4) {
             Text("\(title):")
-                .fontWeight(.bold)
             
             if let loc = location {
                 Text(loc.name.capitalized)
-                    .fontWeight(.medium)
-                    .foregroundStyle(loc.url != nil ? .rmLime : .primary)
-                    .underline(loc.url != nil)
-                    .onTapGesture {
-                        if loc.url != nil {
-                            onTap(loc)
-                        }
-                    }
-                    .accessibilityAddTraits(loc.url != nil ? .isButton : .isStaticText)
-                    .accessibilityHint(loc.url != nil ? "Tap to see further details on a sheet." : "")
+                    .fontWeight(.light)
             } else {
                 Text("N/A")
-                    .foregroundColor(.gray)
+                    .fontWeight(.light)
             }
         }
-        .font(.headline)
-        .shadow(color: .rmLime, radius: 1)
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(title). \(location?.name.capitalized ?? "Value not available")")
     }
