@@ -17,7 +17,7 @@ struct DatabaseCard: View {
             Color.rmLime
                 .padding(.vertical, 2)
             
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 0) {
                 characterImage
                 characterInfo
             }
@@ -83,9 +83,8 @@ extension DatabaseCard {
             LabeledText(label: "Type: ", value: character.type.capitalized)
                 .accessibilityHidden(true)
         }
-        .padding(.top)
-        .padding(.horizontal)
-        .padding(.bottom)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 10)
     }
     
     private var VStackBackground: some View {
