@@ -22,8 +22,17 @@ struct DetailCharacter: Decodable {
     let origin: CharacterLocation?
     let location: CharacterLocation?
     
+    // Computed properties for UI
     var episodeCount: Int {
         episode.count
+    }
+    
+    var hasValidOriginURL: Bool {
+        return origin?.url != nil
+    }
+    
+    var hasValidLocationURL: Bool {
+        return location?.url != nil
     }
     
     enum CodingKeys: String, CodingKey {
