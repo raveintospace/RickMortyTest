@@ -25,6 +25,7 @@ struct DetailBottomButtons: View {
                     .frame(maxWidth: .infinity)
             }
             .detailButtonStyle()
+            .opacity(showOriginButton ? 1 : 0)
             .accessibilityLabel("View details of character's origin")
             
             Button {
@@ -35,6 +36,7 @@ struct DetailBottomButtons: View {
                     .frame(maxWidth: .infinity)
             }
             .detailButtonStyle()
+            .opacity(showLocationButton ? 1 : 0)
             .accessibilityLabel("View details of character's location")
         }
         
