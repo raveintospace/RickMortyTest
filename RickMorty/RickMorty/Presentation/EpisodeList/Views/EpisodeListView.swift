@@ -24,8 +24,9 @@ struct EpisodeListView: View {
             ZStack {
                 episodesWallpaper
                 
-                VStack(spacing: 20) {
+                VStack(spacing: isPad ? 20 : 10) {
                     episodeListTitleHeader
+                    episodeCounterLabel
                     scrollableEpisodeList
                 }
                 .padding(.horizontal)
@@ -56,7 +57,7 @@ extension EpisodeListView {
         Image("episodesWallpaper")
             .resizable()
             .ignoresSafeArea()
-            .opacity(0.15)
+            .opacity(0.075)
     }
     
     private var episodeListTitleHeader: some View {
@@ -64,8 +65,15 @@ extension EpisodeListView {
             .frame(height: isPad ? 100 : 50)
     }
     
+    private var episodeCounterLabel: some View {
+        Text("\(episodeListViewModel.fetchedEpisodesCount) of \(episodeListViewModel.totalEpisodesCount) episodes")
+            .font(isPad ? .largeTitle : .callout)
+            .foregroundStyle(.rmLime)
+            .accessibilityLabel("\(episodeListViewModel.fetchedEpisodesCount) Episodes displayed. Total episodes available are \(episodeListViewModel.totalEpisodesCount).")
+    }
+    
     private var displayedEpisodes: some View {
-        LazyVStack(spacing: 12) {
+        LazyVStack(spacing: isPad ? 24 : 12) {
             ForEach(episodeListViewModel.fetchedEpisodes) { episode in
                 EpisodeCard(episode: episode)
                     .onAppear {
@@ -75,7 +83,7 @@ extension EpisodeListView {
                     }
             }
         }
-        .frame(maxWidth: isPad ? 600 : .infinity)
+        .frame(width: isPad ? 600 : .infinity)
     }
     
     private var scrollableEpisodeList: some View {
@@ -93,6 +101,7 @@ extension EpisodeListView {
                 }
             }
         }
+        .padding(.top, 10)
         .scrollIndicators(.visible)
     }
     
