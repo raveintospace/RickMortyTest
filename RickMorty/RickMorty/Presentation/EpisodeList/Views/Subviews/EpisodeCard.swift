@@ -21,7 +21,7 @@ struct EpisodeCard: View {
             InsightRow(label: "Episode code", value: episode.episodeCode)
                 .padding(.bottom, 8)
             
-            RMDivider(negativePadding: 0)
+            RMDivider(horizontalPadding: 1)
             
             episodeCharacterCountLabel
         }
