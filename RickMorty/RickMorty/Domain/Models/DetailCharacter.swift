@@ -83,7 +83,7 @@ nonisolated struct DetailCharacter: Decodable, Sendable {
         let episodeURLs = try container.decodeIfPresent([String].self, forKey: .episode) ?? []
         self.episode = episodeURLs
         
-        // CharacterLocation has a fallback if their properties are nil
+        // CharacterLocation has a fallback if its properties are null
         self.origin = try container.decodeIfPresent(CharacterLocation.self, forKey: .origin)
         self.location = try container.decodeIfPresent(CharacterLocation.self, forKey: .location)
     }

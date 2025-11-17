@@ -50,7 +50,7 @@ The Filter layer maintains both a Repository and a Use Case to encapsulate the d
 -- Some subviews use basic property types (e.g., String, Int, etc.) instead of custom models (e.g., CardCharacter) to enhance reusability across different projects.
 
 -- Optional URL property type in models
-We want to ensure robust decodability of the entire object. By making "image: URL?" & "url: URL?", we prevent the JSONDecoder from throwing a fatal DecodingError when the API returns a null or an empty string (""). This allows the object to be created successfully even if the image / url data is missing or invalid.
+We want to ensure robust decodability of the entire object. By making "image: URL?" & "url: URL?", we prevent the JSONDecoder from throwing a fatal DecodingError when the API returns a null or an empty string (""). This allows the object to be created successfully even if the image / url data is missing or invalid (it would be created as nil).
 
 -- Optional URL property type in imageLoaders
 The component accepts URL? to directly manage the optionality inherited from the model. When imageUrl is passed as nil, Kingfisher automatically bypasses the network request phase and proceeds immediately to render the placeholder image.

@@ -12,4 +12,8 @@ nonisolated struct APIConstants {
     static let charactersEndpoint = "character"
     
     static let charactersListURL = baseURL + charactersEndpoint
+    
+    static let episodesEndpoint = "episode"
+    
+    static let episodesListURL = baseURL + episodesEndpoint
 }

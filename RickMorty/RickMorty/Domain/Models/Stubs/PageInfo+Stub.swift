@@ -10,18 +10,28 @@ import Foundation
 extension PageInfo {
     
     enum Stub {
-        static let stub1 = PageInfo(
+        static let stubCharacterPage1 = PageInfo(
             objectCount: 20,
             nextPage: URL(string: APIConstants.charactersListURL + "page=2")!
         )
         
-        static let stub2 = PageInfo(
-            objectCount: 20,
+        static let stubCharacterPage2 = PageInfo(
+            objectCount: 826,
             nextPage: URL(string: APIConstants.charactersListURL + "page=3")!
         )
         
-        static let stub42 = PageInfo(
+        static let stubCharacterPage42 = PageInfo(
             objectCount: 20,
+            nextPage: nil
+        )
+        
+        static let stubEpisodePage1 = PageInfo(
+            objectCount: 51,
+            nextPage: URL(string: APIConstants.episodesListURL + "page=2")!
+        )
+        
+        static let stubEpisodePage3 = PageInfo(
+            objectCount: 51,
             nextPage: nil
         )
     }
