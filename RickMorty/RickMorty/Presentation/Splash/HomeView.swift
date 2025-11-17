@@ -65,7 +65,7 @@ struct HomeView: View {
 extension HomeView {
     
     private var appLogo: some View {
-        Image("RMHorizontal")
+        Image("RMHorizontal2")
             .resizable()
             .scaledToFit()
             .accessibilityLabel("Rick and Morty logo")

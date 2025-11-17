@@ -38,7 +38,7 @@ extension TitleHeader {
         } label: {
             Image(systemName: "house.circle")
                 .font(isPad ? .largeTitle : .title)
-                .scaleEffect(isPad ? 1.5 : 1.0)
+                .scaleEffect(1.5)
                 .tint(.rmLime)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,7 +47,7 @@ extension TitleHeader {
     }
     
     private var titleImage: some View {
-        Image("RMHorizontal")
+        Image("RMHorizontal2")
             .resizable()
             .scaledToFit()
             .frame(maxWidth: .infinity, alignment: .center)
