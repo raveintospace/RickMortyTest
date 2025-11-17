@@ -83,7 +83,7 @@ extension HomeView {
                     .frame(width: isPad ? 300 : 150)
             }
             .RMLimeLook()
-            .font(isPad ? .title : .title3)
+            .font(isPad ? .title : .title2)
             .accessibilityHint("Navigates to Database view")
             
             Button {
