@@ -83,7 +83,7 @@ extension EpisodeListView {
                     }
             }
         }
-        .frame(width: isPad ? 600 : .infinity)
+        .frame(maxWidth: isPad ? 600 : .infinity)
     }
     
     private var scrollableEpisodeList: some View {
