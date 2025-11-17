@@ -32,10 +32,7 @@ struct DetailView: View {
                 if detailViewModel.isLoading && detailViewModel.character == nil {
                     ProgressColorBarsView()
                 } else if let error = detailViewModel.errorMessage {
-                    Text(error)
-                        .font(.title3)
-                        .foregroundStyle(.rmLime)
-                        .padding()
+                    RMErrorText(error: error)
                 } else if let character = detailViewModel.character {
                     ScrollView {
                         VStack {

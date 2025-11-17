@@ -28,10 +28,7 @@ struct LocationView: View {
             if locationViewModel.isLoading && locationViewModel.location == nil {
                 ProgressColorBarsView()
             } else if let error = locationViewModel.errorMessage {
-                Text(error)
-                    .font(.title3)
-                    .foregroundStyle(.rmLime)
-                    .padding()
+                RMErrorText(error: error)
             } else if let location = locationViewModel.location {
                 VStack(spacing: 20) {
                     sheetHeader

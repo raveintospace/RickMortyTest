@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct InsightRow: View {
+    
     let label: String
     let value: String
     

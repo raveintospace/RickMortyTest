@@ -93,10 +93,7 @@ extension EpisodeListView {
                 if episodeListViewModel.isLoading && episodeListViewModel.fetchedEpisodes.isEmpty {
                     ProgressColorBarsView()
                 } else if let error = episodeListViewModel.errorMessage {
-                    Text(error)
-                        .font(.title3)
-                        .foregroundStyle(.rmLime)
-                        .padding()
+                    RMErrorText(error: error)
                 } else {
                     displayedEpisodes
                 }

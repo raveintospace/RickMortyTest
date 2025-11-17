@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GlassSheetModifier: ViewModifier {
+    
     func body(content: Content) -> some View {
         content
             .safeAreaPadding()
