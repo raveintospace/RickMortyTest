@@ -29,7 +29,6 @@ struct EpisodeListView: View {
                     episodeCounterLabel
                     scrollableEpisodeList
                 }
-                .padding(.horizontal)
             }
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
@@ -63,6 +62,7 @@ extension EpisodeListView {
     private var episodeListTitleHeader: some View {
         TitleHeader()
             .frame(height: isPad ? 100 : 50)
+            .padding(.horizontal, isPad ? 30 : 12)
     }
     
     private var episodeCounterLabel: some View {
