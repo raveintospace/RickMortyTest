@@ -86,6 +86,7 @@ struct DetailView: View {
 #endif
 
 extension DetailView {
+    
     private var detailWallpaper: some View {
         Image("detailWallpaper")
             .resizable()

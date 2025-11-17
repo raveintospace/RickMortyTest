@@ -22,7 +22,7 @@ struct EpisodeListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // listWallpaper
+                episodesWallpaper
                 
                 VStack(spacing: 0) {
                     // header
@@ -51,6 +51,13 @@ struct EpisodeListView: View {
 
 extension EpisodeListView {
     
+    private var episodesWallpaper: some View {
+        Image("episodesWallpaper")
+            .resizable()
+            .ignoresSafeArea()
+            .opacity(0.15)
+    }
+    
     private var displayedEpisodes: some View {
         LazyVStack(spacing: 12) {
             ForEach(episodeListViewModel.fetchedEpisodes) { episode in
@@ -62,6 +69,7 @@ extension EpisodeListView {
                     }
             }
         }
+        .frame(maxWidth: isPad ? 600 : .infinity)
     }
     
     private var scrollableEpisodeList: some View {
