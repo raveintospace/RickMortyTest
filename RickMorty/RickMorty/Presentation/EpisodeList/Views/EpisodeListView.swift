@@ -24,10 +24,11 @@ struct EpisodeListView: View {
             ZStack {
                 episodesWallpaper
                 
-                VStack(spacing: 0) {
-                    // header
+                VStack(spacing: 20) {
+                    episodeListTitleHeader
                     scrollableEpisodeList
                 }
+                .padding(.horizontal)
             }
             .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
@@ -56,6 +57,11 @@ extension EpisodeListView {
             .resizable()
             .ignoresSafeArea()
             .opacity(0.15)
+    }
+    
+    private var episodeListTitleHeader: some View {
+        TitleHeader()
+            .frame(height: isPad ? 100 : 50)
     }
     
     private var displayedEpisodes: some View {
