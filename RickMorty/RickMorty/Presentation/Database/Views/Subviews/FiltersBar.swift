@@ -17,6 +17,10 @@ struct FiltersBar: View {
     // The value is passed by the parent view
     var selectedFilter: Filter?
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         HStack(spacing: 0) {
             ScrollViewReader { scrollViewProxy in
@@ -27,7 +31,7 @@ struct FiltersBar: View {
                                 onXMarkPressed?()
                             } label: {
                                 Image(systemName: "xmark.circle")
-                                    .font(.title)
+                                    .font(isPad ? .largeTitle : .title)
                                     .tint(.rmLime)
                             }
                             .accessibilityLabel("Clear selected filter")
@@ -66,6 +70,7 @@ struct FiltersBar: View {
                 onOptionButtonPressed?()
             } label: {
                 Image(systemName: "slider.vertical.3")
+                    .font(isPad ? .title3 : .body)
                     .padding(10)
                     .tint(.rmLime)
                     .background(

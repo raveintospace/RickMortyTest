@@ -12,8 +12,13 @@ struct FilterSmallCell: View {
     var title: String
     var isSelected: Bool
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         Text(title)
+            .font(isPad ? .title3 : .body)
             .foregroundStyle(isSelected ? .rmLime : .primary)
             .fontWeight(isSelected ? .semibold : .light)
             .padding(.horizontal, 12)
