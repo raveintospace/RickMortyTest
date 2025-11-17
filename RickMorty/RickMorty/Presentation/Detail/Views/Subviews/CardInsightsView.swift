@@ -22,12 +22,12 @@ struct CardInsightsView: View {
             InsightRow(label: "· Species", value: character.species.capitalized)
             InsightRow(label: "· Type", value: character.type.capitalized)
             
-            RMDivider()
+            RMDivider(negativePadding: -10)
             
             LocationRow(title: "· Origin", location: character.origin)
             LocationRow(title: "· Location", location: character.location)
             
-            RMDivider()
+            RMDivider(negativePadding: -10)
             
             episodeLabel
         }

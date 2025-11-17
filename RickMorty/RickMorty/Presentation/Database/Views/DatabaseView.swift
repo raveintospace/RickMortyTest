@@ -43,7 +43,7 @@ struct DatabaseView: View {
             .onSubmit(of: .search) {
                 setScrollToZero = true
             }
-            .toolbar(isPad ? .visible : .hidden, for: .navigationBar)
+            .toolbar(.hidden, for: .navigationBar)
             .persistentSystemOverlays(.hidden)
             .task {
                 if databaseViewModel.fetchedCharacters.isEmpty {

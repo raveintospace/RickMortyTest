@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct RickMortyApp: App {
     
+    @State private var showSplashView: Bool = true
+    
     // ViewModels
     private let databaseViewModel: DatabaseViewModel
     
@@ -28,10 +30,13 @@ struct RickMortyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                DatabaseView()
-                    .environment(\.databaseViewModel, databaseViewModel)
+            ZStack {
+                HomeView()
+                
+                SplashView(showSplashView: $showSplashView)
+                    .opacity(showSplashView ? 1 : 0)
             }
+            .environment(\.databaseViewModel, databaseViewModel)
         }
     }
 }

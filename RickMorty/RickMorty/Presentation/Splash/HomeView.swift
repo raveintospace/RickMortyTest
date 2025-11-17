@@ -46,6 +46,10 @@ struct HomeView: View {
                 infoText
                     .presentationDetents([.medium])
             }
+            .fullScreenCover(isPresented: $showDatabase) {
+                DatabaseView()
+                    .interactiveDismissDisabled()
+            }
         }
     }
 }
