@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CounterLabel: View {
+struct CharacterCounterLabel: View {
     
     @Environment(\.databaseViewModel) private var databaseViewModel
     @Environment(\.isPad) var isPad: Bool
@@ -22,6 +22,6 @@ struct CounterLabel: View {
 
 #if DEBUG
 #Preview {
-    CounterLabel()
+    CharacterCounterLabel()
 }
 #endif

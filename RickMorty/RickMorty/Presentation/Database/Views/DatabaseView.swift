@@ -112,7 +112,7 @@ extension DatabaseView {
     
     private var sortBar: some View {
         HStack {
-            CounterLabel()
+            CharacterCounterLabel()
             SortMenu()
         }
     }
