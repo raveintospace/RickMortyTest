@@ -21,6 +21,8 @@ struct EpisodeCard: View {
             InsightRow(label: "Episode code", value: episode.episodeCode)
                 .padding(.bottom, 8)
             
+            RMDivider(negativePadding: 0)
+            
             episodeCharacterCountLabel
         }
         .font(isPad ? .title : .headline)
@@ -55,6 +57,7 @@ extension EpisodeCard {
     
     private var episodeCharacterCountLabel: some View {
         Text(episode.characterCountText)
+            .padding(.top, 10)
             .lineLimit(2)
             .minimumScaleFactor(0.7)
             .accessibilityLabel(episode.characterCountText)

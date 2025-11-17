@@ -21,11 +21,11 @@ nonisolated struct Episode: Decodable, Identifiable, Equatable, Sendable {
     var characterCountText: String {
         switch characterCount {
         case 0:
-            return "· There are no characters on this episode ·"
+            return "There are no characters on this episode."
         case 1:
-            return "· There is 1 character on this episode ·"
+            return "There is 1 character on this episode."
         default:
-            return "· There are \(characterCount) characters on this episode ·"
+            return "There are \(characterCount) characters on this episode."
         }
     }
     
