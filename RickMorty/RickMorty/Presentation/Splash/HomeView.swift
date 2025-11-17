@@ -13,7 +13,7 @@ struct HomeView: View {
     
     // MARK: - Navigation states
     @State private var showDatabase: Bool = false
-    @State private var showEpisodesList: Bool = false
+    @State private var showEpisodeList: Bool = false
     @State private var showInfoSheet: Bool = false
     
     private let gitHubURL = URL(string: "https://github.com/raveintospace/RickMortyTest")!
@@ -46,6 +46,10 @@ struct HomeView: View {
             }
             .fullScreenCover(isPresented: $showDatabase) {
                 DatabaseView()
+                    .interactiveDismissDisabled()
+            }
+            .fullScreenCover(isPresented: $showEpisodeList) {
+                EpisodeListView()
                     .interactiveDismissDisabled()
             }
         }
@@ -83,7 +87,7 @@ extension HomeView {
             .accessibilityHint("Navigates to Database view")
             
             Button {
-                showEpisodesList = true
+                showEpisodeList = true
             } label: {
                 Text("Episode List")
                     .shadow(color: .rmLime, radius: 1)

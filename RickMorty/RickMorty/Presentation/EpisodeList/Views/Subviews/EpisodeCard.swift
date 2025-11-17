@@ -28,6 +28,7 @@ struct EpisodeCard: View {
         .modifier(GlassSheetModifier())
         .shadow(color: .rmLime, radius: 3)
         .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isStaticText)
     }
 }
 
