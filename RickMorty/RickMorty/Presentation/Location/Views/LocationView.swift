@@ -14,6 +14,10 @@ struct LocationView: View {
     let locationURL: URL
     let locationTitle: String
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     init(locationURL: URL, locationTitle: String) {
         _locationViewModel = State(initialValue: LocationViewModel(locationURL: locationURL, fetchLocationUseCase: FetchLocationUseCaseImpl(dataSource: LocationDataSourceImpl(dataService: DataService()))))
         
@@ -35,13 +39,13 @@ struct LocationView: View {
                     sheetHeader
                     
                     VStack(alignment: .leading, spacing: 12) {
-                        LocationRow(title: "Name",
+                        LocationRow(title: "Name:",
                                     value: location.name.capitalized)
-                        LocationRow(title: "Dimension",
+                        LocationRow(title: "Dimension:",
                                     value: location.dimension.capitalized)
-                        LocationRow(title: "Type",
+                        LocationRow(title: "Type:",
                                     value: location.type.capitalized)
-                        LocationRow(title: "Residents",
+                        LocationRow(title: "Residents:",
                                     value: location.residentCountText)
                     }
                     
@@ -75,7 +79,7 @@ extension LocationView {
     
     private var sheetHeader: some View {
         Text(locationTitle.uppercased())
-            .font(.title)
+            .font(isPad ? .largeTitle : .title)
             .fontWeight(.semibold)
             .underline()
             .multilineTextAlignment(.center)
@@ -88,13 +92,17 @@ fileprivate struct LocationRow: View {
     let title: String
     let value: String
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .font(.title2)
+                .font(isPad ? .title : .title2)
                 .fontWeight(.medium)
             Text(value)
-                .font(.title3)
+                .font(isPad ? .title2: .title3)
                 .lineLimit(3)
                 .minimumScaleFactor(0.7)
         }
