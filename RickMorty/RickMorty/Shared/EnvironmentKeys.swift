@@ -41,3 +41,16 @@ extension EnvironmentValues {
         set { self[DatabaseViewModelKey.self] = newValue }
     }
 }
+
+/// Check if device is of type iPad
+/// Views can adapt to it being bigger than on iPhone
+private struct IsPadKey: EnvironmentKey {
+    
+    static let defaultValue: Bool = UIDevice.current.userInterfaceIdiom == .pad
+}
+
+extension EnvironmentValues {
+    var isPad: Bool {
+        get { self[IsPadKey.self] }
+    }
+}

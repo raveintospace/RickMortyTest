@@ -9,14 +9,12 @@ import SwiftUI
 
 struct LocationView: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     @State private var locationViewModel: LocationViewModel
     
     let locationURL: URL
     let locationTitle: String
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     init(locationURL: URL, locationTitle: String) {
         _locationViewModel = State(initialValue: LocationViewModel(locationURL: locationURL, fetchLocationUseCase: FetchLocationUseCaseImpl(dataSource: LocationDataSourceImpl(dataService: DataService()))))
@@ -89,12 +87,10 @@ extension LocationView {
 
 fileprivate struct LocationRow: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     let title: String
     let value: String
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {

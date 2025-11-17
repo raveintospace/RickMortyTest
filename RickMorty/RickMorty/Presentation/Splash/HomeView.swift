@@ -9,16 +9,14 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     // MARK: - Navigation states
     @State private var showDatabase: Bool = false
     @State private var showEpisodesList: Bool = false
     @State private var showInfoSheet: Bool = false
     
     private let gitHubURL = URL(string: "https://github.com/raveintospace/RickMortyTest")!
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         NavigationStack {

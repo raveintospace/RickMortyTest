@@ -9,11 +9,9 @@ import SwiftUI
 
 struct CardNameLabel: View {
     
-    let name: String
+    @Environment(\.isPad) var isPad: Bool
     
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
+    let name: String
     
     var body: some View {
         Text(name.capitalized)

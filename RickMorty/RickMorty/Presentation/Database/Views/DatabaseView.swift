@@ -10,6 +10,7 @@ import SwiftUI
 struct DatabaseView: View {
     
     @Environment(\.databaseViewModel) private var databaseViewModel
+    @Environment(\.isPad) var isPad: Bool
     
     @State private var showAlertOnEndOfList: Bool = false
     
@@ -20,11 +21,6 @@ struct DatabaseView: View {
     
     // MARK: - ScrollList behaviour
     @State private var setScrollToZero: Bool = false
-    
-    // iPad detector
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         NavigationStack {

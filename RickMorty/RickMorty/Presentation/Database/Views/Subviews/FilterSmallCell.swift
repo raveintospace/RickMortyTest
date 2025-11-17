@@ -9,12 +9,10 @@ import SwiftUI
 
 struct FilterSmallCell: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     var title: String
     var isSelected: Bool
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         Text(title)

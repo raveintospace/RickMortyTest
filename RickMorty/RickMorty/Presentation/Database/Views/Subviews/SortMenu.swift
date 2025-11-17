@@ -10,10 +10,7 @@ import SwiftUI
 struct SortMenu: View {
     
     @Environment(\.databaseViewModel) private var databaseViewModel
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
+    @Environment(\.isPad) var isPad: Bool
     
     var body: some View {
         HStack {

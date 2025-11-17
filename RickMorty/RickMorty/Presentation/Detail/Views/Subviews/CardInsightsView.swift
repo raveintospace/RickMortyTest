@@ -9,11 +9,9 @@ import SwiftUI
 
 struct CardInsightsView: View {
     
-    let character: DetailCharacter
+    @Environment(\.isPad) var isPad: Bool
     
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
+    let character: DetailCharacter
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {

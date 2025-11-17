@@ -11,10 +11,7 @@ struct DatabaseCard: View {
     
     let character: CardCharacter
     var onCardPressed: (() -> Void)?
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
+    @Environment(\.isPad) var isPad: Bool
     
     var body: some View {
         ZStack {

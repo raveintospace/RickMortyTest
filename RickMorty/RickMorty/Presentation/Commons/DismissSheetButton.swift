@@ -10,10 +10,7 @@ import SwiftUI
 struct DismissSheetButton: View {
     
     @Environment(\.dismiss) private var dismiss
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
+    @Environment(\.isPad) var isPad: Bool
     
     var body: some View {
         Button {

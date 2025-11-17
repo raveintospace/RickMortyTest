@@ -9,16 +9,14 @@ import SwiftUI
 
 struct DetailView: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     @State private var detailViewModel: DetailViewModel
     
     let characterID: Int
     
     // MARK: - Navigation to sheets
     @State private var activeSheet: LocationSheet? = nil
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     init(characterID: Int) {
         _detailViewModel = State(initialValue: DetailViewModel(characterID: characterID, fetchDetailCharacterUseCase: FetchDetailCharacterUseCaseImpl(dataSource: DetailCharacterDataSourceImpl(dataService: DataService()))))

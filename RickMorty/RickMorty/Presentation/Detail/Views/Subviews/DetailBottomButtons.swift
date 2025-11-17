@@ -9,15 +9,13 @@ import SwiftUI
 
 struct DetailBottomButtons: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     var showOriginButton: Bool
     var onOriginButtonPressed: () -> Void
     
     var showLocationButton: Bool
     var onLocationButtonPressed: () -> Void
-
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         VStack(spacing: 20) {

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FiltersBar: View {
     
+    @Environment(\.isPad) var isPad: Bool
+    
     var filters: [Filter]
     var onXMarkPressed: (() -> Void)?
     var onFilterPressed: ((Filter) -> Void)?
@@ -16,10 +18,6 @@ struct FiltersBar: View {
     
     // The value is passed by the parent view
     var selectedFilter: Filter?
-    
-    private var isPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
-    }
     
     var body: some View {
         HStack(spacing: 0) {
