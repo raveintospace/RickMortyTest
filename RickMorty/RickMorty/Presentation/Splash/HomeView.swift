@@ -85,13 +85,13 @@ extension HomeView {
             Button {
                 showEpisodesList = true
             } label: {
-                Text("Episodes List")
+                Text("Episode List")
                     .shadow(color: .rmLime, radius: 1)
                     .frame(width: isPad ? 300 : 150)
             }
             .RMLimeLook()
             .font(isPad ? .title : .title3)
-            .accessibilityHint("Navigates to Episodes List view")
+            .accessibilityHint("Navigates to Episode List view")
         }
     }
     
