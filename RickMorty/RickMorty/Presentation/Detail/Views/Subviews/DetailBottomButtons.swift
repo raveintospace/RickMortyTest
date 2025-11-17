@@ -29,7 +29,7 @@ struct DetailBottomButtons: View {
                         .shadow(color: .rmLime, radius: 1)
                         .frame(maxWidth: .infinity)
                 }
-                .detailButtonStyle()
+                .RMLimeLook()
                 .font(isPad ? .title : .title3)
                 .accessibilityHidden(!showOriginButton)
                 .accessibilityLabel("View details of character's origin")
@@ -43,7 +43,7 @@ struct DetailBottomButtons: View {
                         .shadow(color: .rmLime, radius: 1)
                         .frame(maxWidth: .infinity)
                 }
-                .detailButtonStyle()
+                .RMLimeLook()
                 .font(isPad ? .title : .title3)
                 .accessibilityHidden(!showLocationButton)
                 .accessibilityLabel("View details of character's location")
@@ -62,14 +62,3 @@ struct DetailBottomButtons: View {
                         onLocationButtonPressed: {})
 }
 #endif
-
-extension Button {
-    
-    func detailButtonStyle() -> some View {
-        self
-            .buttonStyle(.glass)
-            .buttonBorderShape(.roundedRectangle(radius: 15))
-            .shadow(color: .rmLime, radius: 3)
-            .controlSize(.large)
-    }
-}
