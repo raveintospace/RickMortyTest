@@ -88,6 +88,7 @@ extension EpisodeListView {
     
     private var scrollableEpisodeList: some View {
         ScrollView {
+            Color.clear.frame(height: isPad ? 8 : 4)
             Group {
                 if episodeListViewModel.isLoading && episodeListViewModel.fetchedEpisodes.isEmpty {
                     ProgressColorBarsView()
@@ -101,7 +102,6 @@ extension EpisodeListView {
                 }
             }
         }
-        .padding(.top, 10)
         .scrollIndicators(.visible)
     }
     

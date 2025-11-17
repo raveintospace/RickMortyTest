@@ -152,6 +152,8 @@ extension DatabaseView {
     private var scrollableCharactersList: some View {
         ScrollViewReader { proxy in
             ScrollView {
+                Color.clear.frame(height: isPad ? 8 : 4)
+                
                 Group {
                     if databaseViewModel.isLoading && databaseViewModel.fetchedCharacters.isEmpty {
                         ProgressColorBarsView()
