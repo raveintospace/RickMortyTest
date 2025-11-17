@@ -11,12 +11,16 @@ struct DismissSheetButton: View {
     
     @Environment(\.dismiss) private var dismiss
     
+    private var isPad: Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     var body: some View {
         Button {
             dismiss()
         } label: {
             Text("Close")
-                .font(.headline)
+                .font(isPad ? .title : .headline)
                 .frame(maxWidth: .infinity)
         }
         .buttonStyle(.glass)
