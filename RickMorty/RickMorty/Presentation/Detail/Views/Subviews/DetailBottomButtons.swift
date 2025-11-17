@@ -24,7 +24,6 @@ struct DetailBottomButtons: View {
                     onOriginButtonPressed()
                 } label: {
                     Text("Origin Details")
-                        .shadow(color: .rmLime, radius: 1)
                         .frame(maxWidth: .infinity)
                 }
                 .RMLimeLook()
@@ -38,7 +37,6 @@ struct DetailBottomButtons: View {
                     onLocationButtonPressed()
                 } label: {
                     Text("Location Details")
-                        .shadow(color: .rmLime, radius: 1)
                         .frame(maxWidth: .infinity)
                 }
                 .RMLimeLook()

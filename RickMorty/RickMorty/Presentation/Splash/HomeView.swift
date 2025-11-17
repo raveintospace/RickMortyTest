@@ -79,7 +79,6 @@ extension HomeView {
                 showDatabase = true
             } label: {
                 Text("Database")
-                    .shadow(color: .rmLime, radius: 1)
                     .frame(width: isPad ? 300 : 150)
             }
             .RMLimeLook()
@@ -90,7 +89,6 @@ extension HomeView {
                 showEpisodeList = true
             } label: {
                 Text("Episode List")
-                    .shadow(color: .rmLime, radius: 1)
                     .frame(width: isPad ? 300 : 150)
             }
             .RMLimeLook()
@@ -105,7 +103,6 @@ extension HomeView {
         } label: {
             Image(systemName: "info.circle")
                 .font(isPad ? .title : .body)
-                .shadow(color: .rmLime, radius: 1)
         }
         .buttonStyle(.glass)
         .shadow(color: .rmLime, radius: 3)
@@ -129,7 +126,6 @@ extension HomeView {
             
             DismissSheetButton()
         }
-        .shadow(color: .rmLime, radius: 1)
         .modifier(GlassSheetModifier())
         .shadow(color: .rmLime, radius: 3)
         

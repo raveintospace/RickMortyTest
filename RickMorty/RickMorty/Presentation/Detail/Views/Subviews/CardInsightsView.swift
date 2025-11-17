@@ -30,7 +30,6 @@ struct CardInsightsView: View {
             episodeLabel
         }
         .font(isPad ? .title : .headline)
-        .shadow(color: .rmLime, radius: 1)
     }
 }
 

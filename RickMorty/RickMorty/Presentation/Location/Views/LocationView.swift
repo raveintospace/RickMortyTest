@@ -47,7 +47,6 @@ struct LocationView: View {
                     DismissSheetButton()
                         .padding(.top, 10)
                 }
-                .shadow(color: .rmLime, radius: 1)
                 .modifier(GlassSheetModifier())
                 .shadow(color: .rmLime, radius: 3)
                 .accessibilityElement(children: .contain)

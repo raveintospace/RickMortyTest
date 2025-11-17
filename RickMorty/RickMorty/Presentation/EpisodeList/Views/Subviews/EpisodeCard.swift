@@ -26,7 +26,6 @@ struct EpisodeCard: View {
             episodeCharacterCountLabel
         }
         .font(isPad ? .title : .headline)
-        .shadow(color: .rmLime, radius: 1)
         .modifier(GlassSheetModifier())
         .shadow(color: .rmLime, radius: 3)
         .accessibilityElement(children: .combine)

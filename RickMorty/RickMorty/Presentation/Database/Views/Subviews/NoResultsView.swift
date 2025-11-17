@@ -36,7 +36,6 @@ struct NoResultsView: View {
             Text(callToActionText)
                 .font(.callout)
         }
-        .shadow(color: .rmLime, radius: 1)
         .modifier(GlassSheetModifier())
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(mainText). \(callToActionText).")

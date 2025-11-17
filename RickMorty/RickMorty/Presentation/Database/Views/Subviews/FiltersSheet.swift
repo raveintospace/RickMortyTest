@@ -27,7 +27,6 @@ struct FiltersSheet: View {
             
             DismissSheetButton()
         }
-        .shadow(color: .rmLime, radius: 1)
         .modifier(GlassSheetModifier())
         .shadow(color: .rmLime, radius: 3)
         .toolbar(.hidden, for: .navigationBar)

@@ -20,6 +20,7 @@ struct DismissSheetButton: View {
                 .font(isPad ? .title : .headline)
                 .frame(maxWidth: .infinity)
         }
+        .shadow(color: .rmLime, radius: 1)
         .buttonStyle(.glass)
         .foregroundStyle(.red)
         .accessibilityHint("Closes this sheet")
