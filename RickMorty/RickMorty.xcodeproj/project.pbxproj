@@ -27,9 +27,26 @@
 		349BEEF22EC5C79300A7208F /* RMIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = RMIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		34371F972ECC6DDF00186A3F /* Exceptions for "RickMortyTests" folder in "RickMorty" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Mocks/MockFetchCardCharactersUseCase.swift,
+				Mocks/MockFetchDetailCharacterUseCase.swift,
+				Mocks/MockFetchEpisodesUseCase.swift,
+				Mocks/MockFetchLocationUseCase.swift,
+				Mocks/MockGetFiltersUseCase.swift,
+			);
+			target = 349BEDF42EC5C3C300A7208F /* RickMorty */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		34371F832ECC655300186A3F /* RickMortyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				34371F972ECC6DDF00186A3F /* Exceptions for "RickMortyTests" folder in "RickMorty" target */,
+			);
 			path = RickMortyTests;
 			sourceTree = "<group>";
 		};
@@ -219,6 +236,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4XAMG487KR;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -240,6 +258,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4XAMG487KR;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -385,7 +404,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4XAMG487KR;
 				ENABLE_PREVIEWS = YES;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(BUILT_PRODUCTS_DIR)";
 				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(BUILD_PRODUCTS_DIR)";
 				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
