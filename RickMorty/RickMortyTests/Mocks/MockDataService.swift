@@ -25,7 +25,7 @@ final class MockDataService {
         self.result = result
     }
     
-    func fetch<T: Decodable>(type: T.Type = T.self, url: URL?) async throws -> T {
+    func fetch<T: Decodable & Sendable>(type: T.Type = T.self, url: URL?) async throws -> T {
         
         guard let url = url else {
             throw RemoteDataSourceError.invalidURL

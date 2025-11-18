@@ -10,9 +10,9 @@ import Foundation
 /// Actor makes this class thread-safe, as it will likely be accessed concurrently
 actor CardCharacterDataSourceImpl: CardCharacterDataSourceProtocol {
     
-    private let dataService: DataService
+    nonisolated private let dataService: DataServiceProtocol
     
-    init(dataService: DataService) {
+    init(dataService: DataServiceProtocol) {
         self.dataService = dataService
     }
     

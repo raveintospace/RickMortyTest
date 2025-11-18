@@ -9,9 +9,9 @@ import Foundation
 
 actor DetailCharacterDataSourceImpl: DetailCharacterDataSourceProtocol {
     
-    private let dataService: DataService
+    nonisolated private let dataService: DataServiceProtocol
     
-    init(dataService: DataService) {
+    init(dataService: DataServiceProtocol) {
         self.dataService = dataService
     }
     

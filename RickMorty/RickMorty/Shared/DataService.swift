@@ -7,11 +7,15 @@
 
 import Foundation
 
+protocol DataServiceProtocol: Sendable {
+    func fetch<T: Decodable & Sendable>(type: T.Type, url: URL?) async throws -> T
+}
+
 /// Generic Data Service for fetching and decoding data from APIs
-final class DataService {
+final class DataService: DataServiceProtocol {
     
     /// Fetches data from a URL, validates the HTTP response and decodes the result
-    func fetch<T: Decodable>(type: T.Type = T.self, url: URL?) async throws -> T {
+    func fetch<T: Decodable & Sendable>(type: T.Type = T.self, url: URL?) async throws -> T {
         
         guard let url = url else {
             throw RemoteDataSourceError.invalidURL

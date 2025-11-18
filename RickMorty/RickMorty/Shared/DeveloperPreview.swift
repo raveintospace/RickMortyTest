@@ -14,7 +14,7 @@ final class DeveloperPreview {
     
     static let instance = DeveloperPreview()
     
-    private let dataService: DataService
+    private let dataService: DataServiceProtocol
     private let dataSource: CardCharacterDataSourceProtocol
     private let fetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol
     
