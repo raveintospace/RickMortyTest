@@ -5,8 +5,9 @@
 //  Created by Uri on 14/11/25.
 //
 
-@testable import RickMorty
+import Foundation
 
+#if DEBUG
 struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
     
     func executeGenderFilters() async throws -> [Filter] {
@@ -17,3 +18,4 @@ struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
         return Filter.Stub.status
     }
 }
+#endif

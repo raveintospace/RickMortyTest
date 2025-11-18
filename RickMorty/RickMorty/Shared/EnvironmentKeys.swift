@@ -21,15 +21,19 @@ import SwiftUI
 private struct DatabaseViewModelKey: EnvironmentKey {
     
     static let defaultValue: DatabaseViewModel = {
-        let mockFetchUseCase = MockFetchCardCharactersUseCase()
-        mockFetchUseCase.mockResponse = CharacterPageResponse.Stub.stub1
         
+        #if DEBUG
+        let mockFetchUseCase = MockFetchCardCharactersUseCase(result: .success(CharacterPageResponse.Stub.stub1))
         let mockFiltersUseCase = MockGetFiltersUseCase()
         
         return DatabaseViewModel(
             fetchCardCharactersUseCase: mockFetchUseCase,
             getFiltersUseCase: mockFiltersUseCase
         )
+        
+        #else
+        fatalError("DatabaseViewModelKey.defaultValue should not be accessed in Production.")
+        #endif
     }()
 }
 

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-@testable import RickMorty
 
+#if DEBUG
 final class MockFetchLocationUseCase: FetchLocationUseCaseProtocol {
     
     enum MockedLocationResult {
@@ -36,3 +36,4 @@ final class MockFetchLocationUseCase: FetchLocationUseCaseProtocol {
         }
     }
 }
+#endif
