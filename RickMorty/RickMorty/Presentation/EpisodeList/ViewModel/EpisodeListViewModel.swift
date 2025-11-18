@@ -51,7 +51,19 @@ final class EpisodeListViewModel {
             self.canFetchMore = response.info.nextPage != nil
             self.currentPage += 1
         } catch {
-            self.errorMessage = "Error loading episodes on page \(self.currentPage): \(error.localizedDescription)"
+            if let remoteError = error as? RemoteDataSourceError {
+                switch remoteError {
+                case .invalidURL, .badServerResponse:
+                    self.errorMessage = "Network Error: We couldn't reach the server."
+                case .decodingError:
+                    self.errorMessage = "Data Error: The received episode data is corrupt."
+                case .httpError(let statusCode):
+                    self.errorMessage = "Server Error: Received status code \(statusCode)."
+                }
+            } else {
+                self.errorMessage = "An unexpected error occurred: \(error.localizedDescription)"
+            }
+            
             self.canFetchMore = false
         }
     }
