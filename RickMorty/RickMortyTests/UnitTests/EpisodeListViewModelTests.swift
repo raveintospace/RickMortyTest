@@ -234,6 +234,9 @@ struct EpisodeListViewModelTests {
         let useCase = MockFetchEpisodesUseCase(results: [.failure(expectedError)])
         let sut = EpisodeListViewModel(fetchEpisodesUseCase: useCase)
         
+        // Assert initial state
+        #expect(sut.isLoading == false)
+        
         // When
         await sut.loadEpisodes()
         
@@ -245,6 +248,5 @@ struct EpisodeListViewModelTests {
         #expect(sut.fetchedEpisodesCount == 0)
         #expect(useCase.requestedPages == [1])
     }
-    
 }
 

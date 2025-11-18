@@ -45,7 +45,7 @@ final class LocationViewModel {
                 case .invalidURL, .badServerResponse:
                     self.errorMessage = "Network Error: We couldn't reach the server."
                 case .decodingError:
-                    self.errorMessage = "Data Error: The received episode data is corrupt."
+                    self.errorMessage = "Data Error: The received location data is corrupt."
                 case .httpError(let statusCode):
                     self.errorMessage = "Server Error: Received status code \(statusCode)."
                 }

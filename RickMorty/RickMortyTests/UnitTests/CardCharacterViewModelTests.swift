@@ -122,7 +122,7 @@ struct CardCharacterListViewModelTests {
         let errorCases: [(RemoteDataSourceError, String)] = [
             (.invalidURL, "Network Error: We couldn't reach the server."),
             (.badServerResponse, "Network Error: We couldn't reach the server."),
-            (.decodingError(NSError(domain: "Test", code: 0)), "Data Error: The received episode data is corrupt."),
+            (.decodingError(NSError(domain: "Test", code: 0)), "Data Error: The received character list data is corrupt."),
             (.httpError(statusCode: 500), "Server Error: Received status code 500.")
         ]
         
@@ -210,6 +210,9 @@ struct CardCharacterListViewModelTests {
         let useCase = MockFetchCardCharactersUseCase(results: [.failure(expectedError)])
         let sut = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
                                     getFiltersUseCase: MockGetFiltersUseCase())
+        
+        // Assert initial state
+        #expect(sut.isLoading == false)
         
         // When
         await sut.loadCharacters()
