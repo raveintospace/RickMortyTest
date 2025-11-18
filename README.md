@@ -22,7 +22,18 @@ To improve modularity and testability, dependencies are injected via protocols i
 3. FRAMEWORKS
 -- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
 
-4. CHOICES
+4. TESTING
+What I have tested:
+- Unit tests:
+    - CardCharacterViewModel: Since it is the main ViewModel of the project, ensuring its logic works correctly is a priority.
+    - EpisodeListViewModel: Has a similar structure than CardCharacterViewModel, but without the filter/sort/search layer.
+- Snapshot tests: Several views were tested as a proof of concept to validate UI consistency. Tests are run on iPhone16 Pro, iOS 18.1, Spanish - Spain.
+
+What I haven’t tested:
+- Repositories: The current implementation simply forwards data without additional logic, making tests unnecessary.
+- Data source: If I had more time, I would explore how to properly test them.
+
+5. CHOICES
 -- nonisolated struct that conforms to Sendable
 Marks the structs as independent from any global actor (including the MainActor) and safe to pass between concurrency contexts.
 
