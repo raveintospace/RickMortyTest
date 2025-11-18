@@ -11,6 +11,7 @@ import Foundation
 extension PageInfo {
     
     nonisolated enum Stub {
+        // MARK: - Characters
         static let stubCharacterPage1 = PageInfo(
             objectCount: 826,
             nextPage: URL(string: APIConstants.charactersListURL + "page=2")!
@@ -26,6 +27,7 @@ extension PageInfo {
             nextPage: nil
         )
         
+        // MARK: - Episodes
         static let stubEpisodePage1 = PageInfo(
             objectCount: 51,
             nextPage: URL(string: APIConstants.episodesListURL + "page=2")!

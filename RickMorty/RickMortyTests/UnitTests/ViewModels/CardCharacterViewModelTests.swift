@@ -22,17 +22,17 @@ extension CardCharacter {
 extension PageInfo {
     nonisolated enum CardCharacterTestStub {
         static let initialInfo = PageInfo.Stub.stubCharacterPage1
-        static let finalInfo = PageInfo.Stub.stubCharacterPage2
+        static let finalInfo = PageInfo.Stub.stubCharacterPage42
     }
 }
 
 extension CharacterPageResponse {
     nonisolated enum TestStub {
-        static let initialResponse = CharacterPageResponse(info: PageInfo.EpisodeTestStub.initialInfo,
+        static let initialResponse = CharacterPageResponse(info: PageInfo.CardCharacterTestStub.initialInfo,
                                                            results: [CardCharacter.TestStub.stub1,
                                                                      CardCharacter.TestStub.stub2])
         
-        static let finalResponse = CharacterPageResponse(info: PageInfo.EpisodeTestStub.finalInfo,
+        static let finalResponse = CharacterPageResponse(info: PageInfo.CardCharacterTestStub.finalInfo,
                                                          results: [CardCharacter.TestStub.stub6,
                                                                    CardCharacter.TestStub.stub8])
     }

@@ -8,7 +8,6 @@
 import Foundation
 @testable import RickMorty
 
-
 final class MockDataService: DataServiceProtocol {
     
     enum MockedResult {
