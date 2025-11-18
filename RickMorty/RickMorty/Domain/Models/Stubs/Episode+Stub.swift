@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension Episode {
     
     enum Stub {
@@ -96,3 +97,4 @@ extension Episode {
         )
     }
 }
+#endif

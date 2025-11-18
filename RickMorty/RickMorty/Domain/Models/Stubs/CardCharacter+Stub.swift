@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension CardCharacter {
     
     private static func generateImageURL(id: Int) -> URL {
@@ -55,3 +56,4 @@ extension CardCharacter {
         )
     }
 }
+#endif

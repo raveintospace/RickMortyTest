@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension CharacterLocation {
     
     enum Stub {
@@ -20,3 +21,4 @@ extension CharacterLocation {
                                             url: URL(string: "https://rickandmortyapi.com/api/location/40")!)
     }
 }
+#endif

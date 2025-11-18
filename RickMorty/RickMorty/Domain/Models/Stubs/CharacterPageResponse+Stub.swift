@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension CharacterPageResponse {
     
     enum Stub {
@@ -23,3 +24,4 @@ extension CharacterPageResponse {
             results: [CardCharacter.Stub.stub1, CardCharacter.Stub.stub2])
     }
 }
+#endif

@@ -5,6 +5,8 @@
 //  Created by Uri on 14/11/25.
 //
 
+@testable import RickMorty
+
 struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
     
     func executeGenderFilters() async throws -> [Filter] {

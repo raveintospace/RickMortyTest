@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension EpisodePageResponse {
     
     enum Stub {
@@ -19,3 +20,4 @@ extension EpisodePageResponse {
             results: [Episode.Stub.stub5])
     }
 }
+#endif

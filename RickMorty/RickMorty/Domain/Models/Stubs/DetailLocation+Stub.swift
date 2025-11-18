@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension DetailLocation {
     
     enum Stub {
@@ -52,3 +53,4 @@ extension DetailLocation {
         )
     }
 }
+#endif

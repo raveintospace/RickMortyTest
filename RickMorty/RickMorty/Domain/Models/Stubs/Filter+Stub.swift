@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension Filter {
     enum Stub {
         static let gender: [Filter] = [
@@ -23,3 +24,4 @@ extension Filter {
         ]
     }
 }
+#endif

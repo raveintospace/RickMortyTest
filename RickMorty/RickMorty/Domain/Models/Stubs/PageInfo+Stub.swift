@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if DEBUG
 extension PageInfo {
     
     enum Stub {
@@ -36,3 +37,4 @@ extension PageInfo {
         )
     }
 }
+#endif
