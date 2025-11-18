@@ -7,8 +7,7 @@ Please, run the app on a real device or using Simulator to properly test it, som
 This project implements an MVVM (Model-View-ViewModel) architecture, structured into four distinct main layers:
 
 - Data Layer: Handles API communication.
-- Domain Layer: Defines repositories and use cases.
-- Model Layer: Contains the data structures used throughout the app.
+- Domain Layer: Defines repositories and use cases. Includes the models layer, that contains the data structures used throughout the app.
 - Presentation Layer: Includes ViewModels and UI components.
 
 The MVVM pattern ensures a clear separation of concerns:
@@ -17,10 +16,12 @@ The MVVM pattern ensures a clear separation of concerns:
 - ViewModel: Manages business logic, interacts with use cases, and updates the UI.
 
 2. DEPENDENCY INJECTION
-To improve modularity and testability, dependencies are injected via protocols into DataSources and UseCases. Protocols are defined in separate files, but I know they could also have been created inside the files that implement each protocol, as there is only one struct for each one. 
+To improve modularity and testability, dependencies are injected via protocols into DataSources and UseCases. Protocols are defined in separate files, but I know they could also have been created inside the files that implement each protocol (see DataService), as there is only one struct for each one. 
 
 3. FRAMEWORKS
 -- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
+SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
+-- SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
 
 4. TESTING
 What I have tested:
@@ -50,7 +51,7 @@ Using an actor is a proactive thread-safety measure because it:
 2. Separates and isolates network access logic from the presentation layer (ViewModel), adhering to the Interface Segregation Principle (ISP) and the Dependency Inversion Principle (DIP).
 
 -- No Repository layer to fetch characters
-The project does not use several sources to fetch characters (ie network & local cache). The Character's Use Case requests the fetch of characters to the datasource, without using a pass-through repository with no added logic, therefore we avoid unnecessary abstraction.
+The project does not use several sources to fetch characters (ie network & local cache). The Character's Use Case requests the fetch of characters to the datasource, without using a pass-through repository with no added logic, therefore we avoid unnecessary abstraction. Same applies for the other Use Cases (Detail, Location, Episode).
 
 The Filter layer maintains both a Repository and a Use Case to encapsulate the data source (currently static/hardcoded) and prepare for future integration with an API or local persistence, which would require source switching logic within the Repository. In contrast, the Character layer skips the Repository because it only uses a single, direct network data source, making a pass-through Repository an unnecessary abstraction.
 
