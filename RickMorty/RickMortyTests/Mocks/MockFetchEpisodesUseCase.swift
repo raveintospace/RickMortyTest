@@ -15,18 +15,24 @@ final class MockFetchEpisodesUseCase: FetchEpisodesUseCaseProtocol {
         case failure(RemoteDataSourceError)
     }
     
-    var result: MockedEpisodeResult
+    private let results: [MockedEpisodeResult]
+    private(set) var requestedPages: [Int] = []
     
-    // Check the page requested by viewmodel
-    private(set) var lastRequestedPage: Int?
+    private var callIndex = 0
     
-    init(result: MockedEpisodeResult) {
-        self.result = result
+    init(results: [MockedEpisodeResult]) {
+        self.results = results
     }
     
     func execute(page: Int) async throws -> EpisodePageResponse {
+        requestedPages.append(page)
         
-        self.lastRequestedPage = page
+        guard callIndex < results.count else {
+            fatalError("MockFetchEpisodesUseCase called more times than expected")
+        }
+        
+        let result = results[callIndex]
+        callIndex += 1
         
         switch result {
         case .success(let response):

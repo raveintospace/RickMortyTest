@@ -15,18 +15,25 @@ final class MockFetchCardCharactersUseCase: FetchCardCharactersUseCaseProtocol {
         case failure(RemoteDataSourceError)
     }
     
-    var result: MockedCardCharacterResult
+    private let results: [MockedCardCharacterResult]
+    private(set) var requestedPages: [Int] = []
     
-    // Check the page requested by viewmodel
-    private(set) var lastRequestedPage: Int?
+    private var callIndex = 0
     
-    init(result: MockedCardCharacterResult) {
-        self.result = result
+    init(results: [MockedCardCharacterResult]) {
+        self.results = results
     }
     
     func execute(page: Int) async throws -> CharacterPageResponse {
         
-        self.lastRequestedPage = page
+        requestedPages.append(page)
+        
+        guard callIndex < results.count else {
+            fatalError("MockFetchCardCharactersUseCase called more times than expected")
+        }
+        
+        let result = results[callIndex]
+        callIndex += 1
         
         switch result {
         case .success(let response):
