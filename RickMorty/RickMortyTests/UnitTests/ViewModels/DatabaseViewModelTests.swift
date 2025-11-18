@@ -1,5 +1,5 @@
 //
-//  CardCharacterViewModelTests.swift
+//  DatabaseViewModelTests.swift
 //  RickMorty
 //
 //  Created by Uri on 18/11/25.
@@ -39,7 +39,7 @@ extension CharacterPageResponse {
 }
 
 @MainActor
-struct CardCharacterListViewModelTests {
+struct DatabaseViewModelTests {
     
     // MARK: - Load
     @Test func testLoadCharacters_success_initialLoad() async throws {
