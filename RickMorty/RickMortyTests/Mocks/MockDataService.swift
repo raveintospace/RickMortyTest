@@ -9,32 +9,28 @@ import Foundation
 @testable import RickMorty
 
 
-final class MockDataService {
+final class MockDataService: DataServiceProtocol {
     
     enum MockedResult {
         case success(Data)
         case failure(RemoteDataSourceError)
     }
     
-    var result: MockedResult
+    let result: MockedResult
+    let expectedURL: URL
     
-    // Check URL requested from DataSource
-    private(set) var requestedURL: URL?
-    
-    init(result: MockedResult) {
+    init(result: MockedResult, expectedURL: URL) {
         self.result = result
+        self.expectedURL = expectedURL
     }
     
     func fetch<T: Decodable & Sendable>(type: T.Type = T.self, url: URL?) async throws -> T {
-        
-        guard let url = url else {
-            throw RemoteDataSourceError.invalidURL
-        }
-        
-        self.requestedURL = url
-        
         switch result {
         case .success(let data):
+            guard url == expectedURL else {
+                throw RemoteDataSourceError.invalidURL
+            }
+            
             do {
                 let decodedObject = try JSONDecoder().decode(T.self, from: data)
                 return decodedObject
