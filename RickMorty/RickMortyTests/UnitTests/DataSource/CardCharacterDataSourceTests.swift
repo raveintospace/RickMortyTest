@@ -1,5 +1,5 @@
 //
-//  DataServiceTests.swift
+//  CardCharacterDataSourceTests.swift
 //  RickMorty
 //
 //  Created by Uri on 18/11/25.
@@ -173,7 +173,7 @@ fileprivate enum TestError: Error {
 }
 
 @MainActor
-struct DataServiceTests {
+struct CardCharacterDataSourceTests {
     
     @Test func testGetCardCharacters_success_urlAndDataDecoded() async throws {
         
