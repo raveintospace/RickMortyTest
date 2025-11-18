@@ -18,7 +18,7 @@ extension Episode {
 }
 
 extension PageInfo {
-    nonisolated enum TestStub {
+    nonisolated enum EpisodeTestStub {
         static let initialInfo = PageInfo.Stub.stubEpisodePage1
         static let finalInfo = PageInfo.Stub.stubEpisodePage3
     }
@@ -26,10 +26,10 @@ extension PageInfo {
 
 extension EpisodePageResponse {
     nonisolated enum TestStub {
-        static let initialResponse = EpisodePageResponse(info: PageInfo.TestStub.initialInfo,
+        static let initialResponse = EpisodePageResponse(info: PageInfo.EpisodeTestStub.initialInfo,
                                                          results: [Episode.TestStub.stub1])
         
-        static let finalResponse = EpisodePageResponse(info: PageInfo.TestStub.finalInfo,
+        static let finalResponse = EpisodePageResponse(info: PageInfo.EpisodeTestStub.finalInfo,
                                                        results: [Episode.TestStub.stub2])
     }
 }
