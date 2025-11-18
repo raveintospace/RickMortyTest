@@ -40,7 +40,18 @@ final class DetailViewModel {
             
             self.character = fetchedCharacter
         } catch {
-            self.errorMessage = "Error loading the character: \(error.localizedDescription)"
+            if let remoteError = error as? RemoteDataSourceError {
+                switch remoteError {
+                case .invalidURL, .badServerResponse:
+                    self.errorMessage = "Network Error: We couldn't reach the server."
+                case .decodingError:
+                    self.errorMessage = "Data Error: The received character data is corrupt."
+                case .httpError(let statusCode):
+                    self.errorMessage = "Server Error: Received status code \(statusCode)."
+                }
+            } else {
+                self.errorMessage = "An unexpected error occurred: \(error.localizedDescription)"
+            }
         }
     }
 }
