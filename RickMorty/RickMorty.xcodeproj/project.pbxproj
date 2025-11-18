@@ -27,26 +27,9 @@
 		349BEEF22EC5C79300A7208F /* RMIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = RMIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		34371F972ECC6DDF00186A3F /* Exceptions for "RickMortyTests" folder in "RickMorty" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Mocks/MockFetchCardCharactersUseCase.swift,
-				Mocks/MockFetchDetailCharacterUseCase.swift,
-				Mocks/MockFetchEpisodesUseCase.swift,
-				Mocks/MockFetchLocationUseCase.swift,
-				Mocks/MockGetFiltersUseCase.swift,
-			);
-			target = 349BEDF42EC5C3C300A7208F /* RickMorty */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		34371F832ECC655300186A3F /* RickMortyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				34371F972ECC6DDF00186A3F /* Exceptions for "RickMortyTests" folder in "RickMorty" target */,
-			);
 			path = RickMortyTests;
 			sourceTree = "<group>";
 		};

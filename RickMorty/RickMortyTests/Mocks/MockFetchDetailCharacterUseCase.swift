@@ -6,8 +6,8 @@
 //
 
 import Foundation
+@testable import RickMorty
 
-#if DEBUG
 final class MockFetchDetailCharacterUseCase: FetchDetailCharacterUseCaseProtocol {
     
     enum MockedDetailCharacterResult {
@@ -36,4 +36,3 @@ final class MockFetchDetailCharacterUseCase: FetchDetailCharacterUseCaseProtocol
         }
     }
 }
-#endif

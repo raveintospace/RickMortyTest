@@ -23,8 +23,8 @@ private struct DatabaseViewModelKey: EnvironmentKey {
     static let defaultValue: DatabaseViewModel = {
         
         #if DEBUG
-        let mockFetchUseCase = MockFetchCardCharactersUseCase(result: .success(CharacterPageResponse.Stub.stub1))
-        let mockFiltersUseCase = MockGetFiltersUseCase()
+        let mockFetchUseCase = MockPreviewFetchCardCharactersUseCase()
+        let mockFiltersUseCase = MockPreviewGetFiltersUseCase()
         
         return DatabaseViewModel(
             fetchCardCharactersUseCase: mockFetchUseCase,

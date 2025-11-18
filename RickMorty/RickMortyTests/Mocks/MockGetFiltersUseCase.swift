@@ -6,8 +6,8 @@
 //
 
 import Foundation
+@testable import RickMorty
 
-#if DEBUG
 struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
     
     func executeGenderFilters() async throws -> [Filter] {
@@ -18,4 +18,4 @@ struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
         return Filter.Stub.status
     }
 }
-#endif
+
