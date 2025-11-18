@@ -12,7 +12,7 @@ extension PageInfo {
     
     nonisolated enum Stub {
         static let stubCharacterPage1 = PageInfo(
-            objectCount: 20,
+            objectCount: 826,
             nextPage: URL(string: APIConstants.charactersListURL + "page=2")!
         )
         
@@ -22,7 +22,7 @@ extension PageInfo {
         )
         
         static let stubCharacterPage42 = PageInfo(
-            objectCount: 20,
+            objectCount: 826,
             nextPage: nil
         )
         

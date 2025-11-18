@@ -53,7 +53,7 @@ struct EpisodeListViewModelTests {
         #expect(sut.errorMessage == nil)
         
         #expect(sut.fetchedEpisodesCount == expectedResponse.results.count)
-        #expect(sut.totalEpisodesCount == PageInfo.Stub.stubEpisodePage1.objectCount)
+        #expect(sut.totalEpisodesCount == expectedResponse.info.objectCount)
         #expect(sut.canFetchMore == true)
         #expect(sut.currentPage == 2)
         
@@ -78,7 +78,7 @@ struct EpisodeListViewModelTests {
         #expect(sut.errorMessage == nil)
         
         #expect(sut.fetchedEpisodesCount == 2)
-        #expect(sut.totalEpisodesCount == PageInfo.Stub.stubEpisodePage1.objectCount)
+        #expect(sut.totalEpisodesCount == finalResponse.info.objectCount)
         #expect(sut.canFetchMore == false)
         #expect(sut.currentPage == 3, "Should be three, as we call load two times and the initial value is 1")
         
@@ -102,7 +102,7 @@ struct EpisodeListViewModelTests {
         #expect(sut.errorMessage == nil)
         
         #expect(sut.fetchedEpisodesCount == finalResponse.results.count)
-        #expect(sut.totalEpisodesCount == PageInfo.Stub.stubEpisodePage1.objectCount)
+        #expect(sut.totalEpisodesCount == finalResponse.info.objectCount)
         #expect(sut.canFetchMore == false)
         #expect(sut.currentPage == 2)
         
