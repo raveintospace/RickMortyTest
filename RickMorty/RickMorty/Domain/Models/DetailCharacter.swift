@@ -8,7 +8,7 @@
 import Foundation
 
 // The character displayed on DetailView
-nonisolated struct DetailCharacter: Decodable, Sendable {
+nonisolated struct DetailCharacter: Decodable, Equatable, Sendable {
     let id: Int
     let name: String
     let status: CharacterStatus
