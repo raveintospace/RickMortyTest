@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension CharacterLocation {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = CharacterLocation(name: "Earth",
                                              url: URL(string: "https://rickandmortyapi.com/api/location/1")!)
         

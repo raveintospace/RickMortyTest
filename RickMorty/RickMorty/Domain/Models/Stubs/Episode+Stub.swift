@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension Episode {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = Episode(
             id: 1,
             name: "Pilot",

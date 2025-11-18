@@ -14,7 +14,7 @@ extension DetailCharacter {
         return URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
     }
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = DetailCharacter(
             id: 1,
             name: "Rick Sanchez",

@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension DetailLocation {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = DetailLocation(
             name: "Earth (C-137)",
             type: "Planet",

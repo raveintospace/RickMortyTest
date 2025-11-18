@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension PageInfo {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stubCharacterPage1 = PageInfo(
             objectCount: 20,
             nextPage: URL(string: APIConstants.charactersListURL + "page=2")!

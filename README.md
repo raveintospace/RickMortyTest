@@ -26,6 +26,8 @@ To improve modularity and testability, dependencies are injected via protocols i
 -- nonisolated struct that conforms to Sendable
 Marks the structs as independent from any global actor (including the MainActor) and safe to pass between concurrency contexts.
 
+This decision also affects the Stubs, they are declared as nonisolated to avoid being attached to MainActor and making them "concurrent-safe"
+
 Conforming to Sendable and being nonisolated is required because:
 1. The models only contain thread-safe types (Int, String, URL, Enums) and manage no mutable state, making them intrinsically safe to transfer (Sendable).
 2. We prevent the compiler, especially in Swift 6 mode, from inferring that the Decodable protocol is bound to the MainActor (default behaviour).

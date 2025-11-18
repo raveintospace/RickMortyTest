@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension CharacterPageResponse {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = CharacterPageResponse(
             info: PageInfo.Stub.stubCharacterPage1,
             results: [CardCharacter.Stub.stub1, CardCharacter.Stub.stub2])

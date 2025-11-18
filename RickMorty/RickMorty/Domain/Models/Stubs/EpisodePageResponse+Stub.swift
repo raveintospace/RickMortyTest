@@ -10,7 +10,7 @@ import Foundation
 #if DEBUG
 extension EpisodePageResponse {
     
-    enum Stub {
+    nonisolated enum Stub {
         static let stub1 = EpisodePageResponse(
             info: PageInfo.Stub.stubEpisodePage1,
             results: [Episode.Stub.stub1, Episode.Stub.stub2])
