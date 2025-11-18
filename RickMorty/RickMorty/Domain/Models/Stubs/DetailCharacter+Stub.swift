@@ -10,10 +10,6 @@ import Foundation
 #if DEBUG
 extension DetailCharacter {
     
-    private static func generateImageURL(id: Int) -> URL {
-        return URL(string: "https://rickandmortyapi.com/api/character/avatar/\(id).jpeg")!
-    }
-    
     nonisolated enum Stub {
         static let stub1 = DetailCharacter(
             id: 1,
@@ -22,7 +18,7 @@ extension DetailCharacter {
             gender: .male,
             species: "Human",
             type: "",
-            image: generateImageURL(id: 1),
+            image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!,
             episode: [
                 "https://rickandmortyapi.com/api/episode/1",
                 "https://rickandmortyapi.com/api/episode/2",
@@ -48,7 +44,7 @@ extension DetailCharacter {
             gender: .male,
             species: "Human",
             type: "Superhuman (Ghost trains summoner)",
-            image: generateImageURL(id: 10),
+            image: URL(string: "https://rickandmortyapi.com/api/character/avatar/10.jpeg")!,
             episode: ["https://rickandmortyapi.com/api/episode/25"],
             origin: CharacterLocation(name: "unknown",
                                       url: URL(string: "")),
@@ -63,7 +59,7 @@ extension DetailCharacter {
             gender: .male,
             species: "Alien",
             type: "Korblock",
-            image: generateImageURL(id: 50),
+            image: URL(string: "https://rickandmortyapi.com/api/character/avatar/50.jpeg")!,
             episode: ["https://rickandmortyapi.com/api/episode/14"],
             origin: CharacterLocation(name: "unknown",
                                       url: URL(string: "")),
