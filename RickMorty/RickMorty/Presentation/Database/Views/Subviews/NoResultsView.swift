@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct NoResultsView: View {
-    
+
     var imageName: String
     var mainText: String
-    var callToActionText: String
-    
+    var ctaText: String
+
+    private var formattedIconName: String {
+        imageName
+            .replacingOccurrences(of: ".slash", with: "")
+            .replacingOccurrences(of: ".", with: " ")
+            .capitalized
+    }
+
     var body: some View {
         VStack(spacing: 20) {
             Image(systemName: imageName)
@@ -26,19 +33,19 @@ struct NoResultsView: View {
                         .accessibilityHidden(true)
                 )
                 .padding(.vertical, 10)
-                .accessibilityLabel("Icon: \(imageName.replacingOccurrences(of: ".slash", with: "").replacingOccurrences(of: ".", with: " ").capitalized) indicating no results")
+                .accessibilityLabel("Icon: \(formattedIconName) indicating no results")
                 .accessibilityAddTraits(.isImage)
-            
+
             Text(mainText)
                 .font(.largeTitle)
                 .bold()
-            
-            Text(callToActionText)
+
+            Text(ctaText)
                 .font(.callout)
         }
         .modifier(GlassSheetModifier())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(mainText). \(callToActionText).")
+        .accessibilityLabel("\(mainText). \(ctaText).")
         .accessibilityAddTraits(.isStaticText)
     }
 }
@@ -48,7 +55,7 @@ struct NoResultsView: View {
     NoResultsView(
         imageName: "person.slash",
         mainText: "No characters",
-        callToActionText: "There are no characters that match your search. Try with other filters or keywords."
+        ctaText: "There are no characters that match your search. Try with other filters or keywords."
     )
 }
 #endif

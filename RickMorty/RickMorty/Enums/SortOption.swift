@@ -9,7 +9,7 @@ import SwiftUI
 
 enum SortOption: String, CaseIterable {
     case id, idReversed, name, nameReversed
-    
+
     private var baseName: String {
         switch self {
         case .id, .idReversed:
@@ -18,7 +18,7 @@ enum SortOption: String, CaseIterable {
             return "Name"
         }
     }
-    
+
     private var isReversed: Bool {
         switch self {
         case .idReversed, .nameReversed:
@@ -27,7 +27,7 @@ enum SortOption: String, CaseIterable {
             return false
         }
     }
-    
+
     func displayName() -> some View {
         HStack(spacing: 4) {
             Text(baseName)
@@ -37,7 +37,7 @@ enum SortOption: String, CaseIterable {
         .accessibilityLabel(accessibilityDescription)
         .accessibilityAddTraits(.isStaticText)
     }
-    
+
     var accessibilityDescription: String {
         let orderDescription = isReversed ? "descending" : "ascending"
 

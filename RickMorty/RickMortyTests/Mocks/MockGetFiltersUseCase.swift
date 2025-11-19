@@ -9,13 +9,12 @@ import Foundation
 @testable import RickMorty
 
 struct MockGetFiltersUseCase: GetFiltersUseCaseProtocol {
-    
+
     func executeGenderFilters() async throws -> [Filter] {
         return Filter.Stub.gender
     }
-    
+
     func executeStatusFilters() async throws -> [Filter] {
         return Filter.Stub.status
     }
 }
-

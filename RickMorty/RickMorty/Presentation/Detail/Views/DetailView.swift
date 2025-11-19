@@ -8,27 +8,36 @@
 import SwiftUI
 
 struct DetailView: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     @State private var detailViewModel: DetailViewModel
-    
+
     let characterID: Int
-    
+
     // MARK: - Navigation to sheets
-    @State private var activeSheet: LocationSheet? = nil
-    
+    @State private var activeSheet: LocationSheet?
+
     init(characterID: Int) {
-        _detailViewModel = State(initialValue: DetailViewModel(characterID: characterID, fetchDetailCharacterUseCase: FetchDetailCharacterUseCaseImpl(dataSource: DetailCharacterDataSourceImpl(dataService: DataService()))))
-        
+        _detailViewModel = State(
+            initialValue: DetailViewModel(
+                characterID: characterID,
+                fetchDetailCharacterUseCase: FetchDetailCharacterUseCaseImpl(
+                    dataSource: DetailCharacterDataSourceImpl(
+                        dataService: DataService()
+                    )
+                )
+            )
+        )
+
         self.characterID = characterID
     }
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 detailWallpaper
-                
+
                 if detailViewModel.isLoading && detailViewModel.character == nil {
                     ProgressColorBarsView()
                 } else if let error = detailViewModel.errorMessage {
@@ -37,7 +46,7 @@ struct DetailView: View {
                     ScrollView {
                         VStack {
                             DetailCard(character: character)
-                            
+
                             DetailBottomButtons(
                                 showOriginButton: character.hasValidOriginURL,
                                 onOriginButtonPressed: {
@@ -83,7 +92,7 @@ struct DetailView: View {
 #endif
 
 extension DetailView {
-    
+
     private var detailWallpaper: some View {
         Image("detailWallpaper")
             .resizable()
@@ -92,10 +101,10 @@ extension DetailView {
     }
 }
 
-fileprivate enum LocationSheet: Identifiable {
+private enum LocationSheet: Identifiable {
     case origin(url: URL)
     case location(url: URL)
-    
+
     var id: String {
         switch self {
         case .origin: return "origin"

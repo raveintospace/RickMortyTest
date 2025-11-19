@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct KingfisherImageLoader: View {
-    
+
     let imageUrl: URL?
     var contentMode: SwiftUI.ContentMode = .fill
 
@@ -37,7 +37,7 @@ struct KingfisherImageLoader: View {
 #if DEBUG
 #Preview {
     let wrongURL = URL(string: "fsafsd")!
-    
+
     VStack {
         KingfisherImageLoader(imageUrl: CardCharacter.Stub.stub1.image, contentMode: .fit)
             .frame(width: 200, height: 200)
@@ -46,6 +46,6 @@ struct KingfisherImageLoader: View {
         KingfisherImageLoader(imageUrl: nil)
             .frame(width: 200, height: 200)
     }
-    
+
 }
 #endif

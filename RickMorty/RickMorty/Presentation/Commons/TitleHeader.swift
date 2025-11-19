@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TitleHeader: View {
-    
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.isPad) private var isPad: Bool
-    
+
     var body: some View {
         HStack(spacing: 0) {
             homeButton
@@ -20,7 +20,7 @@ struct TitleHeader: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .accessibilityHidden(true)
         }
-        
+
     }
 }
 
@@ -31,7 +31,7 @@ struct TitleHeader: View {
 #endif
 
 extension TitleHeader {
-    
+
     private var homeButton: some View {
         Button {
             dismiss()
@@ -45,7 +45,7 @@ extension TitleHeader {
         .accessibilityLabel("Go back to home view")
         .accessibilityAddTraits(.isButton)
     }
-    
+
     private var titleImage: some View {
         Image("RMHorizontal2")
             .resizable()

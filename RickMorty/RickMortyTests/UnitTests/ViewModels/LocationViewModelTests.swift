@@ -19,19 +19,19 @@ extension DetailLocation {
 
 @MainActor
 struct LocationViewModelTests {
-    
+
     private let testURL = URL(string: "https://rickandmortyapi.com/api/location/1")!
-    
+
     @Test func testLoadLocation_success() async throws {
-        
+
         // Given
         let expectedLocation = DetailLocation.TestStub.stub1
         let useCase = MockFetchLocationUseCase(result: .success(expectedLocation))
         let sut = LocationViewModel(locationURL: testURL, fetchLocationUseCase: useCase)
-        
+
         // When
         await sut.loadLocation()
-        
+
         // Then
         #expect(sut.isLoading == false)
         #expect(sut.errorMessage == nil)
@@ -40,25 +40,26 @@ struct LocationViewModelTests {
         #expect(sut.location?.name == expectedLocation.name)
         #expect(useCase.requestedURL == testURL)
     }
-    
+
     @Test func testLoadLocation_allErrorCases() async throws {
-        
+
         let errorCases: [(RemoteDataSourceError, String)] = [
             (.invalidURL, "Network Error: We couldn't reach the server."),
             (.badServerResponse, "Network Error: We couldn't reach the server."),
-            (.decodingError(NSError(domain: "Test", code: 0)), "Data Error: The received location data is corrupt."),
+            (.decodingError(NSError(domain: "Test", code: 0)),
+             "Data Error: The received location data is corrupt."),
             (.httpError(statusCode: 500), "Server Error: Received status code 500.")
         ]
-        
+
         for (error, expectedMessage) in errorCases {
-            
+
             // Given
             let useCase = MockFetchLocationUseCase(result: .failure(error))
             let sut = LocationViewModel(locationURL: testURL, fetchLocationUseCase: useCase)
 
             // When
             await sut.loadLocation()
-            
+
             // Then
             #expect(sut.isLoading == false)
             #expect(sut.errorMessage == expectedMessage)
@@ -66,9 +67,9 @@ struct LocationViewModelTests {
             #expect(useCase.requestedURL == testURL)
         }
     }
-    
+
     @Test func testResidentCountText_returnsCorrectString() {
-        
+
         // Given
         let locationNoResidents = DetailLocation(
             name: "No Res", type: "Planet", dimension: "Dim X", residents: []
@@ -77,23 +78,24 @@ struct LocationViewModelTests {
             name: "One Res", type: "Planet", dimension: "Dim Y", residents: ["R1"]
         )
         let locationMultipleResidents = DetailLocation.TestStub.stub1
-        
+
         // Then
         #expect(locationNoResidents.residentCountText == "This location has no residents.")
         #expect(locationOneResident.residentCountText == "This location has 1 resident.")
-        #expect(locationMultipleResidents.residentCountText == "This location has \(locationMultipleResidents.residentCount) residents.")
+        #expect(locationMultipleResidents.residentCountText ==
+                "This location has \(locationMultipleResidents.residentCount) residents.")
     }
-    
+
     @Test func testLoadLocation_deferSetsIsLoadingToFalse() async throws {
-        
+
         // Given
         let expectedError = RemoteDataSourceError.badServerResponse
         let useCase = MockFetchLocationUseCase(result: .failure(expectedError))
         let sut = LocationViewModel(locationURL: testURL, fetchLocationUseCase: useCase)
-        
+
         // When
         await sut.loadLocation()
-        
+
         // Then
         #expect(sut.isLoading == false)
         #expect(sut.location == nil)

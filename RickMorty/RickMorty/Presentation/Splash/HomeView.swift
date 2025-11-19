@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     // MARK: - Navigation states
     @State private var showDatabase: Bool = false
     @State private var showEpisodeList: Bool = false
     @State private var showInfoSheet: Bool = false
-    
+
     private let gitHubURL = URL(string: "https://github.com/raveintospace/RickMortyTest")!
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 RMBackgroundGradientView()
-                
+
                 VStack {
                     appLogo
                     Spacer()
@@ -63,7 +63,7 @@ struct HomeView: View {
 #endif
 
 extension HomeView {
-    
+
     private var appLogo: some View {
         Image("RMHorizontal2")
             .resizable()
@@ -72,7 +72,7 @@ extension HomeView {
             .accessibilityAddTraits(.isImage)
             .shadow(color: .black, radius: 3)
     }
-    
+
     private var viewsButtonStack: some View {
         VStack(spacing: 20) {
             Button {
@@ -84,7 +84,7 @@ extension HomeView {
             .RMLimeLook()
             .font(isPad ? .title : .title2)
             .accessibilityHint("Navigates to Database view")
-            
+
             Button {
                 showEpisodeList = true
             } label: {
@@ -96,7 +96,7 @@ extension HomeView {
             .accessibilityHint("Navigates to Episode List view")
         }
     }
-    
+
     private var infoButton: some View {
         Button {
             showInfoSheet = true
@@ -111,25 +111,23 @@ extension HomeView {
         .accessibilityAddTraits(.isButton)
         .accessibilityHint("Shows an info sheet with details about the app developer")
     }
-    
+
     private var infoText: some View {
         VStack(spacing: 24) {
             Text("This app has been developed by Oriol Angelet.")
                 .font(isPad ? .largeTitle : .headline)
                 .multilineTextAlignment(.center)
-            
+
             Link("Check the repository here", destination: gitHubURL)
                 .font(isPad ? .title : .body)
                 .foregroundStyle(.blue)
                 .underline()
                 .accessibilityLabel("Opens this app repository in web browser.")
-            
+
             DismissSheetButton()
         }
         .modifier(GlassSheetModifier())
         .shadow(color: .rmLime, radius: 3)
-        
-        
+
     }
 }
-

@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct DetailBottomButtons: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     var showOriginButton: Bool
     var onOriginButtonPressed: () -> Void
-    
+
     var showLocationButton: Bool
     var onLocationButtonPressed: () -> Void
-    
+
     var body: some View {
         VStack(spacing: 20) {
             if showOriginButton {
@@ -31,7 +31,7 @@ struct DetailBottomButtons: View {
                 .accessibilityHidden(!showOriginButton)
                 .accessibilityLabel("View details of character's origin")
             }
-            
+
             if showLocationButton {
                 Button {
                     onLocationButtonPressed()
@@ -46,7 +46,7 @@ struct DetailBottomButtons: View {
             }
         }
         .padding(.horizontal, 40)
-        
+
     }
 }
 

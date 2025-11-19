@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct InsightRow: View {
-    
+
     let label: String
     let value: String
-    
+
     var body: some View {
         HStack(alignment: .top, spacing: 4) {
             Text("\(label):")

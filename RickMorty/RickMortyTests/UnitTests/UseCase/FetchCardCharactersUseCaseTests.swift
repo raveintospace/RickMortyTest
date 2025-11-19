@@ -31,7 +31,7 @@ extension CharacterPageResponse {
         static let initialResponse = CharacterPageResponse(info: PageInfo.CardCharacterTestUseCaseStub.initialInfo,
                                                            results: [CardCharacter.TestStub.stub1,
                                                                      CardCharacter.TestStub.stub2])
-        
+
         static let finalResponse = CharacterPageResponse(info: PageInfo.CardCharacterTestUseCaseStub.finalInfo,
                                                          results: [CardCharacter.TestStub.stub6,
                                                                    CardCharacter.TestStub.stub8])
@@ -40,36 +40,36 @@ extension CharacterPageResponse {
 
 @MainActor
 struct FetchCardCharactersUseCaseTests {
-    
+
     @Test func testGetCardCharacters_success_propagatesDataAndCallsDataSource() async throws {
-        
+
         // Given
         let testPage = 1
         let expectedResponse = CharacterPageResponse.TestUseCaseStub.initialResponse
         let mockDataSource = MockCardCharacterDataSourceProtocol(result: .success(expectedResponse))
         let sut = FetchCardCharactersUseCaseImpl(dataSource: mockDataSource)
-        
+
         // When
         let actualResponse = try await sut.execute(page: testPage)
-        
+
         // Then
         #expect(mockDataSource.requestedPage == testPage)
         #expect(actualResponse.results.count == expectedResponse.results.count)
         #expect(actualResponse.results.first?.name == expectedResponse.results.first?.name)
         #expect(actualResponse.info.objectCount == expectedResponse.info.objectCount)
     }
-    
+
     @Test func testGetCardCharacters_failure_propagatesDataSourceError() async {
-        
+
         // Given
         let expectedError = RemoteDataSourceError.httpError(statusCode: 500)
         let mockDataSource = MockCardCharacterDataSourceProtocol(result: .failure(expectedError))
         let sut = FetchCardCharactersUseCaseImpl(dataSource: mockDataSource)
-        
+
         do {
             // When
             _ = try await sut.execute(page: 1)
-            
+
             #expect(Bool(false))
         } catch let error as RemoteDataSourceError {
             #expect(error == expectedError)
@@ -78,5 +78,3 @@ struct FetchCardCharactersUseCaseTests {
         }
     }
 }
-
-

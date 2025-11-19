@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct EpisodeCard: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     let episode: Episode
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             episodeTitle
-            
+
             InsightRow(label: "Aired on", value: episode.airDate)
             InsightRow(label: "Episode code", value: episode.episodeCode)
                 .padding(.bottom, 8)
-            
+
             RMDivider(horizontalPadding: 1)
-            
+
             episodeCharacterCountLabel
         }
         .font(isPad ? .title : .headline)
@@ -40,7 +40,7 @@ struct EpisodeCard: View {
 #endif
 
 extension EpisodeCard {
-    
+
     private var episodeTitle: some View {
         Text(episode.name)
             .font(isPad ? .largeTitle : .title3)
@@ -53,7 +53,7 @@ extension EpisodeCard {
             .accessibilityAddTraits(.isHeader)
             .accessibilityLabel("Episode title: \(episode.name)")
     }
-    
+
     private var episodeCharacterCountLabel: some View {
         Text(episode.characterCountText)
             .padding(.top, 10)

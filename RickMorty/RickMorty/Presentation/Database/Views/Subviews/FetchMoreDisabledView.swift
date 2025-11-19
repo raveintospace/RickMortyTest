@@ -13,10 +13,10 @@ struct FetchMoreDisabledView: View {
             Image(systemName: "hand.raised.fill")
                 .foregroundColor(.rmYellow)
                 .accessibilityHidden(true)
-            
+
             Text("Unable to fetch more characters")
                 .font(.headline)
-            
+
             Text("Automatic loading of new characters is disabled while filters or search are active.")
                 .font(.subheadline)
                 .foregroundColor(.secondary)

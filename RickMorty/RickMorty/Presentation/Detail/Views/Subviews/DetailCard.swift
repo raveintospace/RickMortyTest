@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct DetailCard: View {
-    
+
     let character: DetailCharacter
-    
+
     var body: some View {
         VStack(spacing: 8) {
             CardNameLabel(name: character.name)
@@ -36,22 +36,22 @@ struct DetailCard: View {
 #endif
 
 extension DetailCard {
-    
+
     private var cardFrame: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 15)
                 .fill(.white)
                 .accessibilityHidden(true)
-            
+
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.rmPink, lineWidth: 6)
                 .accessibilityHidden(true)
-            
+
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.rmLime, lineWidth: 4)
                 .padding(2)
                 .accessibilityHidden(true)
-            
+
             RoundedRectangle(cornerRadius: 15)
                 .stroke(.rmYellow, lineWidth: 3)
                 .padding(4)

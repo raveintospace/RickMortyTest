@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct FiltersBar: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     var filters: [Filter]
     var onXMarkPressed: (() -> Void)?
     var onFilterPressed: ((Filter) -> Void)?
     var onOptionButtonPressed: (() -> Void)?
-    
+
     // The value is passed by the parent view
     var selectedFilter: Filter?
-    
+
     var body: some View {
         HStack(spacing: 0) {
             ScrollViewReader { scrollViewProxy in
@@ -38,7 +38,7 @@ struct FiltersBar: View {
                             .padding(.leading, 4)
                             .padding(.trailing, 4) // avoids hitting another cell
                         }
-                        
+
                         ForEach(filters, id: \.id) { filter in
                             if selectedFilter == nil || selectedFilter == filter {
                                 FilterSmallCell(
@@ -63,7 +63,7 @@ struct FiltersBar: View {
                 .scrollIndicators(.hidden)
                 .animation(.bouncy, value: selectedFilter)
             }
-            
+
             Button {
                 onOptionButtonPressed?()
             } label: {
@@ -90,11 +90,11 @@ struct FiltersBar: View {
 #endif
 
 // Preview to check if filter logic works
-fileprivate struct FiltersBarViewPreview: View {
-    
+private struct FiltersBarViewPreview: View {
+
     @State private var filters = Filter.Stub.gender
-    @State private var selectedFilter: Filter? = nil
-    
+    @State private var selectedFilter: Filter?
+
     var body: some View {
         FiltersBar(
             filters: filters,
@@ -105,7 +105,7 @@ fileprivate struct FiltersBarViewPreview: View {
                 selectedFilter = newFilter
             },
             onOptionButtonPressed: {
-                
+
             },
             selectedFilter: selectedFilter
         )

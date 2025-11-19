@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RMBackgroundGradientView: View {
-    
+
     var body: some View {
         ZStack {
             // Base gradient
@@ -18,7 +18,7 @@ struct RMBackgroundGradientView: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
-            
+
             // Overlay
             RadialGradient(
                 gradient: Gradient(colors: [.rmYellow.opacity(0.55), .rmPink.opacity(0.0)]),
@@ -28,7 +28,7 @@ struct RMBackgroundGradientView: View {
             )
             .blendMode(.screen)
             .ignoresSafeArea()
-            
+
             // Bright effect
             Color.white.opacity(0.08)
                 .blendMode(.overlay)

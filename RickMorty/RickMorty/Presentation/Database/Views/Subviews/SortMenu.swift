@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct SortMenu: View {
-    
+
     @Environment(\.databaseViewModel) private var databaseViewModel
     @Environment(\.isPad) var isPad: Bool
-    
+
     var body: some View {
         HStack {
             Menu {
                 ForEach(SortOption.allCases, id: \.self) { sortOption in
                     Button(action: {
                         databaseViewModel.sortOption = sortOption
-                    }) {
+                    }, label: {
                         sortOption.displayName()
                             .font(isPad ? .title : .body)
-                        
-                    }
+
+                    })
                 }
             } label: {
                 menuTitleView(sortOption: databaseViewModel.sortOption)

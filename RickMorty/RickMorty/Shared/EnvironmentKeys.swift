@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// EnvironmentKeys
-///
+
 /// This file defines the SwiftUI Environment Keys used for **Dependency Injection (DI)** via the
 /// native `@Environment` mechanism.
 /// This allows core services and ViewModels to be easily accessed from any View in the
@@ -19,18 +19,18 @@ import SwiftUI
 /// Previews and fallback code can compile.
 /// We don't need to declare a SessionViewModel object in Previews, they read this automatically
 private struct DatabaseViewModelKey: EnvironmentKey {
-    
+
     static let defaultValue: DatabaseViewModel = {
-        
+
         #if DEBUG
         let mockFetchUseCase = MockPreviewFetchCardCharactersUseCase()
         let mockFiltersUseCase = MockPreviewGetFiltersUseCase()
-        
+
         return DatabaseViewModel(
             fetchCardCharactersUseCase: mockFetchUseCase,
             getFiltersUseCase: mockFiltersUseCase
         )
-        
+
         #else
         fatalError("DatabaseViewModelKey.defaultValue should not be accessed in Production.")
         #endif
@@ -49,7 +49,7 @@ extension EnvironmentValues {
 /// Check if device is of type iPad
 /// Views can adapt to it being bigger than on iPhone
 private struct IsPadKey: EnvironmentKey {
-    
+
     static let defaultValue: Bool = UIDevice.current.userInterfaceIdiom == .pad
 }
 

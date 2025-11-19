@@ -9,7 +9,7 @@ import Foundation
 
 #if DEBUG
 extension DetailCharacter {
-    
+
     nonisolated enum Stub {
         static let stub1 = DetailCharacter(
             id: 1,
@@ -36,7 +36,7 @@ extension DetailCharacter {
             location: CharacterLocation(name: "Citadel of Ricks",
                                         url: URL(string: "https://rickandmortyapi.com/api/location/3")!)
         )
-        
+
         static let stub10 = DetailCharacter(
             id: 10,
             name: "Alan Rails",
@@ -51,7 +51,7 @@ extension DetailCharacter {
             location: CharacterLocation(name: "Worldender's lair",
                                         url: URL(string: "https://rickandmortyapi.com/api/location/4")!)
         )
-        
+
         static let stub50 = DetailCharacter(
             id: 50,
             name: "Blim Blam",

@@ -10,9 +10,4 @@ import Foundation
 nonisolated struct CharacterPageResponse: Decodable, Sendable {
     let info: PageInfo
     let results: [CardCharacter]
-    
-    init(info: PageInfo, results: [CardCharacter]) {
-        self.info = info
-        self.results = results
-    }
 }

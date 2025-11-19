@@ -11,7 +11,7 @@ enum CharacterGender: String, Decodable {
     case genderless = "Genderless"
     case male = "Male"
     case unknown = "unknown"
-    
+
     // Computed property used in UI
     var symbol: String {
         switch self {
@@ -26,4 +26,3 @@ enum CharacterGender: String, Decodable {
         }
     }
 }
-

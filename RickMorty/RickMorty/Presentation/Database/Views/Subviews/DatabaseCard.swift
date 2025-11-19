@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct DatabaseCard: View {
-    
+
     let character: CardCharacter
     var onCardPressed: (() -> Void)?
     @Environment(\.isPad) var isPad: Bool
-    
+
     var body: some View {
         ZStack {
             Color.rmLime
                 .padding(.vertical, 2)
-            
+
             VStack(alignment: .center, spacing: 0) {
                 characterImage
                 characterInfo
@@ -37,9 +37,9 @@ struct DatabaseCard: View {
 
 #if DEBUG
 #Preview {
-    
+
     let previewContent = [CardCharacter.Stub.stub1, CardCharacter.Stub.stub6]
-    
+
     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 2),
               alignment: .center,
               spacing: 4,
@@ -53,15 +53,15 @@ struct DatabaseCard: View {
 #endif
 
 extension DatabaseCard {
-    
-    // MARK - View components
+
+    // MARK: - View components
     private var characterImage: some View {
         ImageLoaderView(url: character.image)
             .clipShape(.rect(cornerRadius: 10))
             .padding(5)
             .accessibilityLabel("Image of \(character.name)")
     }
-    
+
     private var characterInfo: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
@@ -95,23 +95,27 @@ extension DatabaseCard {
         .padding(.vertical, 10)
         .padding(.horizontal, 10)
     }
-    
+
     private var VStackBackground: some View {
         RoundedRectangle(cornerRadius: 10)
             .stroke(.rmYellow, lineWidth: 5)
             .accessibilityHidden(true)
     }
-    
+
     // MARK: - Accessibility
     private var accessibilityLabel: String {
-        "Character name: \(character.name). ID: \(character.id). Status: \(character.status.rawValue). Species: \(character.species). Type: \(character.type)"
+        """
+        Character name: \(character.name). ID: \(character.id). \
+        Status: \(character.status.rawValue). Species: \(character.species). \
+        Type: \(character.type)
+        """
     }
 }
 
-fileprivate struct LabeledText: View {
+private struct LabeledText: View {
     let label: String
     let value: String
-    
+
     var body: some View {
         HStack(spacing: 0) {
             Text(label)

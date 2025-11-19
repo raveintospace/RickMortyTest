@@ -9,7 +9,7 @@ import Foundation
 
 #if DEBUG
 extension DetailLocation {
-    
+
     nonisolated enum Stub {
         static let stub1 = DetailLocation(
             name: "Earth (C-137)",
@@ -32,14 +32,14 @@ extension DetailLocation {
                     "https://rickandmortyapi.com/api/character/169"
             ]
         )
-        
+
         static let stub15 = DetailLocation(
             name: "Bird World",
             type: "Planet",
             dimension: "unknown",
             residents: []
         )
-        
+
         static let stub46 = DetailLocation(
             name: "Zigerion's Base",
             type: "Space station",

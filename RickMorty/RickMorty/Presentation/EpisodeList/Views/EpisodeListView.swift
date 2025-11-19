@@ -8,22 +8,30 @@
 import SwiftUI
 
 struct EpisodeListView: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     @State private var episodeListViewModel: EpisodeListViewModel
-    
+
     @State private var showAlertEndOfList: Bool = false
-    
+
     init() {
-        _episodeListViewModel = State(initialValue: EpisodeListViewModel(fetchEpisodesUseCase: FetchEpisodesUseCaseImpl(dataSource: EpisodeDataSourceImpl(dataService: DataService()))))
+        _episodeListViewModel = State(
+            initialValue: EpisodeListViewModel(
+                fetchEpisodesUseCase: FetchEpisodesUseCaseImpl(
+                    dataSource: EpisodeDataSourceImpl(
+                        dataService: DataService()
+                    )
+                )
+            )
+        )
     }
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 episodesWallpaper
-                
+
                 VStack(spacing: isPad ? 20 : 10) {
                     episodeListTitleHeader
                     episodeCounterLabel
@@ -51,27 +59,38 @@ struct EpisodeListView: View {
 #endif
 
 extension EpisodeListView {
-    
+
     private var episodesWallpaper: some View {
         Image("episodesWallpaper")
             .resizable()
             .ignoresSafeArea()
             .opacity(0.075)
     }
-    
+
     private var episodeListTitleHeader: some View {
         TitleHeader()
             .frame(height: isPad ? 100 : 50)
             .padding(.horizontal, isPad ? 30 : 12)
     }
-    
+
+    private var counterText: String {
+        "\(episodeListViewModel.fetchedEpisodesCount) of \(episodeListViewModel.totalEpisodesCount) episodes"
+    }
+
+    private var accessibilityText: String {
+        """
+        \(episodeListViewModel.fetchedEpisodesCount) Episodes displayed. \
+        Total episodes available are \(episodeListViewModel.totalEpisodesCount).
+        """
+    }
+
     private var episodeCounterLabel: some View {
-        Text("\(episodeListViewModel.fetchedEpisodesCount) of \(episodeListViewModel.totalEpisodesCount) episodes")
+        Text(counterText)
             .font(isPad ? .largeTitle : .callout)
             .foregroundStyle(.rmLime)
-            .accessibilityLabel("\(episodeListViewModel.fetchedEpisodesCount) Episodes displayed. Total episodes available are \(episodeListViewModel.totalEpisodesCount).")
+            .accessibilityLabel(accessibilityText)
     }
-    
+
     private var displayedEpisodes: some View {
         LazyVStack(spacing: isPad ? 24 : 12) {
             ForEach(episodeListViewModel.fetchedEpisodes) { episode in
@@ -85,7 +104,7 @@ extension EpisodeListView {
         }
         .frame(maxWidth: isPad ? 600 : .infinity)
     }
-    
+
     private var scrollableEpisodeList: some View {
         ScrollView {
             Color.clear.frame(height: isPad ? 8 : 4)
@@ -101,7 +120,7 @@ extension EpisodeListView {
         }
         .scrollIndicators(.visible)
     }
-    
+
     private func allEpisodesLoadedAlert() -> Alert {
         return Alert(
             title: Text("All episodes are loaded"),
@@ -109,7 +128,7 @@ extension EpisodeListView {
             dismissButton: .default(Text("OK"))
         )
     }
-    
+
     private func handleEndOfList() {
         if episodeListViewModel.canFetchMore {
             Task {

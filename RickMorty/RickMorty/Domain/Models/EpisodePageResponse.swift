@@ -10,9 +10,4 @@ import Foundation
 nonisolated struct EpisodePageResponse: Decodable, Sendable {
     let info: PageInfo
     let results: [Episode]
-    
-    init(info: PageInfo, results: [Episode]) {
-        self.info = info
-        self.results = results
-    }
 }

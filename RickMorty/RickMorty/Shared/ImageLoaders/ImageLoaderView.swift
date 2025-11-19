@@ -10,13 +10,13 @@ import SwiftUI
 /// Generic image loader, no need to import Kingfisher
 /// We can add several SDKs with this struct (if SDWeb... else Kingfisher)
 struct ImageLoaderView: View {
-    
+
     let url: URL?
     var contentMode: ContentMode = .fit
-    
+
     /// .allowsHitTesting(false) - only rectangle frame is clickable
     var allowHitTesting: Bool = false
-    
+
     var body: some View {
         KingfisherImageLoader(imageUrl: url, contentMode: contentMode)
             .allowsHitTesting(allowHitTesting)

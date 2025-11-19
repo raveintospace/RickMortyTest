@@ -15,15 +15,14 @@ func assertSnapshotView<V: View>(
     testName: String = #function,
     line: UInt = #line
 ) {
-    let vc = UIHostingController(rootView: view)
-    vc.view.frame = CGRect(origin: .zero, size: size)
-    
+    let viewController = UIHostingController(rootView: view)
+    viewController.view.frame = CGRect(origin: .zero, size: size)
+
     assertSnapshot(
-        of: vc,
+        of: viewController,
         as: .image(on: .iPhone13),
         file: file,
         testName: testName,
         line: line
     )
 }
-

@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct CardImageView: View {
-    
+
     let id: Int
     let imageURL: URL?
-    
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             ImageLoaderView(url: imageURL)
                 .fixedSize()
                 .clipShape(RoundedRectangle(cornerRadius: 5))
-            
+
             Text("#\(id)")
                 .font(.caption)
                 .fontWeight(.semibold)
@@ -42,7 +42,7 @@ struct CardImageView: View {
 #if DEBUG
 #Preview {
     let character = DetailCharacter.Stub.stub1
-    
+
     CardImageView(id: 150, imageURL: character.image)
         .safeAreaPadding()
 }

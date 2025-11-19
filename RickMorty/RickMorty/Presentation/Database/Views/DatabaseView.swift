@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct DatabaseView: View {
-    
+
     @Environment(\.databaseViewModel) private var databaseViewModel
     @Environment(\.isPad) var isPad: Bool
-    
+
     @State private var showAlertOnEndOfList: Bool = false
-    
+
     // MARK: - Navigation to other views
     @State private var showFiltersSheet: Bool = false
     @State private var showDetailView: Bool = false
     @State private var selectedCharacter: CardCharacter?
-    
+
     // MARK: - ScrollList behaviour
     @State private var setScrollToZero: Bool = false
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
                 databaseWallpaper
-                
+
                 VStack(spacing: 0) {
                     fullHeader
                     scrollableCharactersList
@@ -73,7 +73,7 @@ struct DatabaseView: View {
 #endif
 
 extension DatabaseView {
-    
+
     // MARK: - View components
     private var databaseWallpaper: some View {
         Image("databaseWallpaper")
@@ -81,7 +81,7 @@ extension DatabaseView {
             .ignoresSafeArea()
             .opacity(0.15)
     }
-    
+
     private var fullHeader: some View {
         VStack {
             databaseTitleHeader
@@ -91,12 +91,12 @@ extension DatabaseView {
         .padding()
         .padding(.top, -20)
     }
-    
+
     private var databaseTitleHeader: some View {
         TitleHeader()
             .frame(height: isPad ? 100 : 50)
     }
-    
+
     private var filtersBar: some View {
         FiltersBar(filters: databaseViewModel.activeSubfilters,
                    onXMarkPressed: {
@@ -109,20 +109,22 @@ extension DatabaseView {
         )
         .padding(.leading, -10)
     }
-    
+
     private var sortBar: some View {
         HStack {
             CharacterCounterLabel()
             SortMenu()
         }
     }
-    
+
     private var noCharactersView: some View {
-        NoResultsView(imageName: "person.slash",
-                      mainText: "No Characters",
-                      callToActionText: "There are no characters that match your search. Try with other filters or keywords.")
+        NoResultsView(
+            imageName: "person.slash",
+            mainText: "No Characters",
+            ctaText: "There are no characters that match your search. Try with other filters or keywords."
+        )
     }
-    
+
     private var displayedCardsGrid: some View {
         LazyVGrid(
             columns: Array(repeating: GridItem(.flexible(), spacing: isPad ? 20: 10), count: isPad ? 3 : 2),
@@ -136,7 +138,7 @@ extension DatabaseView {
                         segue(character: character)
                     })
                 }
-                
+
                 Color.clear
                     .frame(height: 1)
                     .onAppear {
@@ -148,12 +150,12 @@ extension DatabaseView {
         )
         .padding(.horizontal)
     }
-    
+
     private var scrollableCharactersList: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 Color.clear.frame(height: isPad ? 8 : 4)
-                
+
                 Group {
                     if databaseViewModel.isLoading && databaseViewModel.fetchedCharacters.isEmpty {
                         ProgressColorBarsView()
@@ -163,7 +165,7 @@ extension DatabaseView {
                         noCharactersView
                     } else {
                         displayedCardsGrid
-                        
+
                         if databaseViewModel.isFilteringOrSearching {
                             FetchMoreDisabledView()
                                 .padding(.top, 15)
@@ -184,7 +186,7 @@ extension DatabaseView {
             }
         }
     }
-    
+
     // MARK: - Private methods
     private func allCharactersLoadedAlert() -> Alert {
         return Alert(
@@ -193,7 +195,7 @@ extension DatabaseView {
             dismissButton: .default(Text("OK"))
         )
     }
-    
+
     private func handleEndOfList() {
         if databaseViewModel.canFetchMore {
             Task {
@@ -203,7 +205,7 @@ extension DatabaseView {
             showAlertOnEndOfList = true
         }
     }
-    
+
     private func segue(character: CardCharacter) {
         selectedCharacter = character
         showDetailView = true

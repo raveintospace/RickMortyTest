@@ -28,6 +28,16 @@
 		349BEEF22EC5C79300A7208F /* RMIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = RMIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		34DC52912ECDDBF40003E6BA /* Exceptions for "RickMorty" folder in "RickMorty" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 349BEDF42EC5C3C300A7208F /* RickMorty */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		34371F832ECC655300186A3F /* RickMortyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -36,6 +46,9 @@
 		};
 		349BEEEB2EC5C58200A7208F /* RickMorty */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				34DC52912ECDDBF40003E6BA /* Exceptions for "RickMorty" folder in "RickMorty" target */,
+			);
 			path = RickMorty;
 			sourceTree = "<group>";
 		};
@@ -394,7 +407,9 @@
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(BUILT_PRODUCTS_DIR)";
 				GENERATE_INFOPLIST_FILE = YES;
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(BUILD_PRODUCTS_DIR)";
+				INFOPLIST_FILE = RickMorty/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -431,7 +446,9 @@
 				DEVELOPMENT_TEAM = 4XAMG487KR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RickMorty/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Rick & Morty";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

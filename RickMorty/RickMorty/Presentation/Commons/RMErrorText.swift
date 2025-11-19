@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct RMErrorText: View {
-    
+
     let error: String
-    
+
     var body: some View {
         Text(error)
             .font(.title)

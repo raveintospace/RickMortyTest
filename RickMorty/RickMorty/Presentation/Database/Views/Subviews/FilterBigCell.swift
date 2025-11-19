@@ -9,13 +9,13 @@ import SwiftUI
 
 /// Button style is set on FiltersSheet
 struct FilterBigCell: View {
-    
+
     let filterOption: FilterOption
-    
+
     @Binding var selection: FilterOption
-    
+
     var action: (() -> Void)?
-    
+
     var body: some View {
         Button {
             action?()
@@ -45,9 +45,9 @@ struct FilterBigCell: View {
 }
 #endif
 
-fileprivate struct FilterBigCellPreview: View {
+private struct FilterBigCellPreview: View {
     @State private var selectedFilterOption: FilterOption = .gender
-    
+
     var body: some View {
         VStack(spacing: 30) {
             FilterBigCell(filterOption: .gender, selection: $selectedFilterOption) {

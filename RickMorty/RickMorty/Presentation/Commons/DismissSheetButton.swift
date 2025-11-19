@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct DismissSheetButton: View {
-    
+
     @Environment(\.dismiss) private var dismiss
     @Environment(\.isPad) var isPad: Bool
-    
+
     var body: some View {
         Button {
             dismiss()

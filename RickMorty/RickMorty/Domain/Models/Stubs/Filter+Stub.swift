@@ -16,7 +16,7 @@ extension Filter {
             Filter(title: "Male"),
             Filter(title: "Unknown")
         ]
-        
+
         static let status: [Filter] = [
             Filter(title: "Alive"),
             Filter(title: "Dead"),

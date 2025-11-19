@@ -8,14 +8,14 @@
 import Foundation
 
 struct FetchDetailCharacterUseCaseImpl: FetchDetailCharacterUseCaseProtocol {
-    
+
     // Dependency injection of the Data source
     private let dataSource: DetailCharacterDataSourceProtocol
-    
+
     init(dataSource: DetailCharacterDataSourceProtocol) {
         self.dataSource = dataSource
     }
-    
+
     func execute(id: Int) async throws -> DetailCharacter {
         do {
             return try await dataSource.getDetailCharacter(id: id)

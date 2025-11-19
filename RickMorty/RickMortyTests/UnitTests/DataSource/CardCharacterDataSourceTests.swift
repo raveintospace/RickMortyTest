@@ -10,7 +10,7 @@ import Testing
 @testable import RickMorty
 
 extension Data {
-    static let characterPage1JSON: Data = """
+    static let characterPage1JSON: Data = Data("""
         {
         "info": {
           "count": 826,
@@ -165,35 +165,35 @@ extension Data {
           }
         ]
         }
-        """.data(using: .utf8)!
+        """.utf8)
 }
 
-fileprivate enum TestError: Error {
+private enum TestError: Error {
     case castingFailed
 }
 
 @MainActor
 struct CardCharacterDataSourceTests {
-    
+
     @Test func testGetCardCharacters_success_urlAndDataDecoded() async throws {
-        
+
         // Given
         let testPage = 5
         let expectedURL = URL(string: "https://rickandmortyapi.com/api/character?page=\(testPage)")!
         let mockDataService = MockDataService(result: .success(.characterPage1JSON), expectedURL: expectedURL)
         let sut = CardCharacterDataSourceImpl(dataService: mockDataService)
-        
+
         // When
         let response = try await sut.getCardCharacters(page: testPage)
-        
+
         // Then
         #expect(response.results.count == 2)
         #expect(response.info.objectCount == 826)
         #expect(response.results.first?.name == "Rick Sanchez")
     }
-    
+
     @Test func testGetCardCharacters_failure_propagatesRemoteError() async {
-        
+
         // Given
         let errorCases: [RemoteDataSourceError] = [
             .httpError(statusCode: 404),
@@ -201,17 +201,17 @@ struct CardCharacterDataSourceTests {
             .decodingError(NSError(domain: "Test", code: 0)),
             .invalidURL
         ]
-        
+
         let dummyURL = URL(string: "http://dummy.url")!
-                
+
         for expectedError in errorCases {
             let mockDataService = MockDataService(result: .failure(expectedError), expectedURL: dummyURL)
             let sut = CardCharacterDataSourceImpl(dataService: mockDataService)
-            
+
             // When
             do {
                 _ = try await sut.getCardCharacters(page: 1)
-                
+
                 // Then
                 #expect(Bool(false))
             } catch let error as RemoteDataSourceError {

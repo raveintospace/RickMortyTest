@@ -7,8 +7,7 @@
 
 /// Defines the contract for fetching a list of episodes for the Episode List view
 protocol FetchEpisodesUseCaseProtocol {
-    
+
     /// Retrieves a single page of episode data from the API
     func execute(page: Int) async throws -> EpisodePageResponse
 }
-

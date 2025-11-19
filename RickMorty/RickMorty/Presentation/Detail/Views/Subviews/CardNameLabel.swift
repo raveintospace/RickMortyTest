@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CardNameLabel: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     let name: String
-    
+
     var body: some View {
         Text(name.capitalized)
             .font(isPad ? .largeTitle : .title)
@@ -33,8 +33,11 @@ struct CardNameLabel: View {
         CardNameLabel(name: DetailCharacter.Stub.stub1.name)
         CardNameLabel(name: DetailCharacter.Stub.stub10.name)
         CardNameLabel(name: DetailCharacter.Stub.stub50.name)
-        CardNameLabel(name: "fsafusfhasufhusiafhsdoai uhfuiodsahfguisda hgfoudsah gfuiashoiusahsou diahgasufsadofi fsadfiassa fasdsaffas ")
+        CardNameLabel(name: """
+fsafusfhasufhusiafhsdoai uhfuiodsahfguisda hgfoudsah gfuiashoiusahsou
+diahgasufsadofi fsadfiassa fasdsaffas
+""")
     }
-    
+
 }
 #endif

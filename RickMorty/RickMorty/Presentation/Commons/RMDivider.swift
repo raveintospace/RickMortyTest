@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct RMDivider: View {
-    
+
     var horizontalPadding: CGFloat = -25
-    
+
     var body: some View {
         Divider()
             .overlay(.rmPink)

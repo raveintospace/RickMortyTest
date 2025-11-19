@@ -16,7 +16,7 @@ struct FiltersRepositoryImpl: FiltersRepositoryProtocol {
             Filter(title: "Unknown")
         ]
     }
-    
+
     func getStatusFilters() async throws -> [Filter] {
         return [
             Filter(title: "Alive"),

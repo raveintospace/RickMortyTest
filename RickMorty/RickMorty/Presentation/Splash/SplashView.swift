@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SplashView: View {
-    
+
     @State private var showLogo = false
     @State private var showCredits = false
-    
+
     // Control to dismiss SplashView
     @Binding var showSplashView: Bool
-    
+
     var body: some View {
         ZStack {
             RMBackgroundGradientView()
-            
+
             if showLogo {
                 Image("RMVertical")
                     .splashImageStyle()
@@ -26,7 +26,7 @@ struct SplashView: View {
                     .animation(.easeOut(duration: 1.2), value: showLogo)
                     .offset(y: -35)
             }
-            
+
             VStack {
                 Spacer()
                 if showCredits {
@@ -44,16 +44,16 @@ struct SplashView: View {
             Task { @MainActor in
                 try? await Task.sleep(for: .seconds(0.5))
                 withAnimation { showLogo = true }
-                
+
                 try? await Task.sleep(for: .seconds(0.75))
                 withAnimation { showCredits = true }
-                
+
                 try? await Task.sleep(for: .seconds(1.75))
                 withAnimation { showCredits = false }
-                
+
                 try? await Task.sleep(for: .seconds(0.3))
                 withAnimation { showLogo = false }
-                
+
                 try? await Task.sleep(for: .seconds(0.3))
                 withAnimation { showSplashView = false }
             }

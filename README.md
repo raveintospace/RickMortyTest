@@ -4,14 +4,16 @@ Small app to test Rick & Morty API, made with SwiftUI
 Please, run the app on a real device or using Simulator to properly test it, some Canvas use mocks.
 
 1. ARCHITECTURE
-This project implements an MVVM (Model-View-ViewModel) architecture, structured into four distinct main layers:
+This project implements an MVVM (Model-View-ViewModel) architecture, structured into three distinct main layers:
 
 - Data Layer: Handles API communication.
-- Domain Layer: Defines repositories and use cases. Includes the models layer, that contains the data structures used throughout the app.
+- Domain Layer (Model in MVVM): Defines repositories and use cases. This layer contains the core business logic and includes the models layer, that contains the data structures used throughout the app.
 - Presentation Layer: Includes ViewModels and UI components.
+** Enums, Shared & Testing layers include structs & classes used through the project. ** 
+
 
 The MVVM pattern ensures a clear separation of concerns:
-- Model: Represents data structures like Character and Comic.
+- Model: Represents the business logic and data structures (like Character, Episode or Location). This is implemented by the Domain Layer.
 - View: SwiftUI views that display data and handle user interactions.
 - ViewModel: Manages business logic, interacts with use cases, and updates the UI.
 
@@ -19,21 +21,20 @@ The MVVM pattern ensures a clear separation of concerns:
 To improve modularity and testability, dependencies are injected via protocols into DataSources and UseCases. Protocols are defined in separate files, but I know they could also have been created inside the files that implement each protocol (see DataService), as there is only one struct for each one. 
 
 3. FRAMEWORKS
--- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
-SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
--- SnapshotTesting: Used for Snapshot tests, requires a helper to work with iOS26 views.
--- SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
+- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
+- SnapshotTesting: Used for Snapshot tests, requires a helper to work with iOS 26 views.
+- SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project. It is used through Terminal, not as a Swift Package Manager (SPM) dependency.
 
 4. TESTING
 What I have tested:
 - Unit tests:
-    - CardCharacterViewModel: Since it is the main ViewModel of the project, ensuring its logic works correctly is a priority.
-    - EpisodeListViewModel: Has a similar structure than CardCharacterViewModel, but without the filter/sort/search layer.
+    - All four ViewModels
+    - CardCharacterDataSource (the main datasource for the app)
+    - FetchCardCharactersUseCase (the main use case for the app)	
 - Snapshot tests: Several views were tested as a proof of concept to validate UI consistency. Tests are run on iPhone17 Pro, iOS 26.0, English - Spain.
 
 What I haven’t tested:
-- Repositories: The current implementation simply forwards data without additional logic, making tests unnecessary.
-- Data source: If I had more time, I would explore how to properly test them.
+- Repositories: The current implementation simply forwards data without additional logic, making tests unnecessary. I would add tests if the repository contained mapping logic or source-switching logic (e.g., between network and cache).
 
 5. CHOICES
 -- nonisolated struct that conforms to Sendable
@@ -43,7 +44,7 @@ This decision also affects the Stubs, they are declared as nonisolated to avoid 
 
 Conforming to Sendable and being nonisolated is required because:
 1. The models only contain thread-safe types (Int, String, URL, Enums) and manage no mutable state, making them intrinsically safe to transfer (Sendable).
-2. We prevent the compiler, especially in Swift 6 mode, from inferring that the Decodable protocol is bound to the MainActor (default behaviour).
+2. We prevent the compiler, especially in Swift 6 mode, from inferring that the Decodable conformance is restricted to the MainActor.
 3. It allows the DataSourceImpls actor to return data without costly copies or isolation bridging, ensuring efficiency.
 
 -- The Data Source implementation is declared as an 'actor' to guarantee isolation.
@@ -60,7 +61,7 @@ The Filter layer maintains both a Repository and a Use Case to encapsulate the d
 
 -- SwiftUI: Instead of UIKit and Storyboards, SwiftUI was used to embrace a fully declarative UI approach, ensuring a more modern and maintainable codebase.
 
--- Testing Framework: Used Testing instead of XCTest to enhance test readability and maintainability.
+-- Testing Framework: Used the Swift Testing framework instead of XCTest to enhance test readability and maintainability.
 
 -- Some subviews use basic property types (e.g., String, Int, etc.) instead of custom models (e.g., CardCharacter) to enhance reusability across different projects.
 

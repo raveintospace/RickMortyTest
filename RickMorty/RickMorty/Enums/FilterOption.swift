@@ -9,9 +9,9 @@ import Foundation
 
 enum FilterOption: String, CaseIterable, Identifiable {
     case gender, status
-    
+
     var id: String { self.rawValue }
-    
+
     var displayName: String {
         switch self {
         case .gender:

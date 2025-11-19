@@ -8,21 +8,30 @@
 import SwiftUI
 
 struct LocationView: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     @State private var locationViewModel: LocationViewModel
-    
+
     let locationURL: URL
     let locationTitle: String
-    
+
     init(locationURL: URL, locationTitle: String) {
-        _locationViewModel = State(initialValue: LocationViewModel(locationURL: locationURL, fetchLocationUseCase: FetchLocationUseCaseImpl(dataSource: LocationDataSourceImpl(dataService: DataService()))))
-        
+        _locationViewModel = State(
+            initialValue: LocationViewModel(
+                locationURL: locationURL,
+                fetchLocationUseCase: FetchLocationUseCaseImpl(
+                    dataSource: LocationDataSourceImpl(
+                        dataService: DataService()
+                    )
+                )
+            )
+        )
+
         self.locationURL = locationURL
         self.locationTitle = locationTitle
     }
-    
+
     var body: some View {
         NavigationStack {
             if locationViewModel.isLoading && locationViewModel.location == nil {
@@ -32,7 +41,7 @@ struct LocationView: View {
             } else if let location = locationViewModel.location {
                 VStack(spacing: 20) {
                     sheetHeader
-                    
+
                     VStack(alignment: .leading, spacing: 12) {
                         LocationRow(title: "Name:",
                                     value: location.name.capitalized)
@@ -43,7 +52,7 @@ struct LocationView: View {
                         LocationRow(title: "Residents:",
                                     value: location.residentCountText)
                     }
-                    
+
                     DismissSheetButton()
                         .padding(.top, 10)
                 }
@@ -70,7 +79,7 @@ struct LocationView: View {
 #endif
 
 extension LocationView {
-    
+
     private var sheetHeader: some View {
         Text(locationTitle.uppercased())
             .font(isPad ? .largeTitle : .title)
@@ -81,13 +90,13 @@ extension LocationView {
     }
 }
 
-fileprivate struct LocationRow: View {
-    
+private struct LocationRow: View {
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     let title: String
     let value: String
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)

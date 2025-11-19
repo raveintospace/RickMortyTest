@@ -11,7 +11,7 @@ enum RemoteDataSourceError: Error, Equatable {
     case decodingError(Error)
     case httpError(statusCode: Int)
     case invalidURL
-    
+
     static func == (lhs: RemoteDataSourceError, rhs: RemoteDataSourceError) -> Bool {
         switch (lhs, rhs) {
         case (.badServerResponse, .badServerResponse):

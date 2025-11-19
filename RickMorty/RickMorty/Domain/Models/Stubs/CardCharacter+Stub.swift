@@ -9,7 +9,7 @@ import Foundation
 
 #if DEBUG
 extension CardCharacter {
-    
+
     nonisolated enum Stub {
         static let stub1 = CardCharacter(
             id: 1,
@@ -20,7 +20,7 @@ extension CardCharacter {
             type: "",
             image: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")!
         )
-        
+
         static let stub2 = CardCharacter(
             id: 2,
             name: "Morty Smith",
@@ -30,7 +30,7 @@ extension CardCharacter {
             type: "",
             image: URL(string: "https://rickandmortyapi.com/api/character/avatar/2.jpeg")!
         )
-        
+
         static let stub6 = CardCharacter(
             id: 6,
             name: "Abadango Cluster Princess",
@@ -40,7 +40,7 @@ extension CardCharacter {
             type: "",
             image: URL(string: "https://rickandmortyapi.com/api/character/avatar/6.jpeg")!
         )
-        
+
         static let stub8 = CardCharacter(
             id: 8,
             name: "Adjudicator Rick",

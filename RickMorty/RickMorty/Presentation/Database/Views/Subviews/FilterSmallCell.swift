@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct FilterSmallCell: View {
-    
+
     @Environment(\.isPad) var isPad: Bool
-    
+
     var title: String
     var isSelected: Bool
-    
+
     var body: some View {
         Text(title)
             .font(isPad ? .title3 : .body)

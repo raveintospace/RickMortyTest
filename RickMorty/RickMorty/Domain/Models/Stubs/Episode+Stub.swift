@@ -9,7 +9,7 @@ import Foundation
 
 #if DEBUG
 extension Episode {
-    
+
     nonisolated enum Stub {
         static let stub1 = Episode(
             id: 1,
@@ -38,7 +38,7 @@ extension Episode {
                 "https://rickandmortyapi.com/api/character/435"
             ]
         )
-        
+
         static let stub2 = Episode(
             id: 2,
             name: "Lawnmower Dog",
@@ -66,7 +66,7 @@ extension Episode {
                 "https://rickandmortyapi.com/api/character/405"
             ]
         )
-        
+
         static let stub5 = Episode(
             id: 5,
             name: "Meeseeks and Destroy",
