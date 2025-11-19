@@ -15,6 +15,7 @@ struct RMErrorText: View {
         Text(error)
             .font(.title)
             .foregroundStyle(.rmLime)
+            .multilineTextAlignment(.center)
             .padding()
     }
 }

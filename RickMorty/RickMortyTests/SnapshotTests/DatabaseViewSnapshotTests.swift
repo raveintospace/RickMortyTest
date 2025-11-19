@@ -154,4 +154,21 @@ struct DatabaseViewSnapshotTests {
         
         assertSnapshotView(view)
     }
+    
+    @Test func testDatabaseView_ErrorState() async {
+        let useCase = MockFetchCardCharactersUseCase(results: [.failure(.badServerResponse)])
+        let viewModel = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
+                                          getFiltersUseCase: MockGetFiltersUseCase())
+        
+        await viewModel.loadCharacters()
+        
+        #expect(viewModel.displayedCharacters.isEmpty)
+        #expect(viewModel.errorMessage == "Network Error: We couldn't reach the server.")
+        
+        let view = DatabaseView()
+            .environment(\.databaseViewModel, viewModel)
+            .environment(\.isPad, false)
+        
+        assertSnapshotView(view)
+    }
 }
