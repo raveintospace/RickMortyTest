@@ -1,7 +1,7 @@
 # RickMortyTest
 Small app to test Rick & Morty API, made with SwiftUI
 
-Please, run the app on a real device or using Simulator to properly test it, some Canvas use mocks.
+Please, run the app on a real device (requires iOS 26) or using Simulator to properly test it, some Canvas use mocks.
 
 1. ARCHITECTURE
 This project implements an MVVM (Model-View-ViewModel) architecture, structured into three distinct main layers:
