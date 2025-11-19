@@ -56,5 +56,6 @@ private struct IsPadKey: EnvironmentKey {
 extension EnvironmentValues {
     var isPad: Bool {
         get { self[IsPadKey.self] }
+        set { self[IsPadKey.self] = newValue }
     }
 }

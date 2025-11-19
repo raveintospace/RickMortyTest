@@ -21,6 +21,7 @@ To improve modularity and testability, dependencies are injected via protocols i
 3. FRAMEWORKS
 -- Kingfisher: Used for efficient image downloading and caching. It’s a reliable and widely adopted third-party library in the iOS ecosystem, which I have successfully used in previous projects. It provides built-in memory and disk caching with minimal setup.
 SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
+-- SnapshotTesting: Used for Snapshot tests, requires a helper to work with iOS26 views.
 -- SwiftLint: Used for enforcing code style and best practices to maintain uniformity and readability across the project.
 
 4. TESTING
