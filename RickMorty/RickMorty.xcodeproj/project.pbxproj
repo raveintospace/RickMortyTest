@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		349BEEF32EC5C79300A7208F /* RMIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 349BEEF22EC5C79300A7208F /* RMIcon.icon */; };
 		349BF2132EC62C4500A7208F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 349BF2122EC62C4500A7208F /* Kingfisher */; };
+		34DC503A2ECDA8900003E6BA /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 34DC50392ECDA8900003E6BA /* SnapshotTesting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34DC503A2ECDA8900003E6BA /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +101,7 @@
 			);
 			name = RickMortyTests;
 			packageProductDependencies = (
+				34DC50392ECDA8900003E6BA /* SnapshotTesting */,
 			);
 			productName = RickMortyTests;
 			productReference = 34371F822ECC655300186A3F /* RickMortyTests.xctest */;
@@ -157,6 +160,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				349BF2112EC62C4500A7208F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				34DC50382ECDA8900003E6BA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 349BEDF62EC5C3C300A7208F /* Products */;
@@ -495,6 +499,14 @@
 				minimumVersion = 8.6.1;
 			};
 		};
+		34DC50382ECDA8900003E6BA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -502,6 +514,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 349BF2112EC62C4500A7208F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		34DC50392ECDA8900003E6BA /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34DC50382ECDA8900003E6BA /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
