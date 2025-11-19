@@ -42,8 +42,6 @@ struct DatabaseViewSnapshotTests {
             .environment(\.databaseViewModel, viewModel)
             .environment(\.isPad, false)
         
-        try await Task.sleep(for: .milliseconds(500))
-        
         assertSnapshotView(view)
         
         #expect(viewModel.displayedCharacters.count == response.results.count)
@@ -63,7 +61,6 @@ struct DatabaseViewSnapshotTests {
         let viewModel = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
                                           getFiltersUseCase: MockGetFiltersUseCase())
         
-        // Load characters before creating the view
         await viewModel.loadCharacters()
         
         viewModel.selectedFilter = Filter(title: "Dead")
@@ -75,6 +72,85 @@ struct DatabaseViewSnapshotTests {
         let view = DatabaseView()
             .environment(\.isPad, false)
             .environment(\.databaseViewModel, viewModel)
+        
+        assertSnapshotView(view)
+    }
+    
+    @Test func testDatabaseView_SortByNameReversed() async throws {
+        let response = CharacterPageResponse.Stub.stub1
+
+        let useCase = MockFetchCardCharactersUseCase(results: [
+            .success(response),
+            .success(response)
+        ])
+        
+        let viewModel = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
+                                          getFiltersUseCase: MockGetFiltersUseCase())
+        
+        await viewModel.loadCharacters()
+        
+        viewModel.sortOption = .nameReversed
+        
+        #expect(viewModel.displayedCharacters.map(\.name) == ["Rick Sanchez", "Morty Smith"].sorted(by: >))
+        
+        let view = DatabaseView()
+            .environment(\.databaseViewModel, viewModel)
+            .environment(\.isPad, false)
+        
+        assertSnapshotView(view)
+    }
+    
+    @Test func testDatabaseView_SortByIDDescending() async throws {
+        let response = CharacterPageResponse.Stub.stub1
+
+        let useCase = MockFetchCardCharactersUseCase(results: [
+            .success(response),
+            .success(response)
+        ])
+        
+        let viewModel = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
+                                          getFiltersUseCase: MockGetFiltersUseCase())
+
+        await viewModel.loadCharacters()
+        
+        viewModel.sortOption = .idReversed
+        
+        #expect(viewModel.displayedCharacters.map(\.id) == [2, 1])
+        
+        let view = DatabaseView()
+            .environment(\.databaseViewModel, viewModel)
+            .environment(\.isPad, false)
+        
+        try await Task.sleep(for: .milliseconds(1000))
+        
+        assertSnapshotView(view)
+    }
+    
+    @Test func testDatabaseView_SearchByNameRick() async throws {
+        let response = CharacterPageResponse.Stub.stub1
+
+        let useCase = MockFetchCardCharactersUseCase(results: [
+            .success(response),
+            .success(response)
+        ])
+        
+        let viewModel = DatabaseViewModel(fetchCardCharactersUseCase: useCase,
+                                          getFiltersUseCase: MockGetFiltersUseCase())
+        
+        await viewModel.loadCharacters()
+        
+        viewModel.searchText = "Rick"
+        
+        try await Task.sleep(for: .milliseconds(500))
+        
+        #expect(viewModel.displayedCharacters.allSatisfy { $0.name.contains("Rick") })
+        #expect(viewModel.displayedCharacters.count == 1)
+        
+        let view = DatabaseView()
+            .environment(\.databaseViewModel, viewModel)
+            .environment(\.isPad, false)
+        
+        try await Task.sleep(for: .milliseconds(2000))
         
         assertSnapshotView(view)
     }
