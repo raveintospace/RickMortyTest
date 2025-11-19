@@ -29,7 +29,7 @@ What I have tested:
 - Unit tests:
     - CardCharacterViewModel: Since it is the main ViewModel of the project, ensuring its logic works correctly is a priority.
     - EpisodeListViewModel: Has a similar structure than CardCharacterViewModel, but without the filter/sort/search layer.
-- Snapshot tests: Several views were tested as a proof of concept to validate UI consistency. Tests are run on iPhone16 Pro, iOS 18.1, Spanish - Spain.
+- Snapshot tests: Several views were tested as a proof of concept to validate UI consistency. Tests are run on iPhone17 Pro, iOS 26.0, English - Spain.
 
 What I haven’t tested:
 - Repositories: The current implementation simply forwards data without additional logic, making tests unnecessary.
