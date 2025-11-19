@@ -21,7 +21,7 @@ struct DatabaseViewSnapshotTests {
         assertSnapshotView(view)
     }
     
-    @Test func testDatabaseView_WithCharactersLoaded() async throws {
+    @Test func testDatabaseView_WithCharactersLoaded() async {
         let response = CharacterPageResponse.Stub.stub1
         
         // Provide two responses: one for manual load, one for view's .task
@@ -49,7 +49,7 @@ struct DatabaseViewSnapshotTests {
         #expect(viewModel.displayedCharacters.last?.id == response.results.last?.id)
     }
     
-    @Test func testDatabaseView_NoResultsFiltering() async throws {
+    @Test func testDatabaseView_NoResultsFiltering() async {
         let response = CharacterPageResponse.Stub.stub1
         
         // Provide two responses: one for manual load, one for view's .task
@@ -76,7 +76,7 @@ struct DatabaseViewSnapshotTests {
         assertSnapshotView(view)
     }
     
-    @Test func testDatabaseView_SortByNameReversed() async throws {
+    @Test func testDatabaseView_SortByNameReversed() async {
         let response = CharacterPageResponse.Stub.stub1
 
         let useCase = MockFetchCardCharactersUseCase(results: [
