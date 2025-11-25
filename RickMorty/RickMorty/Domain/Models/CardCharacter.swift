@@ -42,7 +42,7 @@ nonisolated struct CardCharacter: Decodable, Identifiable, Equatable, Sendable {
         /// We use `decodeIfPresent` and check for an empty string ("") to ensure robust decodability.
         /// If the URL is null, empty, or invalid, the property is set to nil,
         /// preventing a `DecodingError.dataCorruptedError` that would abort the decoding of the entire object.
-        /// Our ImageLoaderView has a placeholder image if image = nil
+        /// Our ImageLoaderView has a placeholder image if image == nil
         let imageString = try container.decodeIfPresent(String.self, forKey: .image)
 
         if let string = imageString, !string.isEmpty {

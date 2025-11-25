@@ -49,7 +49,7 @@ Conforming to Sendable and being nonisolated is required because:
 
 -- The Data Source implementation is declared as an 'actor' to guarantee isolation.
 Using an actor is a proactive thread-safety measure because it:
-1. Ensures that any future internal state (e.g., an in-memory cache for storing API results) can only be accessed by one thread at a time, eliminating the risk of "data races."
+1. Ensures that any future internal state (e.g., an in-memory cache for storing API results) can only be accessed by one thread at a time, eliminating the risk of "data races.
 2. Separates and isolates network access logic from the presentation layer (ViewModel), adhering to the Interface Segregation Principle (ISP) and the Dependency Inversion Principle (DIP).
 
 -- No Repository layer to fetch characters
